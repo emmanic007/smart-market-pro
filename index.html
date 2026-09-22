@@ -2528,6 +2528,9 @@ const I18n = {
       deferred_submit:'Enregistrer tout',
       eod_title:'Résumé Fin de Journée',
       btn_today:"Aujourd'hui",
+      toast_err_item_required:'Choisissez un article',
+      toast_err_qty_required:'Quantité invalide',
+      toast_line_validated:'✓ Ligne validée',
       eod_mode_day:'Jour', eod_mode_week:'Semaine',
       eod_mode_month:'Mois', eod_mode_year:'Année',
       restock_title:'Rapport Approvisionnement',
@@ -2980,6 +2983,9 @@ const I18n = {
       deferred_submit:'Save all',
       eod_title:'End of Day Summary',
       btn_today:'Today',
+      toast_err_item_required:'Please select an item',
+      toast_err_qty_required:'Invalid quantity',
+      toast_line_validated:'✓ Line validated',
       eod_mode_day:'Day', eod_mode_week:'Week',
       eod_mode_month:'Month', eod_mode_year:'Year',
       restock_title:'Restocking Report',
@@ -6642,26 +6648,30 @@ const DeferredSales = {
     const line = this._lines.find(l => l.id === id);
     if (!line) return;
     line[field] = value;
-    // Auto-remplir le prix si on change l'article
     if (field === 'itemId') {
       const item = DB.data.items.find(i => i.id === value);
-      if (item) {
-        line.price = item.sell;
-      }
-      // Dès qu'un article est choisi et que ce n'était pas déjà rempli,
-      // faire descendre la ligne en bas de la liste et créer une nouvelle ligne vide en haut
-      if (value && !line._wasFilled) {
-        line._wasFilled = true;
-        this._lines = this._lines.filter(l => l.id !== id);
-        this._lines.push(line);
-        this._renderLines();
-        // Créer automatiquement une nouvelle ligne vide en haut
-        this.addLine();
-        return; // _renderLines() et addLine() gèrent déjà l'affichage
-      }
+      if (item) line.price = item.sell;
+      const priceEl = document.getElementById('def-price-' + id);
+      if (priceEl && item) priceEl.value = item.sell;
     }
     this._updateLineTotal(id);
     this._updateSummary();
+  },
+
+  validateLine(id) {
+    const line = this._lines.find(l => l.id === id);
+    if (!line) return;
+    const item = DB.data.items.find(i => i.id === line.itemId);
+    if (!item) { UI.toast(I18n.t('toast_err_item_required'), 'danger'); return; }
+    if (!(parseInt(line.qty) > 0)) { UI.toast(I18n.t('toast_err_qty_required'), 'danger'); return; }
+    line._wasFilled = true;
+    this._lines = this._lines.filter(l => l.id !== id);
+    const firstValidatedIdx = this._lines.findIndex(l => l._wasFilled);
+    if (firstValidatedIdx === -1) { this._lines.push(line); }
+    else { this._lines.splice(firstValidatedIdx, 0, line); }
+    this._renderLines();
+    UI.toast(I18n.t('toast_line_validated'), 'success');
+    if (!this._lines.some(l => !l._wasFilled)) this.addLine();
   },
 
   _updateLineTotal(id) {
@@ -6718,8 +6728,8 @@ const DeferredSales = {
       : `<option value="">— ${I18n.t('no_stock')} —</option>`;
 
     container.innerHTML = this._lines.map((line, idx) => `
-      <div class="deferred-row" id="def-row-${line.id}">
-        <div class="deferred-row-num">Ligne ${idx+1}</div>
+      <div class="deferred-row" id="def-row-${line.id}" style="${line._wasFilled ? 'opacity:.85;border-left:3px solid var(--accent)' : 'border-left:3px solid var(--warning)'}">
+        <div class="deferred-row-num">Ligne ${idx+1} ${line._wasFilled ? '✓' : ''}</div>
         <div class="form-group" style="grid-column:1/-1;margin-bottom:0;margin-top:14px">
           <label class="form-label">Article *</label>
           <select id="def-item-${line.id}"
@@ -6754,6 +6764,11 @@ const DeferredSales = {
         </div>
         <div class="deferred-row-total" id="def-total-${line.id}"></div>
         <div id="def-change-${line.id}" style="display:none;grid-column:1/-1;text-align:center;font-family:var(--fm);font-size:.75rem;font-weight:700;padding:4px"></div>
+        ${!line._wasFilled ? `
+        <button onclick="DeferredSales.validateLine(${line.id})"
+          style="grid-column:1/-1;margin-top:6px;background:var(--accent);color:#000;border:none;border-radius:var(--rmd);padding:10px;font-family:var(--fd);font-weight:700;font-size:.82rem;cursor:pointer">
+          ✓ Valider cette ligne
+        </button>` : ''}
         <button onclick="DeferredSales.removeLine(${line.id})"
           style="position:absolute;top:8px;right:8px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:1rem;padding:2px 6px">✕</button>
       </div>
