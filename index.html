@@ -679,28 +679,28 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div id="ob-step-1">
       <div style="text-align:center;margin-bottom:20px">
         <div style="font-size:3rem;margin-bottom:8px">👋</div>
-        <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;color:var(--accent)">Bienvenue dans Smart Market Pro !</div>
-        <div style="font-size:.82rem;color:var(--text2);margin-top:8px;line-height:1.6">Configurons votre boutique en 3 étapes rapides pour que tout soit prêt dès maintenant.</div>
+        <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;color:var(--accent)" data-i18n="ob_welcome_title">Bienvenue dans Smart Market Pro !</div>
+        <div style="font-size:.82rem;color:var(--text2);margin-top:8px;line-height:1.6" data-i18n="ob_welcome_sub">Configurons votre boutique en 3 étapes rapides pour que tout soit prêt dès maintenant.</div>
       </div>
       <div class="form-group" style="margin-bottom:12px">
-        <label class="form-label">Nom de votre boutique *</label>
-        <input type="text" id="ob-shop-name" placeholder="Ex: Épicerie Eze, Boutique Grace..." maxlength="60">
+        <label class="form-label" data-i18n="ob_shop_name_label">Nom de votre boutique *</label>
+        <input type="text" id="ob-shop-name" placeholder="Ex: Épicerie Eze, Boutique Grace..." data-i18n-placeholder="ob_shop_name_ph" maxlength="60">
       </div>
       <div class="form-group" style="margin-bottom:16px">
-        <label class="form-label">Téléphone (affiché sur les tickets)</label>
+        <label class="form-label" data-i18n="ob_phone_label">Téléphone (affiché sur les tickets)</label>
         <input type="tel" id="ob-phone" placeholder="Ex: +225 07 00 00 00 00" inputmode="tel">
       </div>
-      <button class="btn btn-primary btn-full" onclick="Onboarding.step2()" style="padding:14px;font-size:.95rem">Suivant →</button>
+      <button class="btn btn-primary btn-full" onclick="Onboarding.step2()" style="padding:14px;font-size:.95rem" data-i18n="ob_next">Suivant →</button>
     </div>
 
     <div id="ob-step-2" style="display:none">
       <div style="text-align:center;margin-bottom:20px">
         <div style="font-size:3rem;margin-bottom:8px">💱</div>
-        <div style="font-family:var(--fd);font-size:1.1rem;font-weight:800;color:var(--text)">Devise et langue</div>
-        <div style="font-size:.82rem;color:var(--text2);margin-top:8px">Ces réglages s'affichent sur tous vos tickets et rapports.</div>
+        <div style="font-family:var(--fd);font-size:1.1rem;font-weight:800;color:var(--text)" data-i18n="ob_currency_lang_title">Devise et langue</div>
+        <div style="font-size:.82rem;color:var(--text2);margin-top:8px" data-i18n="ob_currency_lang_sub">Ces réglages s'affichent sur tous vos tickets et rapports.</div>
       </div>
       <div class="form-group" style="margin-bottom:12px">
-        <label class="form-label">Devise</label>
+        <label class="form-label" data-i18n="ob_currency_label">Devise</label>
         <select id="ob-currency">
           <option value="FCFA">FCFA (Franc CFA)</option>
           <option value="XOF">XOF</option>
@@ -714,38 +714,38 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
         </select>
       </div>
       <div class="form-group" style="margin-bottom:16px">
-        <label class="form-label">Langue</label>
+        <label class="form-label" data-i18n="ob_lang_label">Langue</label>
         <select id="ob-lang">
           <option value="fr">Français</option>
           <option value="en">English</option>
         </select>
       </div>
       <div style="display:flex;gap:10px">
-        <button class="btn btn-ghost" style="flex:1" onclick="Onboarding.backTo(1)">← Retour</button>
-        <button class="btn btn-primary" style="flex:1" onclick="Onboarding.step3()" style="padding:14px">Suivant →</button>
+        <button class="btn btn-ghost" style="flex:1" onclick="Onboarding.backTo(1)" data-i18n="ob_back">← Retour</button>
+        <button class="btn btn-primary" style="flex:1" onclick="Onboarding.step3()" style="padding:14px" data-i18n="ob_next">Suivant →</button>
       </div>
     </div>
 
     <div id="ob-step-3" style="display:none">
       <div style="text-align:center;margin-bottom:20px">
         <div style="font-size:3rem;margin-bottom:8px">🔐</div>
-        <div style="font-family:var(--fd);font-size:1.1rem;font-weight:800;color:var(--text)">Sécurité du compte admin</div>
-        <div style="font-size:.82rem;color:var(--text2);margin-top:8px;line-height:1.6">Le PIN par défaut est <strong style="color:var(--accent);font-family:var(--fm)">0000</strong>. Changez-le maintenant pour sécuriser votre compte.</div>
+        <div style="font-family:var(--fd);font-size:1.1rem;font-weight:800;color:var(--text)" data-i18n="ob_security_title">Sécurité du compte admin</div>
+        <div style="font-size:.82rem;color:var(--text2);margin-top:8px;line-height:1.6"><span data-i18n="ob_security_sub_pre">Le PIN par défaut est</span> <strong style="color:var(--accent);font-family:var(--fm)">0000</strong><span data-i18n="ob_security_sub_post">. Changez-le maintenant pour sécuriser votre compte.</span></div>
       </div>
       <div class="form-group" style="margin-bottom:12px">
-        <label class="form-label">Nouveau PIN (4 chiffres)</label>
+        <label class="form-label" data-i18n="ob_pin_new">Nouveau PIN (4 chiffres)</label>
         <input type="password" id="ob-pin" maxlength="4" inputmode="numeric" placeholder="••••" style="text-align:center;letter-spacing:8px;font-size:1.2rem">
       </div>
       <div class="form-group" style="margin-bottom:16px">
-        <label class="form-label">Confirmer le PIN</label>
+        <label class="form-label" data-i18n="ob_pin_confirm">Confirmer le PIN</label>
         <input type="password" id="ob-pin2" maxlength="4" inputmode="numeric" placeholder="••••" style="text-align:center;letter-spacing:8px;font-size:1.2rem">
       </div>
       <div id="ob-error" style="font-size:.78rem;color:var(--danger);min-height:18px;margin-bottom:10px;text-align:center"></div>
       <div style="display:flex;gap:10px;margin-bottom:10px">
-        <button class="btn btn-ghost" style="flex:1" onclick="Onboarding.backTo(2)">← Retour</button>
-        <button class="btn btn-primary" style="flex:1" onclick="Onboarding.finish()">✅ Terminer</button>
+        <button class="btn btn-ghost" style="flex:1" onclick="Onboarding.backTo(2)" data-i18n="ob_back">← Retour</button>
+        <button class="btn btn-primary" style="flex:1" onclick="Onboarding.finish()" data-i18n="ob_finish">✅ Terminer</button>
       </div>
-      <button class="btn btn-ghost btn-full" style="font-size:.75rem;color:var(--text3)" onclick="Onboarding.finish(true)">Garder le PIN 0000 (non recommandé)</button>
+      <button class="btn btn-ghost btn-full" style="font-size:.75rem;color:var(--text3)" onclick="Onboarding.finish(true)" data-i18n="ob_keep_default_pin">Garder le PIN 0000 (non recommandé)</button>
     </div>
   </div>
 </div>
@@ -760,8 +760,8 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
       <input type="text" id="smp-confirm-input" style="margin-top:6px">
     </div>
     <div id="smp-confirm-btns">
-      <button class="btn btn-ghost" style="flex:1" id="smp-confirm-cancel">Annuler</button>
-      <button class="btn btn-primary" style="flex:1" id="smp-confirm-ok">Confirmer</button>
+      <button class="btn btn-ghost" style="flex:1" id="smp-confirm-cancel" data-i18n="smp_confirm_cancel">Annuler</button>
+      <button class="btn btn-primary" style="flex:1" id="smp-confirm-ok" data-i18n="smp_confirm_ok">Confirmer</button>
     </div>
   </div>
 </div>
@@ -769,22 +769,22 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <!-- MODALE COMMANDE FOURNISSEUR -->
 <div id="smp-order-overlay">
   <div id="smp-order-box">
-    <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:16px">📦 Enregistrer une commande</div>
+    <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:16px" data-i18n="smp_order_title">📦 Enregistrer une commande</div>
     <div class="form-group" style="margin-bottom:12px">
-      <label class="form-label">Fournisseur</label>
+      <label class="form-label" data-i18n="smp_order_supplier">Fournisseur</label>
       <div id="smp-order-sup-name" style="font-weight:700;padding:8px 0;color:var(--text)"></div>
     </div>
     <div class="form-group" style="margin-bottom:12px">
-      <label class="form-label">Montant *</label>
+      <label class="form-label" data-i18n="smp_order_amount">Montant *</label>
       <input type="number" id="smp-order-amount" inputmode="decimal" min="0" placeholder="0">
     </div>
     <div class="form-group" style="margin-bottom:16px">
-      <label class="form-label">Description (optionnel)</label>
-      <input type="text" id="smp-order-desc" placeholder="Ex: Livraison marchandises...">
+      <label class="form-label" data-i18n="smp_order_desc">Description (optionnel)</label>
+      <input type="text" id="smp-order-desc" placeholder="Ex: Livraison marchandises..." data-i18n-placeholder="smp_order_desc_ph">
     </div>
     <div style="display:flex;gap:10px">
-      <button class="btn btn-ghost" style="flex:1" onclick="SmpModal.closeOrder()">Annuler</button>
-      <button class="btn btn-primary" style="flex:1" onclick="SmpModal.confirmOrder()">✅ Enregistrer</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="SmpModal.closeOrder()" data-i18n="smp_confirm_cancel">Annuler</button>
+      <button class="btn btn-primary" style="flex:1" onclick="SmpModal.confirmOrder()" data-i18n="smp_order_save">✅ Enregistrer</button>
     </div>
   </div>
 </div>
@@ -954,10 +954,10 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <div id="deferred-overlay">
   <div class="deferred-header">
     <div>
-      <div style="font-family:var(--fd);font-size:.95rem;font-weight:800;color:var(--accent)">📒 Saisie Différée</div>
-      <div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);margin-top:1px">Enregistrez les ventes notées dans votre cahier</div>
+      <div style="font-family:var(--fd);font-size:.95rem;font-weight:800;color:var(--accent)" data-i18n="deferred_title">📒 Saisie Différée</div>
+      <div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);margin-top:1px" data-i18n="deferred_subtitle">Enregistrez les ventes notées dans votre cahier</div>
     </div>
-    <button class="btn btn-ghost btn-sm" onclick="DeferredSales.close()">✕ Fermer</button>
+    <button class="btn btn-ghost btn-sm" onclick="DeferredSales.close()"><span data-i18n="btn_close">Fermer</span></button>
   </div>
 
   <div style="padding:14px;max-width:700px;margin:0 auto">
@@ -966,18 +966,18 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div class="card" style="padding:14px 16px;margin-bottom:14px">
       <div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap">
         <div style="flex:1;min-width:160px">
-          <label class="form-label">Date des ventes *</label>
+          <label class="form-label" data-i18n="deferred_date">Date des ventes *</label>
           <input type="date" id="def-date" onchange="DeferredSales.onDateChange()">
         </div>
         <div style="flex:1;min-width:160px">
-          <label class="form-label">Vendeur</label>
+          <label class="form-label" data-i18n="deferred_seller">Vendeur</label>
           <select id="def-seller">
-            <option value="">— Moi-même —</option>
+            <option value="" data-i18n="def_seller_self">— Moi-même —</option>
           </select>
         </div>
         <div style="flex:1;min-width:160px">
-          <label class="form-label">Nom du client (optionnel)</label>
-          <input type="text" id="def-client" placeholder="Client commun à toutes les lignes">
+          <label class="form-label" data-i18n="ph_client">Nom du client (optionnel)</label>
+          <input type="text" id="def-client" placeholder="Client commun à toutes les lignes" data-i18n-placeholder="def_client_common_ph">
         </div>
       </div>
       <div id="def-date-info" style="font-family:var(--fm);font-size:.72rem;color:var(--text3);margin-top:8px;min-height:16px"></div>
@@ -988,13 +988,13 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
       <div class="deferred-summary" id="def-summary" style="flex:1">
         <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px">
           <div>
-            <div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px">Résumé en cours</div>
+            <div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px" data-i18n="def_summary_current">Résumé en cours</div>
             <div style="font-family:var(--fd);font-weight:800;font-size:1.1rem;color:var(--accent)" id="def-total-display">0 F</div>
           </div>
           <div style="font-family:var(--fm);font-size:.72rem;color:var(--text2)" id="def-lines-info">0 ligne(s)</div>
         </div>
       </div>
-      <button class="btn btn-ghost" style="white-space:nowrap" onclick="DeferredSales.addLine()">+ Ajouter une ligne</button>
+      <button class="btn btn-ghost" style="white-space:nowrap" onclick="DeferredSales.addLine()" data-i18n="deferred_add_line">+ Ajouter une ligne</button>
     </div>
 
     <!-- Lignes de vente -->
@@ -1003,17 +1003,17 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <!-- Bouton Enregistrer en bas -->
     <div style="margin-top:10px;margin-bottom:20px">
       <button class="btn btn-primary btn-full" id="def-submit-btn" onclick="DeferredSales.submit()" disabled>
-        ✅ Enregistrer tout
+        ✅ <span data-i18n="deferred_submit">Enregistrer tout</span>
       </button>
     </div>
 
     <!-- Aide -->
     <div style="background:var(--sur2);border-radius:var(--rmd);padding:14px;font-family:var(--fm);font-size:.72rem;color:var(--text3);line-height:1.8">
-      <strong style="color:var(--text2)">💡 Comment utiliser :</strong><br>
-      1. Choisissez la date où les ventes ont eu lieu<br>
-      2. Ajoutez une ligne par vente notée dans votre cahier<br>
-      3. Renseignez le produit, la quantité, et le montant payé<br>
-      4. Cliquez <strong>"Enregistrer tout"</strong> — les ventes apparaîtront à la bonne date dans l'historique
+      <strong style="color:var(--text2)" data-i18n="def_help_title">💡 Comment utiliser :</strong><br>
+      1. <span data-i18n="def_help_1">Choisissez la date où les ventes ont eu lieu</span><br>
+      2. <span data-i18n="def_help_2">Ajoutez une ligne par vente notée dans votre cahier</span><br>
+      3. <span data-i18n="def_help_3">Renseignez le produit, la quantité, et le montant payé</span><br>
+      4. <span data-i18n="def_help_4_pre">Cliquez</span> <strong data-i18n="def_help_4_btn">"Enregistrer tout"</strong> <span data-i18n="def_help_4_post">— les ventes apparaîtront à la bonne date dans l'historique</span>
     </div>
   </div>
 </div>
@@ -2858,6 +2858,66 @@ const I18n = {
       modal_delete_expense_ok:'Supprimer',
       modal_cloud_download_msg:'Télécharger les données du cloud ? Vos données locales seront remplacées.',
       modal_cloud_upload_msg:'Envoyer vos données locales vers le cloud ? Les données existantes sur le cloud seront remplacées.',
+
+      /* ── LOT 7 : Onboarding ── */
+      ob_welcome_title:'Bienvenue dans Smart Market Pro !',
+      ob_welcome_sub:'Configurons votre boutique en 3 étapes rapides pour que tout soit prêt dès maintenant.',
+      ob_shop_name_label:'Nom de votre boutique *',
+      ob_shop_name_ph:'Ex: Épicerie Eze, Boutique Grace...',
+      ob_phone_label:'Téléphone (affiché sur les tickets)',
+      ob_next:'Suivant →',
+      ob_currency_lang_title:'Devise et langue',
+      ob_currency_lang_sub:"Ces réglages s'affichent sur tous vos tickets et rapports.",
+      ob_currency_label:'Devise',
+      ob_lang_label:'Langue',
+      ob_back:'← Retour',
+      ob_security_title:'Sécurité du compte admin',
+      ob_security_sub_pre:'Le PIN par défaut est',
+      ob_security_sub_post:'. Changez-le maintenant pour sécuriser votre compte.',
+      ob_pin_new:'Nouveau PIN (4 chiffres)',
+      ob_pin_confirm:'Confirmer le PIN',
+      ob_finish:'✅ Terminer',
+      ob_keep_default_pin:'Garder le PIN 0000 (non recommandé)',
+
+      /* ── LOT 7 : Saisie Différée (overlay + rendu dynamique) ── */
+      def_seller_self:'— Moi-même —',
+      def_client_common_ph:'Client commun à toutes les lignes',
+      def_summary_current:'Résumé en cours',
+      def_line_num:'Ligne',
+      def_item_label:'Article *',
+      def_choose_item:'— Choisir un article —',
+      def_choose_short:'— Choisir —',
+      def_qty_star:'Quantité *',
+      def_price_unit:'Prix unitaire *',
+      def_paid_hint:'Montant payé (vide=tout)',
+      def_client_optional:'Client (optionnel)',
+      def_client_name_ph:'Nom du client',
+      def_validate_line:'✓ Valider cette ligne',
+      def_empty_state:'Aucune ligne — cliquez sur « + Ajouter une ligne »',
+      def_total_prefix:'Total : ',
+      def_change_give:'Rendre : ',
+      def_change_owe:'Reste : ',
+      def_lines_valid:'ligne(s) valide(s)',
+      def_help_title:'💡 Comment utiliser :',
+      def_help_1:'Choisissez la date où les ventes ont eu lieu',
+      def_help_2:'Ajoutez une ligne par vente notée dans votre cahier',
+      def_help_3:'Renseignez le produit, la quantité, et le montant payé',
+      def_help_4_pre:'Cliquez',
+      def_help_4_btn:'« Enregistrer tout »',
+      def_help_4_post:"— les ventes apparaîtront à la bonne date dans l'historique",
+      def_date_today:"Aujourd'hui — les ventes apparaîtront dans le tableau du jour.",
+      def_date_yesterday:"Hier — ces ventes seront datées d'hier dans l'historique.",
+      def_date_days_ago:'Il y a {days} jours ({date}) — visible dans l\'onglet Historique.',
+
+      /* ── LOT 7 : Modales SmpModal (confirm générique + commande fournisseur) ── */
+      smp_confirm_cancel:'Annuler',
+      smp_confirm_ok:'Confirmer',
+      smp_order_title:'📦 Enregistrer une commande',
+      smp_order_supplier:'Fournisseur',
+      smp_order_amount:'Montant *',
+      smp_order_desc:'Description (optionnel)',
+      smp_order_desc_ph:'Ex: Livraison marchandises...',
+      smp_order_save:'✅ Enregistrer',
     },
     en: {
       nav_sales:'Sales', nav_stock:'Stock', nav_analytics:'Analytics',
@@ -3313,6 +3373,66 @@ const I18n = {
       modal_delete_expense_ok:'Delete',
       modal_cloud_download_msg:'Download data from cloud? Your local data will be replaced.',
       modal_cloud_upload_msg:'Send your local data to the cloud? Existing cloud data will be replaced.',
+
+      /* ── BATCH 7: Onboarding ── */
+      ob_welcome_title:'Welcome to Smart Market Pro!',
+      ob_welcome_sub:"Let's set up your shop in 3 quick steps so everything is ready right away.",
+      ob_shop_name_label:'Your shop name *',
+      ob_shop_name_ph:'E.g.: Eze Grocery, Grace Store...',
+      ob_phone_label:'Phone (shown on receipts)',
+      ob_next:'Next →',
+      ob_currency_lang_title:'Currency and language',
+      ob_currency_lang_sub:'These settings appear on all your receipts and reports.',
+      ob_currency_label:'Currency',
+      ob_lang_label:'Language',
+      ob_back:'← Back',
+      ob_security_title:'Admin account security',
+      ob_security_sub_pre:'The default PIN is',
+      ob_security_sub_post:'. Change it now to secure your account.',
+      ob_pin_new:'New PIN (4 digits)',
+      ob_pin_confirm:'Confirm PIN',
+      ob_finish:'✅ Finish',
+      ob_keep_default_pin:'Keep PIN 0000 (not recommended)',
+
+      /* ── BATCH 7: Deferred Entry (overlay + dynamic render) ── */
+      def_seller_self:'— Myself —',
+      def_client_common_ph:'Client common to all lines',
+      def_summary_current:'Current summary',
+      def_line_num:'Line',
+      def_item_label:'Item *',
+      def_choose_item:'— Choose an item —',
+      def_choose_short:'— Choose —',
+      def_qty_star:'Quantity *',
+      def_price_unit:'Unit price *',
+      def_paid_hint:'Amount paid (blank=full)',
+      def_client_optional:'Client (optional)',
+      def_client_name_ph:'Client name',
+      def_validate_line:'✓ Validate this line',
+      def_empty_state:'No lines — click "+ Add line"',
+      def_total_prefix:'Total: ',
+      def_change_give:'Change: ',
+      def_change_owe:'Owed: ',
+      def_lines_valid:'valid line(s)',
+      def_help_title:'💡 How to use:',
+      def_help_1:'Choose the date the sales took place',
+      def_help_2:'Add one line per sale noted in your notebook',
+      def_help_3:'Enter the product, quantity, and amount paid',
+      def_help_4_pre:'Click',
+      def_help_4_btn:'"Save all"',
+      def_help_4_post:'— the sales will appear on the correct date in the history',
+      def_date_today:"Today — the sales will appear in today's table.",
+      def_date_yesterday:'Yesterday — these sales will be dated yesterday in the history.',
+      def_date_days_ago:'{days} days ago ({date}) — visible in the History tab.',
+
+      /* ── BATCH 7: SmpModal (generic confirm + supplier order) ── */
+      smp_confirm_cancel:'Cancel',
+      smp_confirm_ok:'Confirm',
+      smp_order_title:'📦 Record an order',
+      smp_order_supplier:'Supplier',
+      smp_order_amount:'Amount *',
+      smp_order_desc:'Description (optional)',
+      smp_order_desc_ph:'E.g.: Merchandise delivery...',
+      smp_order_save:'✅ Save',
     }
   },
   t(key) { return this._d[this._lang]?.[key] ?? this._d['fr']?.[key] ?? key; },
@@ -6572,7 +6692,7 @@ const DeferredSales = {
     // Remplir le sélecteur vendeur
     const sel = document.getElementById('def-seller');
     if (sel) {
-      sel.innerHTML = '<option value="">— Moi-même —</option>';
+      sel.innerHTML = `<option value="">${I18n.t('def_seller_self')}</option>`;
       DB.data.users.forEach(u => {
         const o = document.createElement('option');
         o.value = u.id; o.textContent = u.name;
@@ -6613,13 +6733,16 @@ const DeferredSales = {
     today.setHours(0,0,0,0);
     const diff = Math.floor((today - d) / 86400000);
     if (diff === 0) {
-      infoEl.textContent = "Aujourd'hui — les ventes apparaîtront dans le tableau du jour.";
+      infoEl.textContent = I18n.t('def_date_today');
       infoEl.style.color = 'var(--accent)';
     } else if (diff === 1) {
-      infoEl.textContent = 'Hier — ces ventes seront datées d\'hier dans l\'historique.';
+      infoEl.textContent = I18n.t('def_date_yesterday');
       infoEl.style.color = 'var(--text3)';
     } else if (diff > 1) {
-      infoEl.textContent = `Il y a ${diff} jours (${d.toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long'})}) — visible dans l'onglet Historique.`;
+      const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
+      infoEl.textContent = I18n.t('def_date_days_ago')
+        .replace('{days}', diff)
+        .replace('{date}', d.toLocaleDateString(locale,{weekday:'long',day:'numeric',month:'long'}));
       infoEl.style.color = 'var(--text3)';
     } else {
       infoEl.textContent = '⚠️ ' + I18n.t('toast_err_date_future');
@@ -6681,7 +6804,7 @@ const DeferredSales = {
     const price   = parseFloat(line.price) || 0;
     const total   = qty * price;
     const totEl   = document.getElementById('def-total-' + id);
-    if (totEl) totEl.textContent = total > 0 ? 'Total : ' + Utils.currency(total) : '';
+    if (totEl) totEl.textContent = total > 0 ? I18n.t('def_total_prefix') + Utils.currency(total) : '';
     // Rendu monnaie
     const paid    = parseFloat(line.paid);
     const chEl    = document.getElementById('def-change-' + id);
@@ -6689,8 +6812,8 @@ const DeferredSales = {
       if (!isNaN(paid) && paid > 0 && total > 0) {
         const change = paid - total;
         chEl.textContent = change >= 0
-          ? 'Rendre : ' + Utils.currency(change)
-          : 'Reste : ' + Utils.currency(Math.abs(change));
+          ? I18n.t('def_change_give') + Utils.currency(change)
+          : I18n.t('def_change_owe') + Utils.currency(Math.abs(change));
         chEl.style.color = change >= 0 ? 'var(--accent)' : 'var(--danger)';
         chEl.style.display = '';
       } else {
@@ -6706,7 +6829,7 @@ const DeferredSales = {
     const valid = this._lines.filter(l => l.itemId && parseInt(l.qty) > 0 && parseFloat(l.price) >= 0).length;
     const se = (id, v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
     se('def-total-display', Utils.currency(total));
-    se('def-lines-info', valid + ' ligne' + (valid>1?'s':'') + ' valide' + (valid>1?'s':''));
+    se('def-lines-info', valid + ' ' + I18n.t('def_lines_valid'));
     const sumEl = document.getElementById('def-summary');
     if (sumEl) sumEl.style.opacity = this._lines.length > 0 ? '1' : '0.4';
     const btn = document.getElementById('def-submit-btn');
@@ -6717,49 +6840,50 @@ const DeferredSales = {
     const container = document.getElementById('def-lines-container');
     if (!container) return;
     if (!this._lines.length) {
-      container.innerHTML = '<div style="text-align:center;color:var(--text3);font-family:var(--fm);font-size:.8rem;padding:20px 0">Aucune ligne — cliquez sur "+ Ajouter une ligne"</div>';
+      container.innerHTML = `<div style="text-align:center;color:var(--text3);font-family:var(--fm);font-size:.8rem;padding:20px 0">${I18n.t('def_empty_state')}</div>`;
       return;
     }
     const items = DB.data.items;
     // Trier A→Z
-    const sortedItems = [...items].sort((a,b) => a.name.localeCompare(b.name,'fr',{sensitivity:'base'}));
+    const sortLocale = I18n._lang === 'en' ? 'en' : 'fr';
+    const sortedItems = [...items].sort((a,b) => a.name.localeCompare(b.name,sortLocale,{sensitivity:'base'}));
     const itemOpts = sortedItems.length
-      ? `<option value="">— Choisir —</option>` + sortedItems.map(i => `<option value="${Utils.esc(i.id)}">${Utils.esc(i.name)} (dispo: ${i.qty})</option>`).join('')
+      ? `<option value="">${I18n.t('def_choose_short')}</option>` + sortedItems.map(i => `<option value="${Utils.esc(i.id)}">${Utils.esc(i.name)} (dispo: ${i.qty})</option>`).join('')
       : `<option value="">— ${I18n.t('no_stock')} —</option>`;
 
     container.innerHTML = this._lines.map((line, idx) => `
       <div class="deferred-row" id="def-row-${line.id}" style="${line._wasFilled ? 'opacity:.85;border-left:3px solid var(--accent)' : 'border-left:3px solid var(--warning)'}">
-        <div class="deferred-row-num">Ligne ${idx+1} ${line._wasFilled ? '✓' : ''}</div>
+        <div class="deferred-row-num">${I18n.t('def_line_num')} ${idx+1} ${line._wasFilled ? '✓' : ''}</div>
         <div class="form-group" style="grid-column:1/-1;margin-bottom:0;margin-top:14px">
-          <label class="form-label">Article *</label>
+          <label class="form-label">${I18n.t('def_item_label')}</label>
           <select id="def-item-${line.id}"
             onchange="DeferredSales.updateLine(${line.id},'itemId',this.value)">
-            <option value="">— Choisir un article —</option>
+            <option value="">${I18n.t('def_choose_item')}</option>
             ${itemOpts}
           </select>
         </div>
         <div class="form-group" style="margin-bottom:0">
-          <label class="form-label">Quantité *</label>
+          <label class="form-label">${I18n.t('def_qty_star')}</label>
           <input type="number" id="def-qty-${line.id}" value="${line.qty}"
             min="1" inputmode="numeric"
             oninput="DeferredSales.updateLine(${line.id},'qty',this.value)">
         </div>
         <div class="form-group" style="margin-bottom:0">
-          <label class="form-label">Prix unitaire *</label>
+          <label class="form-label">${I18n.t('def_price_unit')}</label>
           <input type="number" id="def-price-${line.id}" value="${line.price||''}"
             min="0" inputmode="decimal"
             oninput="DeferredSales.updateLine(${line.id},'price',this.value)">
         </div>
         <div class="form-group" style="margin-bottom:0">
-          <label class="form-label">Montant payé (vide=tout)</label>
+          <label class="form-label">${I18n.t('def_paid_hint')}</label>
           <input type="number" id="def-paid-${line.id}" value="${line.paid||''}"
             min="0" inputmode="decimal"
             oninput="DeferredSales.updateLine(${line.id},'paid',this.value)">
         </div>
         <div class="form-group" style="margin-bottom:0">
-          <label class="form-label">Client (optionnel)</label>
+          <label class="form-label">${I18n.t('def_client_optional')}</label>
           <input type="text" id="def-client-${line.id}" value="${Utils.esc(line.client||'')}"
-            placeholder="Nom du client"
+            placeholder="${I18n.t('def_client_name_ph')}"
             oninput="DeferredSales.updateLine(${line.id},'client',this.value)">
         </div>
         <div class="deferred-row-total" id="def-total-${line.id}"></div>
@@ -6767,7 +6891,7 @@ const DeferredSales = {
         ${!line._wasFilled ? `
         <button onclick="DeferredSales.validateLine(${line.id})"
           style="grid-column:1/-1;margin-top:6px;background:var(--accent);color:#000;border:none;border-radius:var(--rmd);padding:10px;font-family:var(--fd);font-weight:700;font-size:.82rem;cursor:pointer">
-          ✓ Valider cette ligne
+          ✓ ${I18n.t('def_validate_line').replace('✓ ','')}
         </button>` : ''}
         <button onclick="DeferredSales.removeLine(${line.id})"
           style="position:absolute;top:8px;right:8px;background:none;border:none;color:var(--danger);cursor:pointer;font-size:1rem;padding:2px 6px">✕</button>
