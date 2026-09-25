@@ -599,17 +599,17 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 
     <!-- Liste des comptes locaux -->
     <div id="auth-step-local">
-      <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-align:center;margin-bottom:12px">Qui êtes-vous ?</div>
+      <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-align:center;margin-bottom:12px" data-i18n="auth_who">Qui êtes-vous ?</div>
       <div id="accounts-list" style="margin-bottom:14px"></div>
       <div style="display:flex;gap:12px;justify-content:center;flex-wrap:wrap">
-        <button onclick="RecoveryManager.show()" style="background:none;border:none;color:var(--text3);font-size:.7rem;cursor:pointer;font-family:var(--fm);text-decoration:underline">Code oublié ?</button>
+        <button onclick="RecoveryManager.show()" style="background:none;border:none;color:var(--text3);font-size:.7rem;cursor:pointer;font-family:var(--fm);text-decoration:underline" data-i18n="auth_forgot_code">Code oublié ?</button>
       </div>
     </div>
 
     <!-- Saisie PIN -->
     <div id="auth-step-pin" style="display:none">
       <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px">
-        <button onclick="Auth.backToAccounts()" style="background:none;border:1px solid var(--border);border-radius:var(--rsm);color:var(--text2);cursor:pointer;font-size:.9rem;padding:4px 10px">← Retour</button>
+        <button onclick="Auth.backToAccounts()" style="background:none;border:1px solid var(--border);border-radius:var(--rsm);color:var(--text2);cursor:pointer;font-size:.9rem;padding:4px 10px" data-i18n="ob_back">← Retour</button>
         <div style="text-align:center;flex:1">
           <div id="auth-selected-name" style="font-family:var(--fd);font-weight:800;font-size:.95rem"></div>
           <div id="auth-selected-role" style="font-family:var(--fm);font-size:.62rem;color:var(--text3);margin-top:2px"></div>
@@ -643,18 +643,18 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <!-- RECOVERY MODAL -->
 <div id="recovery-modal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:19999;align-items:center;justify-content:center;padding:20px">
   <div style="background:var(--surface);border:1px solid var(--bord2);border-radius:var(--rxl);padding:32px 28px;width:100%;max-width:380px;box-shadow:var(--shadow-lg)">
-    <div style="font-family:var(--fd);font-size:1.1rem;font-weight:800;color:var(--accent);margin-bottom:6px">🔑 Récupération d'accès</div>
-    <div style="font-size:.8rem;color:var(--text3);margin-bottom:20px;font-family:var(--fm)">Entrez votre code maître à 8 caractères</div>
+    <div style="font-family:var(--fd);font-size:1.1rem;font-weight:800;color:var(--accent);margin-bottom:6px" data-i18n="rec_title">🔑 Récupération d'accès</div>
+    <div style="font-size:.8rem;color:var(--text3);margin-bottom:20px;font-family:var(--fm)" data-i18n="rec_sub">Entrez votre code maître à 8 caractères</div>
     <div class="form-group" style="margin-bottom:14px">
-      <label class="form-label">Code Maître</label>
+      <label class="form-label" data-i18n="rec_code_label">Code Maître</label>
       <input type="text" id="master-code-input" placeholder="Ex: SMP-A1B2C3" maxlength="12" style="text-transform:uppercase;letter-spacing:2px;text-align:center;font-size:1.1rem">
     </div>
     <div id="recovery-error" style="font-size:.78rem;color:var(--danger);min-height:18px;margin-bottom:12px;text-align:center"></div>
     <div style="display:flex;gap:10px">
-      <button class="btn btn-ghost" style="flex:1" onclick="RecoveryManager.hide()">Annuler</button>
-      <button class="btn btn-primary" style="flex:1" onclick="RecoveryManager.verify()">Accéder</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="RecoveryManager.hide()" data-i18n="smp_confirm_cancel">Annuler</button>
+      <button class="btn btn-primary" style="flex:1" onclick="RecoveryManager.verify()" data-i18n="rec_access">Accéder</button>
     </div>
-    <div style="margin-top:14px;font-size:.72rem;color:var(--text3);text-align:center;font-family:var(--fm)">Le code maître vous a été affiché lors de la première connexion</div>
+    <div style="margin-top:14px;font-size:.72rem;color:var(--text3);text-align:center;font-family:var(--fm)" data-i18n="rec_hint">Le code maître vous a été affiché lors de la première connexion</div>
   </div>
 </div>
 
@@ -802,10 +802,10 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <div id="pwa-banner">
   <div class="pwa-banner-icon">📲</div>
   <div class="pwa-banner-text">
-    <div class="pwa-banner-title">Installer Smart Market Pro</div>
-    <div class="pwa-banner-sub">Accès direct depuis votre écran d'accueil, fonctionne hors-ligne</div>
+    <div class="pwa-banner-title" data-i18n="pwa_install_title">Installer Smart Market Pro</div>
+    <div class="pwa-banner-sub" data-i18n="pwa_install_sub">Accès direct depuis votre écran d'accueil, fonctionne hors-ligne</div>
   </div>
-  <button class="btn btn-primary btn-sm" onclick="PWA.install()" style="white-space:nowrap;flex-shrink:0">Installer</button>
+  <button class="btn btn-primary btn-sm" onclick="PWA.install()" style="white-space:nowrap;flex-shrink:0" data-i18n="pwa_install_btn">Installer</button>
   <button onclick="PWA.dismissBanner()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:1.1rem;padding:4px;flex-shrink:0">✕</button>
 </div>
 
@@ -813,16 +813,16 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <!-- MODALE PAIEMENT PARTIEL -->
 <div id="smp-partial-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:29999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)">
   <div style="background:var(--surface);border:1px solid var(--bord2);border-radius:var(--rxl);padding:28px 24px;width:100%;max-width:360px;box-shadow:var(--shadow-lg);animation:slideUp .18s ease">
-    <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:6px">💳 Encaissement Partiel</div>
+    <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:6px" data-i18n="partial_title">💳 Encaissement Partiel</div>
     <div style="font-size:.82rem;color:var(--text2);margin-bottom:14px" id="smp-partial-info"></div>
     <div class="form-group" style="margin-bottom:14px">
-      <label class="form-label">Montant encaissé *</label>
+      <label class="form-label" data-i18n="partial_amount_label">Montant encaissé *</label>
       <input type="number" id="smp-partial-amount" inputmode="decimal" min="0" placeholder="0">
     </div>
     <div id="smp-partial-rest" style="font-family:var(--fm);font-size:.75rem;color:var(--text3);margin-bottom:14px;min-height:18px"></div>
     <div style="display:flex;gap:10px">
-      <button class="btn btn-ghost" style="flex:1" onclick="Debts.closePartial()">Annuler</button>
-      <button class="btn btn-primary" style="flex:1" onclick="Debts.confirmPartial()">✅ Encaisser</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="Debts.closePartial()" data-i18n="smp_confirm_cancel">Annuler</button>
+      <button class="btn btn-primary" style="flex:1" onclick="Debts.confirmPartial()" data-i18n="partial_confirm">✅ Encaisser</button>
     </div>
   </div>
 </div>
@@ -868,25 +868,25 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div style="background:var(--surface);border:1px solid var(--border);border-radius:var(--rlg);padding:16px 20px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between">
       <div>
         <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--accent)" id="sd-shop-name">Smart Market Pro</div>
-        <div style="font-family:var(--fm);font-size:.68rem;color:var(--text3)" id="sd-seller-name">Vendeur</div>
+        <div style="font-family:var(--fm);font-size:.68rem;color:var(--text3)" id="sd-seller-name" data-i18n="role_seller">Vendeur</div>
       </div>
       <div style="display:flex;gap:8px;align-items:center">
         <div style="font-family:var(--fm);font-size:.65rem;color:var(--text3)" id="sd-date"></div>
-        <button class="btn btn-ghost btn-sm" onclick="Auth.logout()">⏏ Déconn.</button>
+        <button class="btn btn-ghost btn-sm" onclick="Auth.logout()" data-i18n="sd_logout">⏏ Déconn.</button>
       </div>
     </div>
 
     <!-- KPIs du vendeur -->
     <div class="stats-grid" style="margin-bottom:16px">
       <div class="stat-card" style="--accent-color:var(--info)">
-        <div class="stat-label">Mes Ventes Aujourd'hui</div>
+        <div class="stat-label" data-i18n="sd_sales_today">Mes Ventes Aujourd'hui</div>
         <div class="stat-value" id="sd-count">0</div>
         <div class="stat-sub" id="sd-ca">CA : 0</div>
       </div>
       <div class="stat-card" style="--accent-color:var(--accent)">
-        <div class="stat-label">Ma Commission du Mois</div>
+        <div class="stat-label" data-i18n="sd_commission_month">Ma Commission du Mois</div>
         <div class="stat-value" id="sd-comm">0</div>
-        <div class="stat-sub" id="sd-comm-sub">Taux : 0%</div>
+        <div class="stat-sub" id="sd-comm-sub" data-i18n="sd_rate">Taux : 0%</div>
       </div>
     </div>
 
@@ -894,33 +894,33 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:16px">
       <button class="btn btn-primary" onclick="SellerDash.goSales()" style="padding:20px;flex-direction:column;gap:6px">
         <span style="font-size:1.8rem">🛒</span>
-        <span style="font-size:.82rem;font-weight:700">Nouvelle Vente</span>
+        <span style="font-size:.82rem;font-weight:700" data-i18n="sd_new_sale">Nouvelle Vente</span>
       </button>
       <button class="btn btn-ghost" onclick="SellerDash.goStock()" style="padding:20px;flex-direction:column;gap:6px">
         <span style="font-size:1.8rem">📦</span>
-        <span style="font-size:.82rem;font-weight:700">Voir le Stock</span>
+        <span style="font-size:.82rem;font-weight:700" data-i18n="sd_view_stock">Voir le Stock</span>
       </button>
       <button class="btn btn-ghost" onclick="SellerMode.activate()" style="padding:20px;flex-direction:column;gap:6px">
         <span style="font-size:1.8rem">🏪</span>
-        <span style="font-size:.82rem;font-weight:700">Mode Vendeur</span>
+        <span style="font-size:.82rem;font-weight:700" data-i18n="sd_seller_mode">Mode Vendeur</span>
       </button>
       <button class="btn btn-ghost" onclick="SellerDash.goDebts()" style="padding:20px;flex-direction:column;gap:6px">
         <span style="font-size:1.8rem">💳</span>
-        <span style="font-size:.82rem;font-weight:700">Mes Dettes</span>
+        <span style="font-size:.82rem;font-weight:700" data-i18n="sd_my_debts">Mes Dettes</span>
       </button>
       <button class="btn btn-ghost" onclick="SellerDash.openPrefs()" style="padding:20px;flex-direction:column;gap:6px">
         <span style="font-size:1.8rem">🎨</span>
-        <span style="font-size:.82rem;font-weight:700">Apparence</span>
+        <span style="font-size:.82rem;font-weight:700" data-i18n="sd_appearance">Apparence</span>
       </button>
       <button class="btn btn-ghost" onclick="Guide.show()" style="padding:20px;flex-direction:column;gap:6px">
         <span style="font-size:1.8rem">❓</span>
-        <span style="font-size:.82rem;font-weight:700">Aide</span>
+        <span style="font-size:.82rem;font-weight:700" data-i18n="sd_help">Aide</span>
       </button>
     </div>
 
     <!-- Mes dernières ventes -->
     <div class="card">
-      <div class="card-title">🕐 Mes Dernières Ventes</div>
+      <div class="card-title" data-i18n="sd_recent_sales">🕐 Mes Dernières Ventes</div>
       <div id="sd-recent" style="display:flex;flex-direction:column;gap:8px"></div>
     </div>
   </div>
@@ -930,21 +930,21 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <!-- MODALE ÉDITION UTILISATEUR -->
 <div id="smp-edit-user-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:29999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px)">
   <div style="background:var(--surface);border:1px solid var(--bord2);border-radius:var(--rxl);padding:28px 24px;width:100%;max-width:360px;box-shadow:var(--shadow-lg);animation:slideUp .18s ease">
-    <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:16px">✏️ Modifier le compte</div>
+    <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--accent);margin-bottom:16px" data-i18n="eu_title">✏️ Modifier le compte</div>
     <input type="hidden" id="edit-user-id">
     <div class="form-group" style="margin-bottom:12px">
-      <label class="form-label">Nom du vendeur *</label>
-      <input type="text" id="edit-user-name" placeholder="Nouveau nom..." maxlength="40">
+      <label class="form-label" data-i18n="eu_name_label">Nom du vendeur *</label>
+      <input type="text" id="edit-user-name" placeholder="Nouveau nom..." data-i18n-placeholder="eu_name_ph" maxlength="40">
     </div>
     <div class="form-group" style="margin-bottom:16px">
-      <label class="form-label">Nouveau PIN (laisser vide = inchangé)</label>
+      <label class="form-label" data-i18n="eu_pin_label">Nouveau PIN (laisser vide = inchangé)</label>
       <input type="password" id="edit-user-pin" maxlength="4" inputmode="numeric"
         placeholder="••••" style="text-align:center;letter-spacing:8px;font-size:1.1rem">
     </div>
     <div id="edit-user-error" style="font-size:.75rem;color:var(--danger);min-height:16px;margin-bottom:10px"></div>
     <div style="display:flex;gap:10px">
-      <button class="btn btn-ghost" style="flex:1" onclick="Users.closeEdit()">Annuler</button>
-      <button class="btn btn-primary" style="flex:1" onclick="Users.saveEdit()">💾 Sauvegarder</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="Users.closeEdit()" data-i18n="smp_confirm_cancel">Annuler</button>
+      <button class="btn btn-primary" style="flex:1" onclick="Users.saveEdit()">💾 <span data-i18n="btn_save">Sauvegarder</span></button>
     </div>
   </div>
 </div>
@@ -1051,8 +1051,8 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <!-- Header -->
     <div style="background:linear-gradient(135deg,rgba(255,59,92,.15),rgba(255,186,0,.08));padding:16px 20px;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:2;background:var(--surface)">
       <div>
-        <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--danger)">📦 Rapport d'Approvisionnement</div>
-        <div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);margin-top:2px" id="restock-subtitle">Analyse en cours...</div>
+        <div style="font-family:var(--fd);font-size:1rem;font-weight:800;color:var(--danger)" data-i18n="restock_title">📦 Rapport d'Approvisionnement</div>
+        <div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);margin-top:2px" id="restock-subtitle" data-i18n="rs_analyzing">Analyse en cours...</div>
       </div>
       <button onclick="RestockReport.close()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:1.2rem;padding:4px">✕</button>
     </div>
@@ -1060,23 +1060,23 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;padding:14px 16px;border-bottom:1px solid var(--border)">
       <div style="text-align:center;padding:8px;background:rgba(255,59,92,.06);border-radius:var(--rmd)">
         <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;color:var(--danger)" id="rs-count-out">0</div>
-        <div style="font-family:var(--fm);font-size:.6rem;color:var(--text3);text-transform:uppercase">En rupture</div>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--text3);text-transform:uppercase" data-i18n="restock_out">En rupture</div>
       </div>
       <div style="text-align:center;padding:8px;background:rgba(255,186,0,.06);border-radius:var(--rmd)">
         <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;color:var(--warning)" id="rs-count-low">0</div>
-        <div style="font-family:var(--fm);font-size:.6rem;color:var(--text3);text-transform:uppercase">Stock faible</div>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--text3);text-transform:uppercase" data-i18n="restock_low">Stock faible</div>
       </div>
       <div style="text-align:center;padding:8px;background:rgba(0,232,122,.06);border-radius:var(--rmd)">
         <div style="font-family:var(--fd);font-size:1.3rem;font-weight:800;color:var(--accent)" id="rs-cost-total">0</div>
-        <div style="font-family:var(--fm);font-size:.6rem;color:var(--text3);text-transform:uppercase">Coût estimé</div>
+        <div style="font-family:var(--fm);font-size:.6rem;color:var(--text3);text-transform:uppercase" data-i18n="restock_cost">Coût estimé</div>
       </div>
     </div>
     <!-- Liste articles -->
     <div style="padding:14px 16px" id="restock-list"></div>
     <!-- Footer -->
     <div style="padding:12px 16px;border-top:1px solid var(--border);display:flex;gap:10px">
-      <button class="btn btn-ghost" style="flex:1" onclick="RestockReport.close()">Fermer</button>
-      <button class="btn btn-info btn-sm" style="flex:1" onclick="RestockReport.exportCSV()">📊 Exporter</button>
+      <button class="btn btn-ghost" style="flex:1" onclick="RestockReport.close()" data-i18n="btn_close">Fermer</button>
+      <button class="btn btn-info btn-sm" style="flex:1" onclick="RestockReport.exportCSV()">📊 <span data-i18n="btn_export">Exporter</span></button>
     </div>
   </div>
 </div>
@@ -1086,35 +1086,35 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <div id="seller-prefs-overlay" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:39000;align-items:center;justify-content:center;padding:16px;backdrop-filter:blur(6px)">
   <div style="background:var(--surface);border:1px solid var(--bord2);border-radius:var(--rxl);width:100%;max-width:400px;max-height:90vh;overflow-y:auto;box-shadow:var(--shadow-lg);animation:slideUp .2s ease">
     <div style="padding:18px 20px;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center">
-      <div style="font-family:var(--fd);font-size:.95rem;font-weight:800;color:var(--accent)">🎨 Apparence</div>
+      <div style="font-family:var(--fd);font-size:.95rem;font-weight:800;color:var(--accent)" data-i18n="sp_appearance">🎨 Apparence</div>
       <button onclick="SellerDash.closePrefs()" style="background:none;border:none;color:var(--text3);cursor:pointer;font-size:1.2rem">✕</button>
     </div>
     <div style="padding:18px 20px;display:flex;flex-direction:column;gap:16px">
 
       <!-- Thème clair/sombre -->
       <div>
-        <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Thème</div>
+        <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px" data-i18n="sp_theme">Thème</div>
         <div style="display:flex;gap:10px">
           <button onclick="Settings.setTheme('dark')" class="btn btn-ghost" style="flex:1;flex-direction:column;gap:4px;padding:12px">
             <span style="font-size:1.4rem">🌙</span>
-            <span style="font-size:.72rem">Sombre</span>
+            <span style="font-size:.72rem" data-i18n="sp_dark">Sombre</span>
           </button>
           <button onclick="Settings.setTheme('light')" class="btn btn-ghost" style="flex:1;flex-direction:column;gap:4px;padding:12px">
             <span style="font-size:1.4rem">☀️</span>
-            <span style="font-size:.72rem">Clair</span>
+            <span style="font-size:.72rem" data-i18n="sp_light">Clair</span>
           </button>
         </div>
       </div>
 
       <!-- Couleur accent -->
       <div>
-        <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Couleur principale</div>
+        <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px" data-i18n="sp_main_color">Couleur principale</div>
         <div id="seller-accent-colors" style="display:flex;gap:8px;flex-wrap:wrap"></div>
       </div>
 
       <!-- Langue -->
       <div>
-        <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Langue</div>
+        <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px" data-i18n="lbl_language">Langue</div>
         <div style="display:flex;gap:10px">
           <button onclick="SellerDash.setLang('fr')" class="btn btn-ghost" style="flex:1" id="seller-lang-fr">🇫🇷 Français</button>
           <button onclick="SellerDash.setLang('en')" class="btn btn-ghost" style="flex:1" id="seller-lang-en">🇬🇧 English</button>
@@ -1123,7 +1123,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 
       <!-- Taille du texte -->
       <div>
-        <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px">Taille du texte</div>
+        <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3);text-transform:uppercase;letter-spacing:.5px;margin-bottom:8px" data-i18n="sp_font_size">Taille du texte</div>
         <div style="display:flex;gap:8px;align-items:center">
           <button onclick="SellerDash.setFontSize(-1)" class="btn btn-ghost btn-sm" style="font-size:1rem;padding:8px 14px">A−</button>
           <span id="seller-font-size" style="font-family:var(--fm);font-size:.82rem;color:var(--text2);flex:1;text-align:center">16px</span>
@@ -1131,7 +1131,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
         </div>
       </div>
 
-      <button class="btn btn-primary btn-full" onclick="SellerDash.closePrefs()">Fermer</button>
+      <button class="btn btn-primary btn-full" onclick="SellerDash.closePrefs()" data-i18n="btn_close">Fermer</button>
     </div>
   </div>
 </div>
@@ -1165,28 +1165,28 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <!-- Bouton "Plus" dropdown admin -->
   <div id="nav-more-wrap">
     <button id="nav-more-btn" onclick="NavDesktop.toggle()" class="admin-only">
-      ▾ Plus <span id="nav-more-badge" style="display:none;background:var(--danger);color:#fff;font-family:var(--fm);font-size:.55rem;font-weight:800;padding:1px 5px;border-radius:10px;margin-left:3px;vertical-align:middle"></span>
+      ▾ <span data-i18n="nav_more">Plus</span> <span id="nav-more-badge" style="display:none;background:var(--danger);color:#fff;font-family:var(--fm);font-size:.55rem;font-weight:800;padding:1px 5px;border-radius:10px;margin-left:3px;vertical-align:middle"></span>
     </button>
     <div id="nav-dropdown">
-      <div class="nav-drop-item" id="drop-restock" onclick="RestockReport.open();NavDesktop.close()" id="drop-restock"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span> Approvisionnement</div>
+      <div class="nav-drop-item" id="drop-restock" onclick="RestockReport.open();NavDesktop.close()" id="drop-restock"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg></span> <span data-i18n="nav_restock">Approvisionnement</span></div>
       <div class="nav-drop-sep"></div>
-      <div class="nav-drop-item" id="drop-debts" onclick="NavDesktop.go('debts')" id="drop-debts"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span> Dettes</div>
-      <div class="nav-drop-item" id="drop-expenses" onclick="NavDesktop.go('expenses')" id="drop-expenses"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg></span> Dépenses</div>
-      <div class="nav-drop-item" id="drop-cashreport" onclick="NavDesktop.go('cashreport')" id="drop-cashreport"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span> Caisse</div>
-      <div class="nav-drop-item" id="drop-commissions" onclick="NavDesktop.go('commissions')" id="drop-commissions"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span> Commissions</div>
+      <div class="nav-drop-item" id="drop-debts" onclick="NavDesktop.go('debts')" id="drop-debts"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span> <span data-i18n="nav_debts">Dettes</span></div>
+      <div class="nav-drop-item" id="drop-expenses" onclick="NavDesktop.go('expenses')" id="drop-expenses"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg></span> <span data-i18n="nav_expenses">Dépenses</span></div>
+      <div class="nav-drop-item" id="drop-cashreport" onclick="NavDesktop.go('cashreport')" id="drop-cashreport"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg></span> <span data-i18n="nav_cashreport">Caisse</span></div>
+      <div class="nav-drop-item" id="drop-commissions" onclick="NavDesktop.go('commissions')" id="drop-commissions"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg></span> <span data-i18n="nav_commissions">Commissions</span></div>
       <div class="nav-drop-sep"></div>
-      <div class="nav-drop-item" onclick="NavDesktop.go('users')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> Équipe</div>
-      <div class="nav-drop-item" id="drop-suppliers" onclick="NavDesktop.go('suppliers')" id="drop-suppliers"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> Fournisseurs</div>
-      <div class="nav-drop-item" id="drop-loyalty" onclick="NavDesktop.go('loyalty')" id="drop-loyalty"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> Fidélité</div>
-      <div class="nav-drop-item" id="drop-returns" onclick="NavDesktop.go('returns')" id="drop-returns"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg></span> Retours</div>
-      <div class="nav-drop-item" id="drop-objectives" onclick="NavDesktop.go('objectives')" id="drop-objectives"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span> Objectifs</div>
-      <div class="nav-drop-item" id="drop-categories" onclick="NavDesktop.go('categories')" id="drop-categories"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span> Catégories</div>
+      <div class="nav-drop-item" onclick="NavDesktop.go('users')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span> <span data-i18n="nav_users">Équipe</span></div>
+      <div class="nav-drop-item" id="drop-suppliers" onclick="NavDesktop.go('suppliers')" id="drop-suppliers"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg></span> <span data-i18n="nav_suppliers">Fournisseurs</span></div>
+      <div class="nav-drop-item" id="drop-loyalty" onclick="NavDesktop.go('loyalty')" id="drop-loyalty"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg></span> <span data-i18n="nav_loyalty">Fidélité</span></div>
+      <div class="nav-drop-item" id="drop-returns" onclick="NavDesktop.go('returns')" id="drop-returns"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg></span> <span data-i18n="nav_returns">Retours</span></div>
+      <div class="nav-drop-item" id="drop-objectives" onclick="NavDesktop.go('objectives')" id="drop-objectives"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span> <span data-i18n="nav_objectives">Objectifs</span></div>
+      <div class="nav-drop-item" id="drop-categories" onclick="NavDesktop.go('categories')" id="drop-categories"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></span> <span data-i18n="nav_categories">Catégories</span></div>
       <div class="nav-drop-sep"></div>
-      <div class="nav-drop-item" onclick="NavDesktop.go('ai')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg></span> IA</div>
-      <div class="nav-drop-item" onclick="NavDesktop.go('bizimport')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span> Import IA</div>
+      <div class="nav-drop-item" onclick="NavDesktop.go('ai')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg></span> <span data-i18n="nav_ai">IA</span></div>
+      <div class="nav-drop-item" onclick="NavDesktop.go('bizimport')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg></span> <span data-i18n="nav_bizimport_full">Import IA</span></div>
       <div class="nav-drop-sep"></div>
-      <div class="nav-drop-item" onclick="NavDesktop.go('settings')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> Paramètres</div>
-      <div class="nav-drop-item" onclick="NavDesktop.go('config')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span> Système</div>
+      <div class="nav-drop-item" onclick="NavDesktop.go('settings')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span> <span data-i18n="nav_settings">Paramètres</span></div>
+      <div class="nav-drop-item" onclick="NavDesktop.go('config')"><span class="drop-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg></span> <span data-i18n="nav_system">Système</span></div>
     </div>
   </div>
 
@@ -1195,7 +1195,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div class="cloud-dot" id="cloud-dot"></div>
     <span class="nav-badge">v7.7</span>
     <div class="nav-user"><span id="nav-username">—</span></div>
-    <button class="btn btn-ghost btn-sm admin-only" onclick="SellerMode.activate()" title="Mode Vendeur" style="font-size:.82rem;padding:5px 10px;color:var(--accent);border-color:var(--accent)"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span> Vendeur</button>
+    <button class="btn btn-ghost btn-sm admin-only" onclick="SellerMode.activate()" title="Mode Vendeur" data-i18n-title="nav_seller_mode_title" style="font-size:.82rem;padding:5px 10px;color:var(--accent);border-color:var(--accent)"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span> <span data-i18n="role_seller">Vendeur</span></button>
     <button class="btn btn-ghost btn-sm" onclick="Guide.show()" title="Guide" style="padding:5px 8px"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg></span></button>
     <button class="btn btn-primary btn-sm" onclick="Auth.logout()" data-action="logout" style="padding:5px 12px"><span class="nav-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/></svg></span> Déconnecter</button>
   </div>
@@ -1223,16 +1223,16 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <!-- DASHBOARD -->
 <section id="dashboard" class="page active">
   <div class="page-header">
-    <h1 class="page-title">🏠 <span id="dash-greeting">Bonjour</span></h1>
+    <h1 class="page-title">🏠 <span id="dash-greeting" data-i18n="dash_hello">Bonjour</span></h1>
     <div style="font-family:var(--fm);font-size:.72rem;color:var(--text3)" id="dash-date"></div>
   </div>
 
   <!-- KPIs du jour -->
   <div class="stats-grid" style="margin-bottom:16px">
-    <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label" id="dash-ca-label">CA Aujourd'hui</div><div class="stat-value" id="dash-ca-today">0</div><div class="stat-sub" id="dash-ca-sub">0 ventes</div></div>
-    <div class="stat-card" style="--accent-color:var(--accent)"><div class="stat-label" id="dash-profit-label">Profit du Jour</div><div class="stat-value" id="dash-pft-today">0</div><div class="stat-sub" id="dash-margin-sub">Marge : 0%</div></div>
-    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label" id="dash-debt-label">Dettes en Cours</div><div class="stat-value" id="dash-debt">0</div><div class="stat-sub" id="dash-debt-clients">0 client(s)</div></div>
-    <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label" id="dash-alerts-label">Stock en Alerte</div><div class="stat-value" id="dash-alerts">0</div><div class="stat-sub" data-i18n="dash_restock_needed">Produits à réappro</div></div>
+    <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label" id="dash-ca-label" data-i18n="dash_ca_today">CA Aujourd'hui</div><div class="stat-value" id="dash-ca-today">0</div><div class="stat-sub" id="dash-ca-sub">0 ventes</div></div>
+    <div class="stat-card" style="--accent-color:var(--accent)"><div class="stat-label" id="dash-profit-label" data-i18n="dash_profit_today">Profit du Jour</div><div class="stat-value" id="dash-pft-today">0</div><div class="stat-sub" id="dash-margin-sub">Marge : 0%</div></div>
+    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label" id="dash-debt-label" data-i18n="dash_debt_current">Dettes en Cours</div><div class="stat-value" id="dash-debt">0</div><div class="stat-sub" id="dash-debt-clients">0 client(s)</div></div>
+    <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label" id="dash-alerts-label" data-i18n="dash_stock_alert">Stock en Alerte</div><div class="stat-value" id="dash-alerts">0</div><div class="stat-sub" data-i18n="dash_restock_needed">Produits à réappro</div></div>
     <div class="stat-card" style="--accent-color:#e87a00"><div class="stat-label" data-i18n="dash_expenses_today">💸 Dépenses du Jour</div><div class="stat-value" id="dash-expenses-today">0</div><div class="stat-sub" id="dash-expenses-sub" data-i18n="dash_expenses_none">0 dépense(s)</div></div>
     <div class="stat-card" style="--accent-color:#7a00e8;cursor:pointer" onclick="EODSummary.show()"><div class="stat-label" data-i18n="dash_eod_shortcut">📋 Résumé Fin de Journée</div><div class="stat-value" style="font-size:1.4rem">EOD</div><div class="stat-sub" data-i18n="lbl_tap_to_view">Appuyer pour voir →</div></div>
   </div>
@@ -1242,8 +1242,8 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div style="display:flex;align-items:flex-start;gap:12px">
       <div style="font-size:1.6rem;flex-shrink:0">🤖</div>
       <div>
-        <div style="font-family:var(--fd);font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:6px">Conseil IA du jour</div>
-        <div id="dash-ai-tip" style="font-size:.82rem;color:var(--text2);line-height:1.6">Analyse en cours...</div>
+        <div style="font-family:var(--fd);font-size:.82rem;font-weight:700;color:var(--accent);margin-bottom:6px" data-i18n="dash_ai_tip_title">Conseil IA du jour</div>
+        <div id="dash-ai-tip" style="font-size:.82rem;color:var(--text2);line-height:1.6" data-i18n="dash_analyzing">Analyse en cours...</div>
       </div>
     </div>
   </div>
@@ -1251,7 +1251,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <!-- Objectif journalier -->
   <div class="card" id="dash-obj-card" style="padding:14px 16px">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px">
-      <div style="font-family:var(--fd);font-size:.82rem;font-weight:700">🎯 Objectif du Jour</div>
+      <div style="font-family:var(--fd);font-size:.82rem;font-weight:700" data-i18n="dash_daily_objective">🎯 Objectif du Jour</div>
       <span style="font-family:var(--fm);font-size:.72rem;color:var(--accent)" id="dash-obj-pct">0%</span>
     </div>
     <div style="background:var(--border);border-radius:4px;height:8px;overflow:hidden">
@@ -1262,14 +1262,14 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 
   <!-- Actions rapides -->
   <div class="card">
-    <div class="card-title">⚡ Actions Rapides</div>
+    <div class="card-title" data-i18n="dash_quick_actions">⚡ Actions Rapides</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
-      <button class="btn btn-primary" onclick="UI.switchTab('sales')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">🛒</span><span style="font-size:.72rem">Nouvelle Vente</span></button>
+      <button class="btn btn-primary" onclick="UI.switchTab('sales')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">🛒</span><span style="font-size:.72rem" data-i18n="btn_add_sale">Nouvelle Vente</span></button>
       <button class="btn btn-ghost" onclick="UI.switchTab('stock')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">📦</span><span style="font-size:.72rem" data-i18n="dash_manage_stock">Gérer le Stock</span></button>
-      <button class="btn btn-ghost admin-only" onclick="UI.switchTab('analytics')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">📈</span><span style="font-size:.72rem">Voir Analyses</span></button>
-      <button class="btn btn-ghost admin-only" onclick="UI.switchTab('debts')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">💳</span><span style="font-size:.72rem">Dettes Clients</span></button>
-      <button class="btn btn-ghost admin-only" onclick="UI.switchTab('ai')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">🤖</span><span style="font-size:.72rem">IA Assistant</span></button>
-      <button class="btn btn-ghost admin-only" onclick="ExcelExport.daily()" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">📊</span><span style="font-size:.72rem">Export Journalier</span></button>
+      <button class="btn btn-ghost admin-only" onclick="UI.switchTab('analytics')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">📈</span><span style="font-size:.72rem" data-i18n="dash_view_analytics">Voir Analyses</span></button>
+      <button class="btn btn-ghost admin-only" onclick="UI.switchTab('debts')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">💳</span><span style="font-size:.72rem" data-i18n="nav_debts_full">Dettes Clients</span></button>
+      <button class="btn btn-ghost admin-only" onclick="UI.switchTab('ai')" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">🤖</span><span style="font-size:.72rem" data-i18n="dash_ai_assistant">IA Assistant</span></button>
+      <button class="btn btn-ghost admin-only" onclick="ExcelExport.daily()" style="flex-direction:column;gap:4px;padding:16px 10px"><span style="font-size:1.4rem">📊</span><span style="font-size:.72rem" data-i18n="dash_export_daily">Export Journalier</span></button>
       <button class="btn btn-ghost admin-only" onclick="DeferredSales.open()" style="flex-direction:column;gap:4px;padding:16px 10px;border-color:var(--warning)"><span style="font-size:1.4rem">📒</span><span style="font-size:.72rem" data-i18n="dash_deferred_entry">Saisie Différée</span></button>
     </div>
   </div>
@@ -1282,7 +1282,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 
   <!-- Top produits du jour -->
   <div class="card admin-only">
-    <div class="card-title">🏅 Top Produits du Jour</div>
+    <div class="card-title" data-i18n="dash_top_products">🏅 Top Produits du Jour</div>
     <div id="dash-top-products"></div>
   </div>
 </section>
@@ -1293,31 +1293,31 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <h1 class="page-title" data-i18n="sales_title">Caisse <span>Enregistreuse</span></h1>
     <button class="btn btn-ghost btn-sm admin-only" onclick="DeferredSales.open()"
       style="border-color:var(--warning);color:var(--warning)"
-      title="Saisir des ventes d'un jour passé — comme dans un cahier">
-      📒 Saisie Différée
+      title="Saisir des ventes d'un jour passé — comme dans un cahier" data-i18n-title="sale_deferred_tooltip">
+      📒 <span data-i18n="deferred_title_short">Saisie Différée</span>
     </button>
   </div>
   <div class="card">
-    <div class="card-title">Nouvelle Vente</div>
+    <div class="card-title" id="card-title-new-sale" data-i18n="card_new_sale">Nouvelle Vente</div>
     <div class="form-grid">
       <div class="form-group">
         <label class="form-label" data-i18n="lbl_name">Article</label>
-        <input type="text" id="s-item-search" placeholder="🔍 Rechercher un article..." autocomplete="off" style="margin-bottom:6px;font-size:.82rem" oninput="UI._filterItemSelect(this.value)">
+        <input type="text" id="s-item-search" placeholder="🔍 Rechercher un article..." data-i18n-placeholder="ph_search_item" autocomplete="off" style="margin-bottom:6px;font-size:.82rem" oninput="UI._filterItemSelect(this.value)">
         <select id="s-item" onchange="Sales.syncFields()"></select>
       </div>
       <div class="form-group"><label class="form-label" data-i18n="lbl_qty">Quantité</label><input type="number" id="s-qty" value="1" min="1" inputmode="numeric" oninput="Sales.validate()"></div>
       <div class="form-group"><label class="form-label" data-i18n="lbl_sell">Prix Unitaire <button type="button" onclick="Sales.toggleDiscount()" style="background:none;border:none;color:var(--warning);font-size:.65rem;cursor:pointer;font-family:var(--fm);text-decoration:underline;padding:0;margin-left:6px" id="s-discount-toggle">± Modifier le prix</button></label><input type="number" id="s-price" inputmode="decimal" oninput="Sales.validate()"></div>
       <div class="form-group" id="s-discount-wrap" style="display:none">
-        <label class="form-label" style="color:var(--warning)"><span data-i18n="lbl_real_sell_price">Prix réel de vente</span> <span style="font-size:.6rem">(modifié)</span></label>
-        <input type="number" id="s-real-price" inputmode="decimal" oninput="Sales.validate()" placeholder="Prix négocié...">
+        <label class="form-label" style="color:var(--warning)"><span data-i18n="lbl_real_sell_price">Prix réel de vente</span> <span style="font-size:.6rem" data-i18n="lbl_modified">(modifié)</span></label>
+        <input type="number" id="s-real-price" inputmode="decimal" oninput="Sales.validate()" placeholder="Prix négocié..." data-i18n-placeholder="ph_negotiated_price">
         <div style="margin-top:4px">
-          <input type="text" id="s-discount-reason" placeholder="Motif : fidélité, négociation... (optionnel)" style="font-size:.72rem;padding:6px 10px">
+          <input type="text" id="s-discount-reason" placeholder="Motif : fidélité, négociation... (optionnel)" data-i18n-placeholder="ph_discount_reason" style="font-size:.72rem;padding:6px 10px">
         </div>
       </div>
       <div class="form-group"><label class="form-label" data-i18n="lbl_paid">Montant Payé</label><input type="number" id="s-paid" inputmode="decimal" placeholder="Vide = tout payé" data-i18n-placeholder="ph_paid" oninput="Sales.validate()"></div>
       <div class="form-group"><label class="form-label" data-i18n="lbl_client">Nom Client (dettes)</label><input type="text" id="s-client" placeholder="—"></div>
       <div class="form-group" id="s-change-wrap" style="display:none">
-        <label class="form-label">Rendu Monnaie</label>
+        <label class="form-label" data-i18n="lbl_change_due">Rendu Monnaie</label>
         <div id="s-change-display" style="font-family:var(--fd);font-size:1.4rem;font-weight:800;color:var(--accent);padding:10px 14px;background:rgba(0,232,122,.08);border:1.5px solid var(--accent);border-radius:var(--rmd);text-align:center">0 F</div>
       </div>
     </div>
@@ -1329,12 +1329,12 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   </div>
   <div class="card">
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;flex-wrap:wrap;gap:8px">
-      <div class="card-title" style="margin-bottom:0">Transactions du Jour</div>
-      <input type="search" id="sales-search" placeholder="🔍 Client ou produit..."
+      <div class="card-title" style="margin-bottom:0" id="card-title-today-tx" data-i18n="card_today_sales">Transactions du Jour</div>
+      <input type="search" id="sales-search" placeholder="🔍 Client ou produit..." data-i18n-placeholder="ph_search_client_product"
         style="flex:1;min-width:160px;max-width:260px;padding:8px 12px;font-size:.82rem"
         oninput="Sales.filterTable(this.value)">
-      <button class="btn btn-info btn-sm" onclick="Printer.printDayReport()">🖨️ Rapport journalier</button>
-      <button class="btn btn-warning btn-sm" onclick="Share.dayReport()" title="Partager sur WhatsApp">📤 Partager</button>
+      <button class="btn btn-info btn-sm" id="btn-day-report" onclick="Printer.printDayReport()">🖨️ Rapport journalier</button>
+      <button class="btn btn-warning btn-sm" onclick="Share.dayReport()" title="Partager sur WhatsApp" data-i18n-title="lbl_share_whatsapp">📤 <span data-i18n="lbl_share">Partager</span></button>
     </div>
     <div class="table-wrap">
       <table id="tableSales">
@@ -1350,36 +1350,36 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <div class="page-header"><h1 class="page-title" data-i18n="stock_title">Gestion <span>Inventaire</span></h1></div>
   <div class="stats-grid">
     <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label" data-i18n="lbl_purchase_value">Valeur Achat</div><div class="stat-value" id="v-stock-buy">0</div><div class="stat-sub" data-i18n="lbl_immobilized_cost">Coût immobilisé</div></div>
-    <div class="stat-card" style="--accent-color:var(--accent)"><div class="stat-label">Valeur Vente</div><div class="stat-value" id="v-stock-sell">0</div><div class="stat-sub">Potentiel revenus</div></div>
-    <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label">En Alerte</div><div class="stat-value" id="v-stock-alerts">0</div><div class="stat-sub">Stock ≤ minimum</div></div>
+    <div class="stat-card" style="--accent-color:var(--accent)"><div class="stat-label" data-i18n="lbl_sell_value">Valeur Vente</div><div class="stat-value" id="v-stock-sell">0</div><div class="stat-sub" data-i18n="lbl_revenue_potential">Potentiel revenus</div></div>
+    <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label" data-i18n="lbl_low_stock">En Alerte</div><div class="stat-value" id="v-stock-alerts">0</div><div class="stat-sub" data-i18n="lbl_stock_min">Stock ≤ minimum</div></div>
     <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label" data-i18n="lbl_references">Références</div><div class="stat-value" id="v-stock-count">0</div><div class="stat-sub" data-i18n="lbl_products_registered">Produits enregistrés</div></div>
   </div>
   <div class="card">
     <div class="card-title" data-i18n="add_restock">Ajouter / Réapprovisionner</div>
     <div class="form-grid">
-      <div class="form-group"><label class="form-label">Nom du Produit *</label><input type="text" id="i-name"></div>
-      <div class="form-group"><label class="form-label">Code-barres</label><input type="text" id="i-code"></div>
-      <div class="form-group"><label class="form-label">Prix Achat (F) *</label><input type="number" id="i-buy" min="0" inputmode="decimal"></div>
-      <div class="form-group"><label class="form-label">Prix Vente (F) *</label><input type="number" id="i-sell" min="0" inputmode="decimal"></div>
-      <div class="form-group"><label class="form-label">Quantité *</label><input type="number" id="i-qty" min="1" inputmode="numeric"></div>
-      <div class="form-group"><label class="form-label">Seuil Alerte</label><input type="number" id="i-min" placeholder="5" min="1" inputmode="numeric"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_product_name">Nom du Produit *</label><input type="text" id="i-name"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_barcode">Code-barres</label><input type="text" id="i-code"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_buy_price_f">Prix Achat (F) *</label><input type="number" id="i-buy" min="0" inputmode="decimal"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_sell_price_f">Prix Vente (F) *</label><input type="number" id="i-sell" min="0" inputmode="decimal"></div>
+      <div class="form-group"><label class="form-label" data-i18n="def_qty_star">Quantité *</label><input type="number" id="i-qty" min="1" inputmode="numeric"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_alert_threshold">Seuil Alerte</label><input type="number" id="i-min" placeholder="5" min="1" inputmode="numeric"></div>
       <div class="form-group"><label class="form-label" data-i18n="lbl_category">Catégorie</label><select id="i-category"><option value="Autre">Autre</option></select></div>
-      <div class="form-group" style="grid-column:1/-1"><label class="form-label">Description (optionnel)</label><input type="text" id="i-desc" placeholder="Référence, détails fournisseur..."></div>
-      <div class="form-group"><label class="form-label">Fournisseur</label><select id="i-supplier"><option value="">— Aucun —</option></select></div>
-      <div class="form-group"><label class="form-label">TVA %</label><input type="number" id="i-tva" placeholder="0" min="0" max="100" value="0" inputmode="numeric"></div>
+      <div class="form-group" style="grid-column:1/-1"><label class="form-label" data-i18n="lbl_desc_optional">Description (optionnel)</label><input type="text" id="i-desc" placeholder="Référence, détails fournisseur..." data-i18n-placeholder="ph_ref_details"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_supplier">Fournisseur</label><select id="i-supplier"><option value="" data-i18n="lbl_none_m">— Aucun —</option></select></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_tva">TVA %</label><input type="number" id="i-tva" placeholder="0" min="0" max="100" value="0" inputmode="numeric"></div>
     </div>
     <button class="btn btn-primary mt-14" onclick="Stock.add()" data-i18n="add_stock_btn">+ AJOUTER AU STOCK</button>
   </div>
   <div class="card">
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
-      <div class="card-title" style="margin-bottom:0">Inventaire Complet</div>
-      <input type="search" id="stock-search" placeholder="🔍 Rechercher un produit..."
+      <div class="card-title" style="margin-bottom:0" data-i18n="lbl_full_inventory">Inventaire Complet</div>
+      <input type="search" id="stock-search" placeholder="🔍 Rechercher un produit..." data-i18n-placeholder="ph_search_product"
         style="flex:1;min-width:180px;max-width:320px;padding:8px 12px;font-size:.82rem"
         oninput="Stock.filterTable(this.value)">
     </div>
     <div class="table-wrap">
       <table id="tableStock">
-        <thead><tr><th data-i18n="th_code">Code</th><th data-i18n="th_name">Désignation</th><th data-i18n="th_buy">Achat</th><th data-i18n="th_sell">Vente</th><th data-i18n="th_margin">Marge</th><th>TVA</th><th data-i18n="th_stock">Stock</th><th data-i18n="th_category">Catégorie</th><th data-i18n="th_state">État</th><th data-i18n="th_actions">Actions</th></tr></thead>
+        <thead><tr><th data-i18n="th_code">Code</th><th data-i18n="th_name">Désignation</th><th data-i18n="th_buy">Achat</th><th data-i18n="th_sell">Vente</th><th data-i18n="th_margin">Marge</th><th data-i18n="th_vat">TVA</th><th data-i18n="th_stock">Stock</th><th data-i18n="th_category">Catégorie</th><th data-i18n="th_state">État</th><th data-i18n="th_actions">Actions</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -1391,7 +1391,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <div class="page-header">
     <h1 class="page-title" data-i18n="analytics_title">Indicateurs <span>Performance</span></h1>
     <div class="ph-controls">
-      <input type="number" id="cash-init" placeholder="Fond de caisse" inputmode="decimal" onchange="Analytics.updateCash()">
+      <input type="number" id="cash-init" placeholder="Fond de caisse" data-i18n-placeholder="lbl_cash_fund" inputmode="decimal" onchange="Analytics.updateCash()">
       <select id="timePeriod" onchange="Analytics.refresh()">
         <option value="day" data-i18n="period_today">Aujourd'hui</option><option value="week" data-i18n="period_7days">7 derniers jours</option>
         <option value="month" data-i18n="period_month">Mois en cours</option><option value="year" data-i18n="period_year">Année en cours</option>
@@ -1400,15 +1400,15 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   </div>
   <div id="system-alerts" class="alert-list"></div>
   <div class="stats-grid">
-    <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label">Chiffre d'Affaires</div><div class="stat-value" id="st-ca">0</div><div class="stat-sub" id="st-ca-sub"></div><div class="stat-sub" id="st-returns-info" style="display:none;color:var(--danger)"></div></div>
-    <div class="stat-card" style="--accent-color:var(--accent)"><div class="stat-label">Profit Net</div><div class="stat-value" id="st-pft">0</div><div class="stat-sub" id="st-margin-sub"></div></div>
-    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label">Dettes Clients</div><div class="stat-value" id="st-debt">0</div><div class="stat-sub" id="st-debt-sub"></div></div>
-    <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label">Liquidités</div><div class="stat-value" id="st-cash">0</div><div class="stat-sub">Caisse + CA - Dettes</div></div>
+    <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label" data-i18n="lbl_revenue_total">Chiffre d'Affaires</div><div class="stat-value" id="st-ca">0</div><div class="stat-sub" id="st-ca-sub"></div><div class="stat-sub" id="st-returns-info" style="display:none;color:var(--danger)"></div></div>
+    <div class="stat-card" style="--accent-color:var(--accent)"><div class="stat-label" data-i18n="lbl_net_profit">Profit Net</div><div class="stat-value" id="st-pft">0</div><div class="stat-sub" id="st-margin-sub"></div></div>
+    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label" data-i18n="nav_debts_full">Dettes Clients</div><div class="stat-value" id="st-debt">0</div><div class="stat-sub" id="st-debt-sub"></div></div>
+    <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label" data-i18n="lbl_liquidity">Liquidités</div><div class="stat-value" id="st-cash">0</div><div class="stat-sub" data-i18n="lbl_liquidity_formula">Caisse + CA - Dettes</div></div>
   </div>
   <div class="analytics-bottom">
     <div class="card chart-card"><div class="card-title" data-i18n="lbl_sales_evolution">Évolution des Ventes</div><div class="chart-wrap"><canvas id="mainChart"></canvas></div></div>
-    <div class="card"><div class="card-title">Top Produits (CA)</div><div id="top-products-list"></div></div>
-    <div class="card"><div class="card-title">Performance Vendeurs</div><div id="sellers-perf-list"></div></div>
+    <div class="card"><div class="card-title" data-i18n="lbl_top_products_ca">Top Produits (CA)</div><div id="top-products-list"></div></div>
+    <div class="card"><div class="card-title" data-i18n="lbl_sellers_perf">Performance Vendeurs</div><div id="sellers-perf-list"></div></div>
   </div>
 </section>
 
@@ -1416,16 +1416,16 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <section id="debts" class="page">
   <div class="page-header">
     <h1 class="page-title" data-i18n="debts_title">Dettes <span>Clients</span></h1>
-    <button class="btn btn-info btn-sm" onclick="Printer.exportDebtsPDF()">📄 Export PDF</button>
+    <button class="btn btn-info btn-sm" onclick="Printer.exportDebtsPDF()">📄 <span data-i18n="lbl_export_pdf">Export PDF</span></button>
   </div>
   <div class="stats-grid">
-    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label">Total Dettes</div><div class="stat-value" id="dt-total">0</div></div>
+    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label" data-i18n="lbl_total_debts">Total Dettes</div><div class="stat-value" id="dt-total">0</div></div>
     <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label" data-i18n="debt_clients">Clients Débiteurs</div><div class="stat-value" id="dt-count">0</div></div>
-    <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label">Dette Moyenne</div><div class="stat-value" id="dt-avg">0</div></div>
-    <div class="stat-card" style="--accent-color:var(--accent)"><div class="stat-label">Dette Max</div><div class="stat-value" id="dt-max">0</div></div>
+    <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label" data-i18n="lbl_avg_debt">Dette Moyenne</div><div class="stat-value" id="dt-avg">0</div></div>
+    <div class="stat-card" style="--accent-color:var(--accent)"><div class="stat-label" data-i18n="lbl_max_debt">Dette Max</div><div class="stat-value" id="dt-max">0</div></div>
   </div>
   <div class="card">
-    <div class="card-title">Registre des Dettes</div>
+    <div class="card-title" data-i18n="lbl_debts_registry">Registre des Dettes</div>
     <div class="table-wrap">
       <table id="tableDebts">
         <thead><tr><th data-i18n="th_client">Client</th><th data-i18n="th_debt">Dette Totale</th><th data-i18n="th_last_buy">Dernier Achat</th><th data-i18n="th_transactions">Transactions</th><th data-i18n="th_action">Action</th></tr></thead>
@@ -1440,11 +1440,11 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     </div>
     <div class="table-wrap">
       <table id="tableDebtDetail">
-        <thead><tr><th>Date</th><th>Produit</th><th>Total</th><th>Dette</th><th>Action</th></tr></thead>
+        <thead><tr><th data-i18n="lbl_date">Date</th><th data-i18n="th_product">Produit</th><th data-i18n="th_total">Total</th><th data-i18n="th_debt_short">Dette</th><th data-i18n="th_action">Action</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
-    <button class="btn btn-primary mt-14" onclick="Debts.markAllPaid()">✅ Tout marquer payé</button>
+    <button class="btn btn-primary mt-14" onclick="Debts.markAllPaid()">✅ <span data-i18n="lbl_mark_all_paid">Tout marquer payé</span></button>
   </div>
 </section>
 
@@ -1458,18 +1458,18 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <div class="card">
     <div class="card-title" data-i18n="lbl_create_account">Créer un Compte</div>
     <div class="form-grid">
-      <div class="form-group"><label class="form-label">Nom Complet *</label><input type="text" id="u-name"></div>
-      <div class="form-group"><label class="form-label">Code PIN (4 chiffres) *</label><input type="password" id="u-pin" maxlength="4" inputmode="numeric"></div>
-      <div class="form-group"><label class="form-label">Confirmer PIN *</label><input type="password" id="u-pin2" maxlength="4" inputmode="numeric"></div>
-      <div class="form-group"><label class="form-label">Rôle</label><select id="u-role"><option value="seller">Vendeur</option><option value="admin">Administrateur</option></select></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_full_name">Nom Complet *</label><input type="text" id="u-name"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_pin_code">Code PIN (4 chiffres) *</label><input type="password" id="u-pin" maxlength="4" inputmode="numeric"></div>
+      <div class="form-group"><label class="form-label" data-i18n="ob_pin_confirm">Confirmer PIN *</label><input type="password" id="u-pin2" maxlength="4" inputmode="numeric"></div>
+      <div class="form-group"><label class="form-label" data-i18n="th_role">Rôle</label><select id="u-role"><option value="seller" data-i18n="role_seller">Vendeur</option><option value="admin" data-i18n="role_admin_full">Administrateur</option></select></div>
     </div>
     <button class="btn btn-primary mt-14" onclick="Users.add()" data-i18n="create_account_btn">CRÉER LE COMPTE</button>
   </div>
   <div class="card">
-    <div class="card-title">Comptes Utilisateurs</div>
+    <div class="card-title" data-i18n="lbl_user_accounts">Comptes Utilisateurs</div>
     <div class="table-wrap">
       <table id="tableUsers">
-        <thead><tr><th data-i18n="lbl_name">Nom</th><th data-i18n="th_role">Rôle</th><th data-i18n="nav_sales">Ventes</th><th>CA Généré</th><th data-i18n="th_action">Action</th></tr></thead>
+        <thead><tr><th data-i18n="lbl_name">Nom</th><th data-i18n="th_role">Rôle</th><th data-i18n="nav_sales">Ventes</th><th data-i18n="lbl_ca_generated">CA Généré</th><th data-i18n="th_action">Action</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -1498,13 +1498,13 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     </div>
   </div>
   <div class="card mt-14">
-    <div class="card-title">📊 Exporter les Rapports Excel</div>
+    <div class="card-title" data-i18n="lbl_export_excel_reports">📊 Exporter les Rapports Excel</div>
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px">
-      <button class="btn btn-primary btn-full" onclick="ExcelExport.daily()">📅 Rapport Journalier</button>
-      <button class="btn btn-primary btn-full" onclick="ExcelExport.monthly()">📆 Rapport Mensuel</button>
-      <button class="btn btn-primary btn-full" onclick="ExcelExport.annual()">📈 Rapport Annuel</button>
-      <button class="btn btn-ghost btn-full" onclick="ExcelExport.stockReport()">📦 Rapport Stock</button>
-      <button class="btn btn-ghost btn-full" onclick="ExcelExport.debtsReport()">💳 Rapport Dettes</button>
+      <button class="btn btn-primary btn-full" onclick="ExcelExport.daily()">📅 <span data-i18n="lbl_daily_report">Rapport Journalier</span></button>
+      <button class="btn btn-primary btn-full" onclick="ExcelExport.monthly()">📆 <span data-i18n="lbl_monthly_report">Rapport Mensuel</span></button>
+      <button class="btn btn-primary btn-full" onclick="ExcelExport.annual()">📈 <span data-i18n="lbl_annual_report">Rapport Annuel</span></button>
+      <button class="btn btn-ghost btn-full" onclick="ExcelExport.stockReport()">📦 <span data-i18n="lbl_stock_report">Rapport Stock</span></button>
+      <button class="btn btn-ghost btn-full" onclick="ExcelExport.debtsReport()">💳 <span data-i18n="lbl_debts_report">Rapport Dettes</span></button>
     </div>
   </div>
 
@@ -1516,12 +1516,12 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
       <input type="text" id="storage-prefix" placeholder="Ex: MonMagasin" maxlength="20">
     </div>
     <div style="font-size:.78rem;color:var(--text3);margin-bottom:10px;font-family:var(--fm)">
-      Les fichiers seront nommés : <span id="storage-preview" style="color:var(--accent)">MonMagasin_Backup_2026.json</span>
+      <span data-i18n="lbl_files_named">Les fichiers seront nommés :</span> <span id="storage-preview" style="color:var(--accent)">MonMagasin_Backup_2026.json</span>
     </div>
     <button class="btn btn-primary btn-sm" onclick="StorageConfig.savePrefs()" data-i18n="lbl_save_prefs">💾 Sauvegarder préférences</button>
   </div>
 
-  <div class="card mt-14"><div class="card-title">Informations Système</div><div id="sys-info" style="display:grid;gap:8px;font-family:var(--fm);font-size:.76rem;color:var(--text2)"></div></div>
+  <div class="card mt-14"><div class="card-title" data-i18n="lbl_system_info">Informations Système</div><div id="sys-info" style="display:grid;gap:8px;font-family:var(--fm);font-size:.76rem;color:var(--text2)"></div></div>
 </section>
 
 <!-- PARAMÈTRES -->
@@ -1766,21 +1766,21 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <section id="suppliers" class="page">
   <div class="page-header"><h1 class="page-title"><span data-i18n="nav_suppliers">Fournisseurs</span></h1></div>
   <div class="stats-grid">
-    <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label">Fournisseurs</div><div class="stat-value" id="sup-count">0</div></div>
-    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label">Total Achats</div><div class="stat-value" id="sup-total-spent">0</div></div>
+    <div class="stat-card" style="--accent-color:var(--info)"><div class="stat-label" data-i18n="nav_suppliers">Fournisseurs</div><div class="stat-value" id="sup-count">0</div></div>
+    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label" data-i18n="lbl_total_purchases">Total Achats</div><div class="stat-value" id="sup-total-spent">0</div></div>
   </div>
   <div class="card">
-    <div class="card-title">Ajouter un Fournisseur</div>
+    <div class="card-title" data-i18n="lbl_add_supplier">Ajouter un Fournisseur</div>
     <div class="form-grid">
-      <div class="form-group"><label class="form-label">Nom *</label><input type="text" id="sup-name" placeholder="Ex: Grossiste ABC"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_name_star">Nom *</label><input type="text" id="sup-name" placeholder="Ex: Grossiste ABC"></div>
       <div class="form-group"><label class="form-label" data-i18n="lbl_phone">Téléphone</label><input type="tel" id="sup-phone" placeholder="+229 XX XX XX" inputmode="tel"></div>
-      <div class="form-group"><label class="form-label">Contact / Email</label><input type="text" id="sup-contact" placeholder="contact@fournisseur.com"></div>
-      <div class="form-group"><label class="form-label">Notes</label><input type="text" id="sup-notes" placeholder="Conditions, délais..."></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_contact_email">Contact / Email</label><input type="text" id="sup-contact" placeholder="contact@fournisseur.com"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_notes">Notes</label><input type="text" id="sup-notes" placeholder="Conditions, délais..." data-i18n-placeholder="ph_supplier_notes"></div>
     </div>
-    <button class="btn btn-primary mt-14" onclick="Suppliers.add()">+ AJOUTER LE FOURNISSEUR</button>
+    <button class="btn btn-primary mt-14" onclick="Suppliers.add()" data-i18n="lbl_add_supplier_btn">+ AJOUTER LE FOURNISSEUR</button>
   </div>
   <div class="card">
-    <div class="card-title">Liste des Fournisseurs</div>
+    <div class="card-title" data-i18n="lbl_suppliers_list">Liste des Fournisseurs</div>
     <div class="table-wrap">
       <table id="tableSuppliers">
         <thead><tr><th data-i18n="lbl_name">Nom</th><th data-i18n="lbl_phone">Téléphone</th><th data-i18n="lbl_contact">Contact</th><th data-i18n="lbl_orders">Commandes</th><th data-i18n="lbl_total_spent">Total Dépensé</th><th data-i18n="lbl_last_purchase">Dernier Achat</th><th data-i18n="th_action">Actions</th></tr></thead>
@@ -1797,7 +1797,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div class="card-title" data-i18n="lbl_add_category">Ajouter une Catégorie</div>
     <div style="display:flex;gap:10px;flex-wrap:wrap">
       <input type="text" id="cat-name" placeholder="Ex: Électronique" style="flex:1;min-width:180px">
-      <button class="btn btn-primary" onclick="Categories.add(document.getElementById('cat-name').value);document.getElementById('cat-name').value=''">+ Ajouter</button>
+      <button class="btn btn-primary" onclick="Categories.add(document.getElementById('cat-name').value);document.getElementById('cat-name').value=''">+ <span data-i18n="btn_add">Ajouter</span></button>
     </div>
   </div>
   <div class="card">
@@ -1815,18 +1815,18 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <section id="returns" class="page">
   <div class="page-header"><h1 class="page-title" data-i18n="returns_title">↩️ <span>Retours Clients</span></h1></div>
   <div class="stats-grid">
-    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label">Montant Retourné</div><div class="stat-value" id="returns-total">0</div></div>
-    <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label">Nb Retours</div><div class="stat-value" id="returns-count">0</div></div>
+    <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label" data-i18n="lbl_amount_returned">Montant Retourné</div><div class="stat-value" id="returns-total">0</div></div>
+    <div class="stat-card" style="--accent-color:var(--warning)"><div class="stat-label" data-i18n="lbl_returns_count">Nb Retours</div><div class="stat-value" id="returns-count">0</div></div>
   </div>
   <div class="card">
-    <div class="card-title">Pour enregistrer un retour</div>
+    <div class="card-title" data-i18n="lbl_how_to_return">Pour enregistrer un retour</div>
     <p style="font-size:.82rem;color:var(--text2);margin-bottom:10px" data-i18n="returns_instruction">Allez dans <strong>Ventes → Transactions du Jour</strong> et cliquez sur le bouton <strong>↩️</strong> à côté de la vente à retourner.</p>
   </div>
   <div class="card">
-    <div class="card-title">Historique des Retours</div>
+    <div class="card-title" data-i18n="lbl_returns_history">Historique des Retours</div>
     <div class="table-wrap">
       <table id="tableReturns">
-        <thead><tr><th>Date</th><th>Produit</th><th>Quantité</th><th>Montant</th><th>Client</th><th>Statut</th></tr></thead>
+        <thead><tr><th data-i18n="lbl_date">Date</th><th data-i18n="th_product">Produit</th><th data-i18n="lbl_qty">Quantité</th><th data-i18n="lbl_amount">Montant</th><th data-i18n="lbl_client">Client</th><th data-i18n="th_status">Statut</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -2489,6 +2489,8 @@ const I18n = {
       nav_suppliers:'Fournisseurs', nav_loyalty:'Fidélité',
       nav_objectives:'Objectifs', nav_categories:'Catégories',
       nav_bizimport:'Import',
+      nav_bizimport_full:'Import IA',
+      nav_more:'Plus', nav_seller_mode_title:'Mode Vendeur',
       nav_restock:'Approvisionnement',
       btn_add_sale:'Nouvelle Vente', btn_validate:'Valider',
       btn_cancel:'Annuler', btn_save:'Sauvegarder',
@@ -2682,6 +2684,69 @@ const I18n = {
       sale_warning_neg_margin:'⚠️ Prix de vente inférieur au prix d\'achat — marge négative !',
       lbl_tap_to_view:'Appuyer pour voir →',
       role_admin:'Admin', role_seller:'Vendeur',
+      role_admin_full:'👑 Administrateur', role_seller_full:'👤 Vendeur',
+      auth_who:'Qui êtes-vous ?', auth_forgot_code:'Code oublié ?',
+      auth_init:'Initialisation en cours...', auth_init_reload:'Rechargez la page si ce message persiste.',
+      rec_title:"🔑 Récupération d'accès", rec_sub:'Entrez votre code maître à 8 caractères',
+      rec_code_label:'Code Maître', rec_access:'Accéder',
+      rec_hint:'Le code maître vous a été affiché lors de la première connexion',
+      pwa_install_title:'Installer Smart Market Pro', pwa_install_sub:"Accès direct depuis votre écran d'accueil, fonctionne hors-ligne", pwa_install_btn:'Installer',
+      partial_title:'💳 Encaissement Partiel', partial_amount_label:'Montant encaissé *', partial_confirm:'✅ Encaisser',
+      partial_debt_remaining:'dette restante', partial_after_payment:'Reste après encaissement',
+      sd_logout:'⏏ Déconn.', sd_sales_today:"Mes Ventes Aujourd'hui", sd_commission_month:'Ma Commission du Mois',
+      sd_rate:'Taux : 0%', sd_new_sale:'Nouvelle Vente', sd_view_stock:'Voir le Stock', sd_seller_mode:'Mode Vendeur',
+      sd_my_debts:'Mes Dettes', sd_appearance:'Apparence', sd_help:'Aide', sd_recent_sales:'🕐 Mes Dernières Ventes',
+      sd_ca_prefix:'CA : ', sd_rate_prefix:'Taux : ', sd_base_profit:'sur bénéfice', sd_base_ca:'sur CA',
+      sd_month_prefix:'Mois : ', sd_commissions_off:'Commissions non activées', sd_no_sales_today:"Aucune vente aujourd'hui",
+      sd_units:'unité(s)',
+      eu_title:'✏️ Modifier le compte', eu_name_label:'Nom du vendeur *', eu_name_ph:'Nouveau nom...',
+      eu_pin_label:'Nouveau PIN (laisser vide = inchangé)',
+      sp_appearance:'🎨 Apparence', sp_theme:'Thème', sp_dark:'Sombre', sp_light:'Clair',
+      sp_main_color:'Couleur principale', sp_font_size:'Taille du texte',
+      rs_items_to_restock:'article(s) à approvisionner', rs_all_ok:'Tous les stocks sont OK',
+      rs_no_critical:"Aucun article en rupture ou sous le seuil d'alerte",
+      rs_badge_out:'RUPTURE', rs_badge_low:'FAIBLE', rs_velocity:'Écoulement', rs_units_week:'unité(s)/semaine',
+      rs_no_recent_sales:'Pas de ventes récentes', rs_to_order:'à commander', rs_current_stock:'Stock actuel',
+      rs_units:'unité(s)', rs_alert_threshold:'Seuil alerte', rs_buy_price:'Prix achat', rs_sell_price:'Prix vente',
+      rs_margin:'Marge', rs_csv_header:'Article,Stock actuel,Seuil,Ecoulement/semaine,A commander,Cout achat,Cout total',
+      dash_hello:'Bonjour', dash_ca_today:"CA Aujourd'hui", dash_profit_today:'Profit du Jour',
+      dash_debt_current:'Dettes en Cours', dash_stock_alert:'Stock en Alerte',
+      dash_ai_tip_title:'Conseil IA du jour', dash_analyzing:'Analyse en cours...',
+      dash_daily_objective:'🎯 Objectif du Jour', dash_quick_actions:'⚡ Actions Rapides',
+      dash_view_analytics:'Voir Analyses', dash_ai_assistant:'IA Assistant',
+      dash_export_daily:'Export Journalier', dash_top_products:'🏅 Top Produits du Jour',
+      dash_greet_morning:'Bonjour', dash_greet_afternoon:'Bon après-midi', dash_greet_evening:'Bonsoir',
+      dash_sales_count:'vente(s)', dash_returns_prefix:'Retours : -', dash_real_net_profit:'Bénéf. net réel',
+      dash_margin_prefix:'Marge : ', dash_debtor_clients:'client(s) débiteur(s)',
+      lbl_sell_value:'Valeur Vente', lbl_revenue_potential:'Potentiel revenus',
+      lbl_low_stock:'En Alerte', lbl_stock_min:'Stock ≤ minimum',
+      lbl_product_name:'Nom du Produit *', lbl_buy_price_f:'Prix Achat (F) *', lbl_sell_price_f:'Prix Vente (F) *',
+      lbl_desc_optional:'Description (optionnel)', ph_ref_details:'Référence, détails fournisseur...',
+      lbl_none_m:'— Aucun —', lbl_full_inventory:'Inventaire Complet', ph_search_product:'🔍 Rechercher un produit...',
+      th_vat:'TVA',
+      badge_low_stock:'Stock faible', badge_ok_stock:'Stock ok', btn_delete_short:'Suppr.',
+      sale_deferred_tooltip:"Saisir des ventes d'un jour passé — comme dans un cahier",
+      deferred_title_short:'Saisie Différée', ph_search_item:'🔍 Rechercher un article...',
+      lbl_modified:'(modifié)', ph_negotiated_price:'Prix négocié...',
+      ph_discount_reason:'Motif : fidélité, négociation... (optionnel)', lbl_change_due:'Rendu Monnaie',
+      ph_search_client_product:'🔍 Client ou produit...', lbl_share_whatsapp:'Partager sur WhatsApp', lbl_share:'Partager',
+      lbl_cash_fund:'Fond de caisse', lbl_revenue_total:"Chiffre d'Affaires", lbl_net_profit:'Profit Net',
+      lbl_liquidity:'Liquidités', lbl_liquidity_formula:'Caisse + CA - Dettes',
+      lbl_top_products_ca:'Top Produits (CA)', lbl_sellers_perf:'Performance Vendeurs',
+      lbl_deferred_badge:'DIFFÉRÉ', lbl_price_modified:'Prix modifié', lbl_discount:'remise', lbl_surplus:'surplus', lbl_paid_off:'Soldé',
+      lbl_export_pdf:'Export PDF', lbl_total_debts:'Total Dettes', lbl_avg_debt:'Dette Moyenne', lbl_max_debt:'Dette Max',
+      lbl_debts_registry:'Registre des Dettes', th_debt_short:'Dette', lbl_mark_all_paid:'Tout marquer payé',
+      lbl_full_name:'Nom Complet *', lbl_pin_code:'Code PIN (4 chiffres) *', lbl_user_accounts:'Comptes Utilisateurs',
+      lbl_ca_generated:'CA Généré',
+      lbl_view:'Voir', lbl_paid_check:'Payé ✓', lbl_partial:'Partiel',
+      lbl_export_excel_reports:'📊 Exporter les Rapports Excel', lbl_daily_report:'Rapport Journalier',
+      lbl_monthly_report:'Rapport Mensuel', lbl_annual_report:'Rapport Annuel', lbl_stock_report:'Rapport Stock',
+      lbl_debts_report:'Rapport Dettes', lbl_files_named:'Les fichiers seront nommés :', lbl_system_info:'Informations Système',
+      lbl_total_purchases:'Total Achats', lbl_add_supplier:'Ajouter un Fournisseur', lbl_name_star:'Nom *',
+      lbl_contact_email:'Contact / Email', lbl_notes:'Notes', ph_supplier_notes:'Conditions, délais...',
+      lbl_add_supplier_btn:'+ AJOUTER LE FOURNISSEUR', lbl_suppliers_list:'Liste des Fournisseurs',
+      lbl_amount_returned:'Montant Retourné', lbl_returns_count:'Nb Retours',
+      lbl_how_to_return:'Pour enregistrer un retour', lbl_returns_history:'Historique des Retours',
       stock_out:'Épuisé', stock_alert:'Alerte',
       // Paramètres
       set_confirm_sale:'Demander confirmation avant vente',
@@ -3004,6 +3069,8 @@ const I18n = {
       nav_suppliers:'Suppliers', nav_loyalty:'Loyalty',
       nav_objectives:'Objectives', nav_categories:'Categories',
       nav_bizimport:'Import',
+      nav_bizimport_full:'AI Import',
+      nav_more:'More', nav_seller_mode_title:'Seller Mode',
       nav_restock:'Restock',
       btn_add_sale:'New Sale', btn_validate:'Validate',
       btn_cancel:'Cancel', btn_save:'Save',
@@ -3197,6 +3264,69 @@ const I18n = {
       sale_warning_neg_margin:'⚠️ Selling price below purchase price — negative margin!',
       lbl_tap_to_view:'Tap to view →',
       role_admin:'Admin', role_seller:'Seller',
+      role_admin_full:'👑 Administrator', role_seller_full:'👤 Seller',
+      auth_who:'Who are you?', auth_forgot_code:'Forgot your code?',
+      auth_init:'Initializing...', auth_init_reload:'Reload the page if this message persists.',
+      rec_title:'🔑 Access Recovery', rec_sub:'Enter your 8-character master code',
+      rec_code_label:'Master Code', rec_access:'Access',
+      rec_hint:'The master code was shown to you at first login',
+      pwa_install_title:'Install Smart Market Pro', pwa_install_sub:'Direct access from your home screen, works offline', pwa_install_btn:'Install',
+      partial_title:'💳 Partial Payment', partial_amount_label:'Amount received *', partial_confirm:'✅ Collect',
+      partial_debt_remaining:'remaining debt', partial_after_payment:'Remaining after payment',
+      sd_logout:'⏏ Log out', sd_sales_today:'My Sales Today', sd_commission_month:'My Commission This Month',
+      sd_rate:'Rate: 0%', sd_new_sale:'New Sale', sd_view_stock:'View Stock', sd_seller_mode:'Seller Mode',
+      sd_my_debts:'My Debts', sd_appearance:'Appearance', sd_help:'Help', sd_recent_sales:'🕐 My Recent Sales',
+      sd_ca_prefix:'Revenue: ', sd_rate_prefix:'Rate: ', sd_base_profit:'on profit', sd_base_ca:'on revenue',
+      sd_month_prefix:'Month: ', sd_commissions_off:'Commissions not enabled', sd_no_sales_today:'No sales today',
+      sd_units:'unit(s)',
+      eu_title:'✏️ Edit account', eu_name_label:'Seller name *', eu_name_ph:'New name...',
+      eu_pin_label:'New PIN (leave blank = unchanged)',
+      sp_appearance:'🎨 Appearance', sp_theme:'Theme', sp_dark:'Dark', sp_light:'Light',
+      sp_main_color:'Main color', sp_font_size:'Text size',
+      rs_items_to_restock:'item(s) to restock', rs_all_ok:'All stock levels are OK',
+      rs_no_critical:'No items out of stock or below the alert threshold',
+      rs_badge_out:'OUT OF STOCK', rs_badge_low:'LOW', rs_velocity:'Sell-through', rs_units_week:'unit(s)/week',
+      rs_no_recent_sales:'No recent sales', rs_to_order:'to order', rs_current_stock:'Current stock',
+      rs_units:'unit(s)', rs_alert_threshold:'Alert threshold', rs_buy_price:'Buy price', rs_sell_price:'Sell price',
+      rs_margin:'Margin', rs_csv_header:'Item,Current stock,Threshold,Sell-through/week,To order,Buy cost,Total cost',
+      dash_hello:'Hello', dash_ca_today:'Revenue Today', dash_profit_today:'Profit Today',
+      dash_debt_current:'Current Debts', dash_stock_alert:'Stock Alerts',
+      dash_ai_tip_title:"Today's AI Tip", dash_analyzing:'Analyzing...',
+      dash_daily_objective:'🎯 Daily Goal', dash_quick_actions:'⚡ Quick Actions',
+      dash_view_analytics:'View Analytics', dash_ai_assistant:'AI Assistant',
+      dash_export_daily:'Daily Export', dash_top_products:"🏅 Today's Top Products",
+      dash_greet_morning:'Good morning', dash_greet_afternoon:'Good afternoon', dash_greet_evening:'Good evening',
+      dash_sales_count:'sale(s)', dash_returns_prefix:'Returns: -', dash_real_net_profit:'Real net profit',
+      dash_margin_prefix:'Margin: ', dash_debtor_clients:'debtor client(s)',
+      lbl_sell_value:'Sale Value', lbl_revenue_potential:'Revenue potential',
+      lbl_low_stock:'Low Stock', lbl_stock_min:'Stock ≤ minimum',
+      lbl_product_name:'Product Name *', lbl_buy_price_f:'Buy Price (F) *', lbl_sell_price_f:'Sell Price (F) *',
+      lbl_desc_optional:'Description (optional)', ph_ref_details:'Reference, supplier details...',
+      lbl_none_m:'— None —', lbl_full_inventory:'Full Inventory', ph_search_product:'🔍 Search a product...',
+      th_vat:'VAT',
+      badge_low_stock:'Low stock', badge_ok_stock:'Stock ok', btn_delete_short:'Del.',
+      sale_deferred_tooltip:'Enter sales from a past day — like in a notebook',
+      deferred_title_short:'Deferred Entry', ph_search_item:'🔍 Search an item...',
+      lbl_modified:'(modified)', ph_negotiated_price:'Negotiated price...',
+      ph_discount_reason:'Reason: loyalty, negotiation... (optional)', lbl_change_due:'Change Due',
+      ph_search_client_product:'🔍 Client or product...', lbl_share_whatsapp:'Share on WhatsApp', lbl_share:'Share',
+      lbl_cash_fund:'Cash fund', lbl_revenue_total:'Revenue', lbl_net_profit:'Net Profit',
+      lbl_liquidity:'Liquidity', lbl_liquidity_formula:'Cash + Revenue - Debts',
+      lbl_top_products_ca:'Top Products (Revenue)', lbl_sellers_perf:'Seller Performance',
+      lbl_deferred_badge:'DEFERRED', lbl_price_modified:'Price modified', lbl_discount:'discount', lbl_surplus:'surplus', lbl_paid_off:'Paid',
+      lbl_export_pdf:'Export PDF', lbl_total_debts:'Total Debts', lbl_avg_debt:'Average Debt', lbl_max_debt:'Max Debt',
+      lbl_debts_registry:'Debts Registry', th_debt_short:'Debt', lbl_mark_all_paid:'Mark all as paid',
+      lbl_full_name:'Full Name *', lbl_pin_code:'PIN Code (4 digits) *', lbl_user_accounts:'User Accounts',
+      lbl_ca_generated:'Revenue Generated',
+      lbl_view:'View', lbl_paid_check:'Paid ✓', lbl_partial:'Partial',
+      lbl_export_excel_reports:'📊 Export Excel Reports', lbl_daily_report:'Daily Report',
+      lbl_monthly_report:'Monthly Report', lbl_annual_report:'Annual Report', lbl_stock_report:'Stock Report',
+      lbl_debts_report:'Debts Report', lbl_files_named:'Files will be named:', lbl_system_info:'System Information',
+      lbl_total_purchases:'Total Purchases', lbl_add_supplier:'Add a Supplier', lbl_name_star:'Name *',
+      lbl_contact_email:'Contact / Email', lbl_notes:'Notes', ph_supplier_notes:'Terms, delivery times...',
+      lbl_add_supplier_btn:'+ ADD SUPPLIER', lbl_suppliers_list:'Suppliers List',
+      lbl_amount_returned:'Amount Returned', lbl_returns_count:'Number of Returns',
+      lbl_how_to_return:'To record a return', lbl_returns_history:'Returns History',
       stock_out:'Out of stock', stock_alert:'Alert',
       // Paramètres
       set_confirm_sale:'Ask confirmation before sale',
@@ -3535,6 +3665,13 @@ const I18n = {
       if (val && val !== key) el.placeholder = val;
     });
 
+    // ── Infobulles data-i18n-title ──
+    document.querySelectorAll('[data-i18n-title]').forEach(el => {
+      const key = el.getAttribute('data-i18n-title');
+      const val = this.t(key);
+      if (val && val !== key) el.title = val;
+    });
+
     // ── Textes JS dynamiques traduits par id ──
     const textMap = {
       // Formulaire ventes
@@ -3635,21 +3772,24 @@ const UI = {
     const today = new Date().toDateString();
     const list  = DB.activeSales().filter(s => new Date(s.date).toDateString() === today).reverse().slice(0,50);
     if (!list.length) { tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('no_sales')}</td></tr>`; return; }
-    tbody.innerHTML = list.map(s => `
+    tbody.innerHTML = list.map(s => {
+      const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
+      return `
       <tr>
-        <td class="td-mono">${new Date(s.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})}${s.deferred?'<span style="margin-left:4px;font-family:var(--fm);font-size:.55rem;color:var(--warning);background:rgba(255,186,0,.12);padding:1px 4px;border-radius:3px">DIFFÉRÉ</span>':''}</td>
+        <td class="td-mono">${new Date(s.date).toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit'})}${s.deferred?'<span style="margin-left:4px;font-family:var(--fm);font-size:.55rem;color:var(--warning);background:rgba(255,186,0,.12);padding:1px 4px;border-radius:3px">'+I18n.t('lbl_deferred_badge')+'</span>':''}</td>
         <td><span class="badge badge-gray">${Utils.esc(s.userName)}</span></td>
         <td class="fw-700">${Utils.esc(s.itemName)}</td>
         <td class="td-mono">${s.qty}</td>
-        <td class="td-mono fw-700">${Utils.currency(s.total)}${s.priceModified ? '<span title="'+(s.discountReason||'Prix modifié')+'" style="margin-left:4px;font-size:.6rem;color:'+(s.price<(s.priceRef||s.price)?'var(--warning)':'var(--accent)')+'">('+(s.price<(s.priceRef||s.price)?'remise':'surplus')+')</span>' : ''}</td>
-        <td>${s.debt>0?`<span class="badge badge-red">Dette ${Utils.currency(s.debt)}</span>`:`<span class="badge badge-green">Soldé</span>`}</td>
+        <td class="td-mono fw-700">${Utils.currency(s.total)}${s.priceModified ? '<span title="'+(s.discountReason||I18n.t('lbl_price_modified'))+'" style="margin-left:4px;font-size:.6rem;color:'+(s.price<(s.priceRef||s.price)?'var(--warning)':'var(--accent)')+'">('+(s.price<(s.priceRef||s.price)?I18n.t('lbl_discount'):I18n.t('lbl_surplus'))+')</span>' : ''}</td>
+        <td>${s.debt>0?`<span class="badge badge-red">${I18n.t('lbl_debt')} ${Utils.currency(s.debt)}</span>`:`<span class="badge badge-green">${I18n.t('lbl_paid_off')}</span>`}</td>
         <td>
-          <button class="btn btn-danger btn-sm" onclick="Sales.cancel('${Utils.esc(s.id)}')" ${!Auth.isAdmin()?'disabled':''}>Annuler</button>
+          <button class="btn btn-danger btn-sm" onclick="Sales.cancel('${Utils.esc(s.id)}')" ${!Auth.isAdmin()?'disabled':''}>${I18n.t('btn_cancel')}</button>
           <button class="btn btn-info btn-sm" onclick="Printer.printTicket('${Utils.esc(s.id)}')" style="margin-top:2px">🖨️</button>
-          <button class="btn btn-warning btn-sm" onclick="Share.ticket('${Utils.esc(s.id)}')" style="margin-top:2px" title="Partager WhatsApp">📤</button>
-          <button class="btn btn-ghost btn-sm" onclick="Returns.process('${Utils.esc(s.id)}')" ${!Auth.isAdmin()||s.returned?'disabled':''} style="margin-top:2px" title="Retour">↩️</button>
+          <button class="btn btn-warning btn-sm" onclick="Share.ticket('${Utils.esc(s.id)}')" style="margin-top:2px" title="${I18n.t('lbl_share_whatsapp')}">📤</button>
+          <button class="btn btn-ghost btn-sm" onclick="Returns.process('${Utils.esc(s.id)}')" ${!Auth.isAdmin()||s.returned?'disabled':''} style="margin-top:2px" title="${I18n.t('nav_returns')}">↩️</button>
         </td>
-      </tr>`).join('');
+      </tr>`;
+    }).join('');
   },
   renderStock() {
     const tbody = document.querySelector('#tableStock tbody'); if(!tbody) return;
@@ -3661,16 +3801,16 @@ const UI = {
         return `<tr>
           <td class="td-mono text-muted" style="color:var(--text3)">${Utils.esc(i.code||'')}</td>
           <td class="fw-700">${Utils.esc(i.name)}${i.desc?'<div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);font-weight:400;margin-top:2px">'+Utils.esc(i.desc)+'</div>':''}</td>
-          <td class="td-mono"><span style="font-family:var(--fm);font-size:.58rem;color:var(--text3)">Achat </span>${Utils.currency(i.buy)}</td>
-          <td class="td-mono"><span style="font-family:var(--fm);font-size:.58rem;color:var(--text3)">Vente </span>${Utils.currency(i.sell)}</td>
+          <td class="td-mono"><span style="font-family:var(--fm);font-size:.58rem;color:var(--text3)">${I18n.t('th_buy')} </span>${Utils.currency(i.buy)}</td>
+          <td class="td-mono"><span style="font-family:var(--fm);font-size:.58rem;color:var(--text3)">${I18n.t('th_sell')} </span>${Utils.currency(i.sell)}</td>
           <td class="td-mono ${i.sell<i.buy?'text-danger':'text-accent'}">${margin}%</td>
           <td class="td-mono">${i.tva>0?i.tva+'%':'—'}</td>
-          <td class="td-mono"><span style="font-family:var(--fm);font-size:.58rem;color:var(--text3)">Stock </span><strong>${i.qty}</strong></td>
+          <td class="td-mono"><span style="font-family:var(--fm);font-size:.58rem;color:var(--text3)">${I18n.t('th_stock')} </span><strong>${i.qty}</strong></td>
           <td><span class="badge badge-gray" style="font-size:.58rem">${Utils.esc(i.category||'—')}</span></td>
-          <td><span class="badge ${isLow?'badge-red':'badge-green'}">${isLow?'⚠ Stock faible':'✓ Stock ok'}</span></td>
+          <td><span class="badge ${isLow?'badge-red':'badge-green'}">${isLow?'⚠ '+I18n.t('badge_low_stock'):'✓ '+I18n.t('badge_ok_stock')}</span></td>
           <td style="display:flex;gap:4px;flex-wrap:wrap">
-            <button class="btn btn-ghost btn-sm" onclick="Stock.openEdit('${Utils.esc(i.id)}')" ${!Auth.isAdmin()?'disabled':''} title="Modifier">✏️ Modifier</button>
-            <button class="btn btn-danger btn-sm" onclick="Stock.remove('${Utils.esc(i.id)}')" ${!Auth.isAdmin()?'disabled':''}>Supprimer</button>
+            <button class="btn btn-ghost btn-sm" onclick="Stock.openEdit('${Utils.esc(i.id)}')" ${!Auth.isAdmin()?'disabled':''} title="${I18n.t('btn_edit')}">✏️ ${I18n.t('btn_edit')}</button>
+            <button class="btn btn-danger btn-sm" onclick="Stock.remove('${Utils.esc(i.id)}')" ${!Auth.isAdmin()?'disabled':''}>${I18n.t('btn_delete')}</button>
           </td>
         </tr>`;
       }).join('');
@@ -3694,7 +3834,7 @@ const UI = {
         <td class="td-mono">${Utils.currency(ca)}</td>
         <td style="display:flex;gap:4px;flex-wrap:wrap">
           <button class="btn btn-ghost btn-sm" onclick="Users.openEdit('${Utils.esc(u.id)}')" ${!Auth.isAdmin()?'disabled':''}>✏️</button>
-          <button class="btn btn-danger btn-sm" onclick="Users.remove('${Utils.esc(u.id)}')" ${isSelf||!Auth.isAdmin()?'disabled':''}>Suppr.</button>
+          <button class="btn btn-danger btn-sm" onclick="Users.remove('${Utils.esc(u.id)}')" ${isSelf||!Auth.isAdmin()?'disabled':''}>${I18n.t('btn_delete_short')}</button>
         </td>
       </tr>`;
     }).join('');
@@ -3703,10 +3843,11 @@ const UI = {
     const sel = document.getElementById('s-item'); if(!sel) return;
     const cur = sel.value;
     // Trier A→Z
+    const sortLocale = I18n._lang === 'en' ? 'en' : 'fr';
     const avail = [...DB.data.items.filter(i=>i.qty>0)]
-      .sort((a,b) => a.name.localeCompare(b.name, 'fr', {sensitivity:'base'}));
+      .sort((a,b) => a.name.localeCompare(b.name, sortLocale, {sensitivity:'base'}));
     sel.innerHTML = avail.length
-      ? `<option value="">— Choisir un article —</option>` +
+      ? `<option value="">${I18n.t('def_choose_item')}</option>` +
         avail.map(i=>`<option value="${Utils.esc(i.id)}">${Utils.esc(i.name)} (dispo: ${i.qty})</option>`).join('')
       : `<option value="">— ${I18n.t('no_stock')} —</option>`;
     if (cur) sel.value = cur;
@@ -4180,9 +4321,9 @@ const Debts = {
       <tr style="cursor:pointer" onclick="Debts.showDetail('${Utils.esc(name)}')">
         <td class="fw-700">${Utils.esc(name)}</td>
         <td class="td-mono" style="color:var(--danger)">${Utils.currency(d.total)}</td>
-        <td class="td-mono">${new Date(d.lastDate).toLocaleDateString('fr-FR')}</td>
+        <td class="td-mono">${new Date(d.lastDate).toLocaleDateString(I18n._lang==='en'?'en-US':'fr-FR')}</td>
         <td class="td-mono">${d.count}</td>
-        <td><button class="btn btn-primary btn-sm" onclick="event.stopPropagation();Debts.showDetail('${Utils.esc(name)}')">Voir</button></td>
+        <td><button class="btn btn-primary btn-sm" onclick="event.stopPropagation();Debts.showDetail('${Utils.esc(name)}')">${I18n.t('lbl_view')}</button></td>
       </tr>`).join('');
   },
   showDetail(clientName) {
@@ -4191,15 +4332,16 @@ const Debts = {
     document.getElementById('debt-detail').style.display='block';
     document.getElementById('debt-detail-title').textContent=`${clientName} — ${Utils.currency(d.total)}`;
     const tbody=document.querySelector('#tableDebtDetail tbody');
+    const locale = I18n._lang==='en'?'en-US':'fr-FR';
     tbody.innerHTML=d.sales.map(s=>`
       <tr>
-        <td class="td-mono">${new Date(s.date).toLocaleDateString('fr-FR')}</td>
+        <td class="td-mono">${new Date(s.date).toLocaleDateString(locale)}</td>
         <td class="fw-700">${Utils.esc(s.itemName)}</td>
         <td class="td-mono">${Utils.currency(s.total)}</td>
         <td class="td-mono" style="color:var(--danger)">${Utils.currency(s.debt)}</td>
         <td style="display:flex;gap:4px;flex-wrap:wrap">
-          <button class="btn btn-primary btn-sm" onclick="Debts.markPaid('${Utils.esc(s.id)}')">Payé ✓</button>
-          <button class="btn btn-ghost btn-sm" onclick="Debts.partialPay('${Utils.esc(s.id)}')" style="font-size:.65rem">Partiel</button>
+          <button class="btn btn-primary btn-sm" onclick="Debts.markPaid('${Utils.esc(s.id)}')">${I18n.t('lbl_paid_check')}</button>
+          <button class="btn btn-ghost btn-sm" onclick="Debts.partialPay('${Utils.esc(s.id)}')" style="font-size:.65rem">${I18n.t('lbl_partial')}</button>
         </td>
       </tr>`).join('');
     document.getElementById('debt-detail').scrollIntoView({behavior:'smooth'});
@@ -4229,11 +4371,11 @@ const Debts = {
     const info = document.getElementById('smp-partial-info');
     const amt  = document.getElementById('smp-partial-amount');
     const rest = document.getElementById('smp-partial-rest');
-    if (info) info.textContent = (sale.clientName || 'Client') + ' — dette restante : ' + Utils.currency(sale.debt);
+    if (info) info.textContent = (sale.clientName || I18n.t('lbl_client')) + ' — ' + I18n.t('partial_debt_remaining') + ' : ' + Utils.currency(sale.debt);
     if (amt)  { amt.value = ''; amt.max = sale.debt; amt.oninput = () => {
       const v = Utils.num(amt.value);
       if (rest) rest.textContent = !isNaN(v) && v > 0
-        ? 'Reste après encaissement : ' + Utils.currency(Math.max(0, sale.debt - v))
+        ? I18n.t('partial_after_payment') + ' : ' + Utils.currency(Math.max(0, sale.debt - v))
         : '';
     }; }
     const ov = document.getElementById('smp-partial-overlay');
@@ -5997,8 +6139,9 @@ const RestockReport = {
 
     const sub = document.getElementById('restock-subtitle');
     if (sub) {
-      const d = new Date().toLocaleDateString('fr-FR', {day:'numeric', month:'long', year:'numeric'});
-      sub.textContent = critical.length + ' article(s) à approvisionner — ' + d;
+      const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
+      const d = new Date().toLocaleDateString(locale, {day:'numeric', month:'long', year:'numeric'});
+      sub.textContent = critical.length + ' ' + I18n.t('rs_items_to_restock') + ' — ' + d;
     }
 
     const list = document.getElementById('restock-list');
@@ -6008,8 +6151,8 @@ const RestockReport = {
       list.innerHTML = `
         <div style="text-align:center;padding:32px">
           <div style="font-size:3rem;margin-bottom:10px">✅</div>
-          <div style="font-family:var(--fd);font-weight:800;color:var(--accent)">Tous les stocks sont OK</div>
-          <div style="font-family:var(--fm);font-size:.75rem;color:var(--text3);margin-top:6px">Aucun article en rupture ou sous le seuil d'alerte</div>
+          <div style="font-family:var(--fd);font-weight:800;color:var(--accent)">${I18n.t('rs_all_ok')}</div>
+          <div style="font-family:var(--fm);font-size:.75rem;color:var(--text3);margin-top:6px">${I18n.t('rs_no_critical')}</div>
         </div>`;
       return;
     }
@@ -6018,11 +6161,11 @@ const RestockReport = {
       const isOut   = i.qty === 0;
       const urgency = isOut ? 'var(--danger)' : 'var(--warning)';
       const badge   = isOut
-        ? '<span style="background:rgba(255,59,92,.15);color:var(--danger);font-family:var(--fm);font-size:.58rem;font-weight:700;padding:2px 6px;border-radius:4px">RUPTURE</span>'
-        : '<span style="background:rgba(255,186,0,.12);color:var(--warning);font-family:var(--fm);font-size:.58rem;font-weight:700;padding:2px 6px;border-radius:4px">FAIBLE</span>';
+        ? `<span style="background:rgba(255,59,92,.15);color:var(--danger);font-family:var(--fm);font-size:.58rem;font-weight:700;padding:2px 6px;border-radius:4px">${I18n.t('rs_badge_out')}</span>`
+        : `<span style="background:rgba(255,186,0,.12);color:var(--warning);font-family:var(--fm);font-size:.58rem;font-weight:700;padding:2px 6px;border-radius:4px">${I18n.t('rs_badge_low')}</span>`;
       const velText = velocity > 0
-        ? `<span style="color:var(--text3)">Écoulement : </span><strong>${velocity} unité(s)/semaine</strong>`
-        : `<span style="color:var(--text3)">Pas de ventes récentes</span>`;
+        ? `<span style="color:var(--text3)">${I18n.t('rs_velocity')} : </span><strong>${velocity} ${I18n.t('rs_units_week')}</strong>`
+        : `<span style="color:var(--text3)">${I18n.t('rs_no_recent_sales')}</span>`;
 
       return `
         <div style="padding:12px 14px;background:var(--sur2);border:1.5px solid ${urgency}22;border-left:3px solid ${urgency};border-radius:var(--rmd);margin-bottom:8px">
@@ -6033,24 +6176,24 @@ const RestockReport = {
             </div>
             <div style="text-align:right;flex-shrink:0">
               <div style="font-family:var(--fd);font-size:1.1rem;font-weight:800;color:${urgency}">${toOrder}</div>
-              <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3)">à commander</div>
+              <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3)">${I18n.t('rs_to_order')}</div>
             </div>
           </div>
           <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:6px;font-family:var(--fm);font-size:.65rem">
             <div style="background:var(--surface);padding:5px 8px;border-radius:4px">
-              <div style="color:var(--text3)">Stock actuel</div>
-              <div style="font-weight:700;color:${urgency}">${i.qty} unité(s)</div>
+              <div style="color:var(--text3)">${I18n.t('rs_current_stock')}</div>
+              <div style="font-weight:700;color:${urgency}">${i.qty} ${I18n.t('rs_units')}</div>
             </div>
             <div style="background:var(--surface);padding:5px 8px;border-radius:4px">
-              <div style="color:var(--text3)">Seuil alerte</div>
-              <div style="font-weight:700">${i.min || Settings.data.stockMin || 5} unité(s)</div>
+              <div style="color:var(--text3)">${I18n.t('rs_alert_threshold')}</div>
+              <div style="font-weight:700">${i.min || Settings.data.stockMin || 5} ${I18n.t('rs_units')}</div>
             </div>
             <div style="background:var(--surface);padding:5px 8px;border-radius:4px">
-              <div style="color:var(--text3)">Coût estimé</div>
+              <div style="color:var(--text3)">${I18n.t('restock_cost')}</div>
               <div style="font-weight:700;color:var(--accent)">${Utils.currency(toOrder * i.buy)}</div>
             </div>
           </div>
-          ${i.sellWithTVA || i.sell ? `<div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);margin-top:6px">Prix achat : ${Utils.currency(i.buy)} · Prix vente : ${Utils.currency(i.sellWithTVA||i.sell)} · Marge : ${i.buy>0?Math.round((((i.sell||0)-i.buy)/i.buy)*100)+'%':'—'}</div>` : ''}
+          ${i.sellWithTVA || i.sell ? `<div style="font-family:var(--fm);font-size:.62rem;color:var(--text3);margin-top:6px">${I18n.t('rs_buy_price')} : ${Utils.currency(i.buy)} · ${I18n.t('rs_sell_price')} : ${Utils.currency(i.sellWithTVA||i.sell)} · ${I18n.t('rs_margin')} : ${i.buy>0?Math.round((((i.sell||0)-i.buy)/i.buy)*100)+'%':'—'}</div>` : ''}
         </div>`;
     }).join('');
   },
@@ -6061,11 +6204,12 @@ const RestockReport = {
     const crit   = [...items.filter(i=>i.qty===0), ...items.filter(i=>i.qty>0&&i.qty<=(i.min||minQty))];
     if (!crit.length) { UI.toast(I18n.t('toast_err_no_stock'),'warning'); return; }
     const curr = Settings.getCurrency();
+    const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
     const esc  = v => { const s=String(v??''); return s.includes(',')?'"'+s+'"':s; };
     const lines = [
-      'Rapport Approvisionnement,' + new Date().toLocaleDateString('fr-FR'),
+      I18n.t('restock_title').replace(/^[^\wÀ-ÿ]*/,'').trim() + ',' + new Date().toLocaleDateString(locale),
       '',
-      'Article,Stock actuel,Seuil,Ecoulement/semaine,A commander,Cout achat,Cout total',
+      I18n.t('rs_csv_header'),
       ...crit.map(i => {
         const { toOrder, velocity } = this._recommended(i);
         return [i.name, i.qty, i.min||minQty, velocity, toOrder, i.buy+' '+curr, (toOrder*i.buy)+' '+curr].map(esc).join(',');
@@ -7041,17 +7185,18 @@ const SellerDash = {
     const comm  = mCA * rate / 100;
 
     const se = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+    const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
     se('sd-shop-name',  Settings.data.shopName || 'Smart Market Pro');
     se('sd-seller-name', user.name);
-    se('sd-date', now.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long'}));
+    se('sd-date', now.toLocaleDateString(locale, {weekday:'long', day:'numeric', month:'long'}));
     se('sd-count',    todaySales.length);
-    se('sd-ca',       'CA : ' + Utils.currency(ca));
+    se('sd-ca',       I18n.t('sd_ca_prefix') + Utils.currency(ca));
     if (Commissions.isEnabled()) {
       se('sd-comm',     Utils.currency(comm));
-      se('sd-comm-sub', 'Taux : ' + rate + '% (' + (Commissions.getBase()==='profit'?'sur bénéfice':'sur CA') + ') — Mois : ' + Utils.currency(mCA));
+      se('sd-comm-sub', I18n.t('sd_rate_prefix') + rate + '% (' + (Commissions.getBase()==='profit'?I18n.t('sd_base_profit'):I18n.t('sd_base_ca')) + ') — ' + I18n.t('sd_month_prefix') + Utils.currency(mCA));
     } else {
       se('sd-comm',     '—');
-      se('sd-comm-sub', 'Commissions non activées');
+      se('sd-comm-sub', I18n.t('sd_commissions_off'));
     }
 
     // Dernières ventes
@@ -7059,13 +7204,13 @@ const SellerDash = {
     if (recent) {
       const last5 = todaySales.slice(-5).reverse();
       if (!last5.length) {
-        recent.innerHTML = '<div style="text-align:center;color:var(--text3);font-family:var(--fm);font-size:.8rem;padding:16px">Aucune vente aujourd\'hui</div>';
+        recent.innerHTML = `<div style="text-align:center;color:var(--text3);font-family:var(--fm);font-size:.8rem;padding:16px">${I18n.t('sd_no_sales_today')}</div>`;
       } else {
         recent.innerHTML = last5.map(s => `
           <div style="display:flex;justify-content:space-between;align-items:center;padding:10px 12px;background:var(--sur2);border-radius:var(--rmd)">
             <div>
               <div style="font-weight:700;font-size:.85rem">${Utils.esc(s.itemName)}</div>
-              <div style="font-family:var(--fm);font-size:.65rem;color:var(--text3)">${new Date(s.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} — ${s.qty} unité(s)</div>
+              <div style="font-family:var(--fm);font-size:.65rem;color:var(--text3)">${new Date(s.date).toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit'})} — ${s.qty} ${I18n.t('sd_units')}</div>
             </div>
             <div style="font-family:var(--fd);font-size:.95rem;font-weight:800;color:var(--accent)">${Utils.currency(s.total)}</div>
           </div>`).join('');
@@ -8431,9 +8576,10 @@ const Dashboard = {
 
     // Date & greeting
     const hours = now.getHours();
-    const greet = hours < 12 ? 'Bonjour' : hours < 18 ? 'Bon après-midi' : 'Bonsoir';
+    const greet = hours < 12 ? I18n.t('dash_greet_morning') : hours < 18 ? I18n.t('dash_greet_afternoon') : I18n.t('dash_greet_evening');
     const user  = Auth.currentUser?.name || '';
-    const dateStr = now.toLocaleDateString('fr-FR', {weekday:'long', day:'numeric', month:'long', year:'numeric'});
+    const locale  = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
+    const dateStr = now.toLocaleDateString(locale, {weekday:'long', day:'numeric', month:'long', year:'numeric'});
 
     // Retours du jour
     const todayReturns = (DB.data.returns||[]).filter(r => new Date(r.date).toDateString() === today);
@@ -8443,16 +8589,16 @@ const Dashboard = {
     se('dash-greeting',     greet + (user ? ', ' + user : '') + ' 👋');
     se('dash-date',         dateStr);
     se('dash-ca-today',     Utils.currency(ca));
-    se('dash-ca-sub',       todayS.length + ' vente' + (todayS.length>1?'s':'') + (returnedAmt>0 ? ' — Retours : -'+Utils.currency(returnedAmt) : ''));
+    se('dash-ca-sub',       todayS.length + ' ' + I18n.t('dash_sales_count') + (returnedAmt>0 ? ' — ' + I18n.t('dash_returns_prefix') + Utils.currency(returnedAmt) : ''));
     se('dash-pft-today',    Utils.currency(pft));
     if (typeof Expenses !== 'undefined') {
       const _nr  = Expenses.getRealNetProfit();
       const _del = document.getElementById('dash-margin-sub');
-      if (_del) _del.textContent = 'Bénéf. net réel : ' + Utils.currency(_nr);
+      if (_del) _del.textContent = I18n.t('dash_real_net_profit') + ' : ' + Utils.currency(_nr);
     }
-    se('dash-margin-sub',   'Marge : ' + margin + '%');
+    se('dash-margin-sub',   I18n.t('dash_margin_prefix') + margin + '%');
     se('dash-debt',         Utils.currency(allDebt));
-    se('dash-debt-clients', debtClients + ' client' + (debtClients>1?'s':'') + ' débiteur' + (debtClients>1?'s':''));
+    se('dash-debt-clients', debtClients + ' ' + I18n.t('dash_debtor_clients'));
     se('dash-alerts',       alerts);
     // Badge stock mobile (onglet bas)
     const stockBadge = document.getElementById('stock-alert-badge');
@@ -8472,17 +8618,17 @@ const Dashboard = {
     const recentEl = document.getElementById('dash-recent-sales');
     if (recentEl) {
       if (!recent.length) {
-        recentEl.innerHTML = `<div style="text-align:center;color:var(--text3);padding:20px;font-size:.82rem">Aucune vente aujourd'hui</div>`;
+        recentEl.innerHTML = `<div style="text-align:center;color:var(--text3);padding:20px;font-size:.82rem">${I18n.t('sd_no_sales_today')}</div>`;
       } else {
         recentEl.innerHTML = recent.map(s => `
           <div class="dash-sale-row">
             <div>
               <div style="font-weight:700;font-size:.82rem">${Utils.esc(s.itemName)}</div>
-              <div style="font-size:.7rem;color:var(--text3);font-family:var(--fm)">${new Date(s.date).toLocaleTimeString('fr-FR',{hour:'2-digit',minute:'2-digit'})} — ${Utils.esc(s.userName)}</div>
+              <div style="font-size:.7rem;color:var(--text3);font-family:var(--fm)">${new Date(s.date).toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit'})} — ${Utils.esc(s.userName)}</div>
             </div>
             <div style="text-align:right">
               <div style="font-weight:700;color:var(--accent);font-family:var(--fm)">${Utils.currency(s.total)}</div>
-              ${s.debt>0 ? '<div style="font-size:.68rem;color:var(--danger)">Dette: '+Utils.currency(s.debt)+'</div>' : ''}
+              ${s.debt>0 ? '<div style="font-size:.68rem;color:var(--danger)">' + I18n.t('lbl_debt') + ': '+Utils.currency(s.debt)+'</div>' : ''}
             </div>
           </div>`).join('');
       }
@@ -8495,7 +8641,7 @@ const Dashboard = {
     const topEl = document.getElementById('dash-top-products');
     if (topEl) {
       if (!top3.length) {
-        topEl.innerHTML = `<div style="text-align:center;color:var(--text3);padding:16px;font-size:.82rem">Aucune vente aujourd'hui</div>`;
+        topEl.innerHTML = `<div style="text-align:center;color:var(--text3);padding:16px;font-size:.82rem">${I18n.t('sd_no_sales_today')}</div>`;
       } else {
         const maxCA = top3[0][1].ca;
         const medals = ['🥇','🥈','🥉'];
@@ -8919,7 +9065,7 @@ const Auth = {
 
     if (!users.length) {
       // Ne devrait jamais arriver après ensureDefaultAdmin — cas de sécurité
-      list.innerHTML = '<div style="text-align:center;color:var(--text3);font-size:.8rem;padding:16px">Initialisation en cours...<br><span style="font-size:.7rem">Rechargez la page si ce message persiste.</span></div>';
+      list.innerHTML = `<div style="text-align:center;color:var(--text3);font-size:.8rem;padding:16px">${I18n.t('auth_init')}<br><span style="font-size:.7rem">${I18n.t('auth_init_reload')}</span></div>`;
       // Tenter de créer l'admin et recharger la liste
       Auth.ensureDefaultAdmin().then(() => {
         const freshUsers = DB.data.users || [];
@@ -8938,7 +9084,7 @@ const Auth = {
           <div>
             <div class="acc-info-name">${this._esc(u.name)}</div>
             <div class="acc-info-role" style="color:${u.role==='admin'?'var(--accent)':'var(--text3)'}">
-              ${u.role==='admin'?'👑 Administrateur':'👤 Vendeur'}
+              ${u.role==='admin'?(I18n.t('role_admin_full')):(I18n.t('role_seller_full'))}
             </div>
           </div>
         </button>`).join('');
@@ -8957,7 +9103,7 @@ const Auth = {
             <div class="acc-info-name" id="acc-trigger-name">${this._esc(defUser.name)}</div>
             <div class="acc-info-role" id="acc-trigger-role"
               style="color:${defUser.role==='admin'?'var(--accent)':'var(--text3)'}">
-              ${defUser.role==='admin'?'👑 Administrateur':'👤 Vendeur'}
+              ${defUser.role==='admin'?(I18n.t('role_admin_full')):(I18n.t('role_seller_full'))}
             </div>
           </div>
           <span class="acc-chevron">▼</span>
@@ -8973,7 +9119,7 @@ const Auth = {
                 <div class="acc-info-name">${this._esc(u.name)}</div>
                 <div class="acc-info-role"
                   style="color:${u.role==='admin'?'var(--accent)':'var(--text3)'}">
-                  ${u.role==='admin'?'👑 Administrateur':'👤 Vendeur'}
+                  ${u.role==='admin'?(I18n.t('role_admin_full')):(I18n.t('role_seller_full'))}
                 </div>
               </div>
             </button>`).join('')}
@@ -9013,7 +9159,7 @@ const Auth = {
     const col  = user.role === 'admin' ? 'var(--accent)' : 'var(--info)';
     if (av)  { av.textContent = user.name.charAt(0).toUpperCase(); av.style.background = col; }
     if (nm)  nm.textContent   = user.name;
-    if (rl)  { rl.textContent = user.role === 'admin' ? '👑 Administrateur' : '👤 Vendeur'; rl.style.color = col; }
+    if (rl)  { rl.textContent = user.role === 'admin' ? (I18n.t('role_admin_full')) : (I18n.t('role_seller_full')); rl.style.color = col; }
     if (btn) { btn.textContent = 'Connexion → ' + user.name; btn.onclick = () => Auth.selectAccount(userId); }
 
     // Mémoriser le dernier choix
@@ -9041,7 +9187,7 @@ const Auth = {
     const nameEl = document.getElementById('auth-selected-name');
     const roleEl = document.getElementById('auth-selected-role');
     if (nameEl) nameEl.textContent = user.name;
-    if (roleEl) roleEl.textContent = user.role === 'admin' ? '👑 Administrateur' : '👤 Vendeur';
+    if (roleEl) roleEl.textContent = user.role === 'admin' ? (I18n.t('role_admin_full')) : (I18n.t('role_seller_full'));
     this._buf = ''; this._dots();
     const pe = document.getElementById('auth-pin-error'); if(pe) pe.textContent = '';
   },
@@ -9231,22 +9377,22 @@ const PWA = {
 /* ═══════════════ MOB NAV DRAWER ═══════════════ */
 const MobNav = {
   _items: [
-    {id:'restock',   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`, label:'Appro.',      admin:true},
-    {id:'history',   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/><polyline points="12 7 12 12 16 14"/></svg>`, label:'Historique',  admin:true},
-    {id:'debts',     icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`, label:'Dettes',      admin:true},
-    {id:'expenses',  icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>`, label:'Dépenses',     admin:true},
-    {id:'cashreport',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>`, label:'Caisse',       admin:true},
-    {id:'commissions',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,label:'Commissions',  admin:true},
-    {id:'users',     icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`, label:'Équipe',       admin:true},
-    {id:'suppliers', icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`, label:'Fournisseurs', admin:true},
-    {id:'loyalty',   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`, label:'Fidélité',     admin:true},
-    {id:'returns',   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>`,  label:'Retours',      admin:true},
-    {id:'objectives',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`, label:'Objectifs',    admin:true},
-    {id:'categories',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`,  label:'Catégories',  admin:true},
-    {id:'ai',        icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>`, label:'IA',           admin:true},
-    {id:'bizimport', icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>`, label:'Import IA',    admin:true},
-    {id:'settings',  icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`, label:'Paramètres',   admin:true},
-    {id:'config',    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,  label:'Système',      admin:true},
+    {id:'restock',   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg>`, labelKey:'nav_restock',      admin:true},
+    {id:'history',   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-4.95"/><polyline points="12 7 12 12 16 14"/></svg>`, labelKey:'nav_history',  admin:true},
+    {id:'debts',     icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="4" width="22" height="16" rx="2" ry="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg>`, labelKey:'nav_debts',      admin:true},
+    {id:'expenses',  icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 1 0 0 7h5a3.5 3.5 0 1 1 0 7H6"/></svg>`, labelKey:'nav_expenses',     admin:true},
+    {id:'cashreport',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="3" y1="22" x2="21" y2="22"/><line x1="6" y1="18" x2="6" y2="11"/><line x1="10" y1="18" x2="10" y2="11"/><line x1="14" y1="18" x2="14" y2="11"/><line x1="18" y1="18" x2="18" y2="11"/><polygon points="12 2 20 7 4 7"/></svg>`, labelKey:'nav_cashreport',       admin:true},
+    {id:'commissions',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`,labelKey:'nav_commissions',  admin:true},
+    {id:'users',     icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>`, labelKey:'nav_users',       admin:true},
+    {id:'suppliers', icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="1" y="3" width="15" height="13"/><polygon points="16 8 20 8 23 11 23 16 16 16 16 8"/><circle cx="5.5" cy="18.5" r="2.5"/><circle cx="18.5" cy="18.5" r="2.5"/></svg>`, labelKey:'nav_suppliers', admin:true},
+    {id:'loyalty',   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>`, labelKey:'nav_loyalty',     admin:true},
+    {id:'returns',   icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 14 4 9 9 4"/><path d="M20 20v-7a4 4 0 0 0-4-4H4"/></svg>`,  labelKey:'nav_returns',      admin:true},
+    {id:'objectives',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>`, labelKey:'nav_objectives',    admin:true},
+    {id:'categories',icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg>`,  labelKey:'nav_categories',  admin:true},
+    {id:'ai',        icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="11" width="18" height="10" rx="2"/><circle cx="12" cy="5" r="2"/><path d="M12 7v4"/><line x1="8" y1="16" x2="8" y2="16"/><line x1="16" y1="16" x2="16" y2="16"/></svg>`, labelKey:'nav_ai',           admin:true},
+    {id:'bizimport', icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>`, labelKey:'nav_bizimport_full',    admin:true},
+    {id:'settings',  icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>`, labelKey:'nav_settings',   admin:true},
+    {id:'config',    icon:`<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>`,  labelKey:'nav_system',      admin:true},
   ],
 
   openDrawer() {
@@ -9257,7 +9403,7 @@ const MobNav = {
       grid.innerHTML = visible.map(it => `
         <div class="drawer-item" onclick="MobNav.goTo('${it.id}')">
           <span class="di-icon" style="display:flex;align-items:center;justify-content:center;width:24px;height:24px">${it.icon}</span>
-          <span>${it.label}</span>
+          <span>${I18n.t(it.labelKey)}</span>
         </div>`).join('');
     }
     document.getElementById('mob-drawer')?.classList.add('open');
