@@ -1314,7 +1314,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
           <input type="text" id="s-discount-reason" placeholder="Motif : fidélité, négociation... (optionnel)" data-i18n-placeholder="ph_discount_reason" style="font-size:.72rem;padding:6px 10px">
         </div>
       </div>
-      <div class="form-group"><label class="form-label" data-i18n="lbl_paid">Montant Payé</label><input type="number" id="s-paid" inputmode="decimal" placeholder="Vide = tout payé" data-i18n-placeholder="ph_paid" oninput="Sales.validate()"></div>
+      <div class="form-group"><label class="form-label" data-i18n="lbl_paid">Montant Payé <button type="button" onclick="Sales.setFullCredit()" style="background:none;border:none;color:var(--danger);font-size:.65rem;cursor:pointer;font-family:var(--fm);text-decoration:underline;padding:0;margin-left:6px">🔴 <span data-i18n="lbl_full_credit">Vente à crédit</span></button></label><input type="number" id="s-paid" inputmode="decimal" placeholder="Vide = tout payé" data-i18n-placeholder="ph_paid" oninput="Sales.validate()"></div>
       <div class="form-group"><label class="form-label" data-i18n="lbl_client">Nom Client (dettes)</label><input type="text" id="s-client" placeholder="—"></div>
       <div class="form-group" id="s-change-wrap" style="display:none">
         <label class="form-label" data-i18n="lbl_change_due">Rendu Monnaie</label>
@@ -1416,7 +1416,10 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <section id="debts" class="page">
   <div class="page-header">
     <h1 class="page-title" data-i18n="debts_title">Dettes <span>Clients</span></h1>
-    <button class="btn btn-info btn-sm" onclick="Printer.exportDebtsPDF()">📄 <span data-i18n="lbl_export_pdf">Export PDF</span></button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-primary btn-sm" onclick="DeferredSales.open()" style="border-color:var(--warning)">📒 <span data-i18n="lbl_add_debt">Ajouter une dette</span></button>
+      <button class="btn btn-info btn-sm" onclick="Printer.exportDebtsPDF()">📄 <span data-i18n="lbl_export_pdf">Export PDF</span></button>
+    </div>
   </div>
   <div class="stats-grid">
     <div class="stat-card" style="--accent-color:var(--danger)"><div class="stat-label" data-i18n="lbl_total_debts">Total Dettes</div><div class="stat-value" id="dt-total">0</div></div>
@@ -2043,28 +2046,28 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <section id="cashreport" class="page">
   <div class="page-header">
     <h1 class="page-title" data-i18n="cash_title">🏦 <span>Rapport Caisse</span></h1>
-    <button class="btn btn-info btn-sm" onclick="Printer.printCashReport()">🖨️ Imprimer</button>
+    <button class="btn btn-info btn-sm" onclick="Printer.printCashReport()">🖨️ <span data-i18n="btn_print">Imprimer</span></button>
   </div>
   <div class="card">
     <div class="card-title" data-i18n="cr_closing_title">Clôture de Caisse</div>
-    <div style="font-size:.82rem;color:var(--text2);margin-bottom:14px;line-height:1.6">
+    <div style="font-size:.82rem;color:var(--text2);margin-bottom:14px;line-height:1.6" data-i18n="cr_instructions">
       Comptez l'argent physiquement dans votre caisse, entrez le montant ci-dessous.
       L'app calcule automatiquement les écarts avec la caisse théorique.
     </div>
     <div class="form-grid">
       <div class="form-group">
-        <label class="form-label">Fond de caisse (ouverture)</label>
+        <label class="form-label" data-i18n="cr_opening_fund">Fond de caisse (ouverture)</label>
         <input type="number" id="cr-fond" inputmode="decimal"
-          placeholder="Montant au début de la journée">
+          placeholder="Montant au début de la journée" data-i18n-placeholder="ph_amount_day_start">
       </div>
       <div class="form-group">
         <label class="form-label" data-i18n="cr_counted_amount">Montant compté maintenant</label>
         <input type="number" id="cr-counted" inputmode="decimal"
-          placeholder="Argent dans la caisse en ce moment">
+          placeholder="Argent dans la caisse en ce moment" data-i18n-placeholder="ph_cash_now">
       </div>
     </div>
     <button class="btn btn-primary mt-14" onclick="CashReport.calculate()">
-      📊 Calculer le rapport
+      📊 <span data-i18n="lbl_calc_report">Calculer le rapport</span>
     </button>
   </div>
   <div class="card" id="cr-result-card" style="display:none">
@@ -2079,24 +2082,24 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <h1 class="page-title" data-i18n="comm_title">💰 <span>Commissions</span></h1>
   </div>
   <div class="card">
-    <div class="card-title">Taux de Commission par Vendeur (%)</div>
-    <div style="font-size:.8rem;color:var(--text2);margin-bottom:12px;line-height:1.6">
+    <div class="card-title" data-i18n="lbl_comm_rate_title">Taux de Commission par Vendeur (%)</div>
+    <div style="font-size:.8rem;color:var(--text2);margin-bottom:12px;line-height:1.6" data-i18n="lbl_comm_explain">
       Pourcentage du CA que chaque vendeur reçoit. Exemple : 5% = le vendeur reçoit
       5% du total de tout ce qu'il vend ce mois.
     </div>
     <div id="commissions-config" style="display:flex;flex-direction:column;gap:10px"></div>
     <button class="btn btn-primary mt-14" onclick="Commissions.saveRates()">
-      💾 Sauvegarder les taux
+      💾 <span data-i18n="lbl_save_rates">Sauvegarder les taux</span>
     </button>
   </div>
   <div class="card">
-    <div class="card-title">Commissions — Mois en Cours</div>
+    <div class="card-title" data-i18n="lbl_comm_current_month">Commissions — Mois en Cours</div>
     <div class="table-wrap">
       <table id="tableCommissions">
         <thead>
           <tr>
-            <th>Vendeur</th><th>CA</th><th>Base calcul</th><th>Taux</th>
-            <th>Commission</th><th>Statut</th><th>Action</th>
+            <th data-i18n="th_seller">Vendeur</th><th data-i18n="th_ca">CA</th><th data-i18n="th_calc_base">Base calcul</th><th data-i18n="th_rate">Taux</th>
+            <th data-i18n="th_commission">Commission</th><th data-i18n="th_status">Statut</th><th data-i18n="th_action">Action</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -2110,40 +2113,40 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <section id="history" class="page">
   <div class="page-header">
     <h1 class="page-title" data-i18n="history_title">📋 <span>Historique</span></h1>
-    <button class="btn btn-info btn-sm" onclick="ExcelExport.historyReport()">📊 Export</button>
+    <button class="btn btn-info btn-sm" onclick="ExcelExport.historyReport()">📊 <span data-i18n="btn_export">Export</span></button>
   </div>
 
   <!-- Filtres -->
   <div class="card" style="padding:14px 16px">
     <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px">
       <div class="form-group" style="margin-bottom:0">
-        <label class="form-label">Période</label>
+        <label class="form-label" data-i18n="lbl_period">Période</label>
         <select id="hist-period" onchange="History.render()">
-          <option value="all">Tout</option>
-          <option value="today">Aujourd'hui</option>
-          <option value="week">7 derniers jours</option>
-          <option value="month" selected>Ce mois</option>
-          <option value="year">Cette année</option>
-          <option value="custom">Dates personnalisées</option>
+          <option value="all" data-i18n="lbl_all">Tout</option>
+          <option value="today" data-i18n="period_today">Aujourd'hui</option>
+          <option value="week" data-i18n="period_7days">7 derniers jours</option>
+          <option value="month" selected data-i18n="lbl_this_month">Ce mois</option>
+          <option value="year" data-i18n="lbl_this_year">Cette année</option>
+          <option value="custom" data-i18n="lbl_custom_dates">Dates personnalisées</option>
         </select>
       </div>
       <div class="form-group" style="margin-bottom:0" id="hist-date-from-wrap" style="display:none">
-        <label class="form-label">Du</label>
+        <label class="form-label" data-i18n="lbl_from">Du</label>
         <input type="date" id="hist-date-from" onchange="History.render()">
       </div>
       <div class="form-group" style="margin-bottom:0" id="hist-date-to-wrap" style="display:none">
-        <label class="form-label">Au</label>
+        <label class="form-label" data-i18n="lbl_to">Au</label>
         <input type="date" id="hist-date-to" onchange="History.render()">
       </div>
       <div class="form-group" style="margin-bottom:0">
-        <label class="form-label">Vendeur</label>
+        <label class="form-label" data-i18n="th_seller">Vendeur</label>
         <select id="hist-seller" onchange="History.render()">
-          <option value="">Tous</option>
+          <option value="" data-i18n="lbl_all">Tous</option>
         </select>
       </div>
       <div class="form-group" style="margin-bottom:0">
-        <label class="form-label">Recherche</label>
-        <input type="search" id="hist-search" placeholder="Produit, client..." oninput="History.render()">
+        <label class="form-label" data-i18n="lbl_search">Recherche</label>
+        <input type="search" id="hist-search" placeholder="Produit, client..." data-i18n-placeholder="ph_product_client" oninput="History.render()">
       </div>
     </div>
   </div>
@@ -2151,37 +2154,37 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <!-- Stats filtrées -->
   <div class="stats-grid">
     <div class="stat-card" style="--accent-color:var(--info)">
-      <div class="stat-label">Ventes</div>
+      <div class="stat-label" data-i18n="nav_sales">Ventes</div>
       <div class="stat-value" id="hist-count">0</div>
-      <div class="stat-sub">Transactions</div>
+      <div class="stat-sub" data-i18n="lbl_transactions">Transactions</div>
     </div>
     <div class="stat-card" style="--accent-color:var(--accent)">
-      <div class="stat-label">CA Total</div>
+      <div class="stat-label" data-i18n="lbl_ca_total">CA Total</div>
       <div class="stat-value" id="hist-ca">0</div>
-      <div class="stat-sub" id="hist-ca-sub">Chiffre d'affaires</div>
+      <div class="stat-sub" id="hist-ca-sub" data-i18n="lbl_revenue_total">Chiffre d'affaires</div>
     </div>
     <div class="stat-card" style="--accent-color:var(--warning)">
-      <div class="stat-label">Profit</div>
+      <div class="stat-label" data-i18n="lbl_profit">Profit</div>
       <div class="stat-value" id="hist-profit">0</div>
-      <div class="stat-sub" id="hist-margin-sub">Marge</div>
+      <div class="stat-sub" id="hist-margin-sub" data-i18n="lbl_margin">Marge</div>
     </div>
     <div class="stat-card" style="--accent-color:var(--danger)">
-      <div class="stat-label">Dettes</div>
+      <div class="stat-label" data-i18n="nav_debts_full">Dettes</div>
       <div class="stat-value" id="hist-debt">0</div>
-      <div class="stat-sub">Non encaissé</div>
+      <div class="stat-sub" data-i18n="lbl_uncollected">Non encaissé</div>
     </div>
   </div>
 
   <!-- Tableau -->
   <div class="card">
-    <div class="card-title">Transactions</div>
+    <div class="card-title" data-i18n="lbl_transactions">Transactions</div>
     <div class="table-wrap">
       <table id="tableHistory">
         <thead>
           <tr>
-            <th>Date</th><th>Produit</th><th>Qté</th>
-            <th>Total</th><th>Profit</th><th>Client</th>
-            <th>Vendeur</th><th>Dette</th>
+            <th data-i18n="lbl_date">Date</th><th data-i18n="th_product">Produit</th><th data-i18n="th_qty">Qté</th>
+            <th data-i18n="th_total">Total</th><th data-i18n="lbl_profit">Profit</th><th data-i18n="lbl_client">Client</th>
+            <th data-i18n="th_seller">Vendeur</th><th data-i18n="th_debt_short">Dette</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -2267,11 +2270,11 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <div class="sm-header">
     <div class="sm-header-info">
       <div class="sm-shop" id="sm-shop-name">Smart Market Pro</div>
-      <div class="sm-seller" id="sm-seller-name">Vendeur</div>
+      <div class="sm-seller" id="sm-seller-name" data-i18n="role_seller">Vendeur</div>
     </div>
     <div style="display:flex;align-items:center;gap:8px;flex-shrink:0">
       <div id="sm-total-header" style="font-family:var(--fd);font-weight:800;font-size:.95rem;color:var(--accent);display:none"></div>
-      <button onclick="SellerMode.deactivate()" class="btn btn-ghost btn-sm" style="font-size:.75rem;padding:5px 10px">✕ Quitter</button>
+      <button onclick="SellerMode.deactivate()" class="btn btn-ghost btn-sm" style="font-size:.75rem;padding:5px 10px">✕ <span data-i18n="sm_exit">Quitter</span></button>
     </div>
   </div>
 
@@ -2279,14 +2282,14 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <div class="sm-body">
     <!-- Panel produits -->
     <div class="sm-products-panel" id="sm-products-panel">
-      <div class="sm-products-hint">Touchez un produit pour l'ajouter</div>
+      <div class="sm-products-hint" data-i18n="sm_tap_to_add">Touchez un produit pour l'ajouter</div>
       <div id="sm-products-grid"></div>
     </div>
 
     <!-- Panel panier -->
     <div class="sm-cart-panel" id="sm-cart-panel">
       <div class="sm-cart-header">
-        <span class="sm-cart-title">Panier</span>
+        <span class="sm-cart-title" data-i18n="sm_cart_title">Panier</span>
         <span id="sm-cart-count"></span>
       </div>
       <div id="sm-cart"></div>
@@ -2294,17 +2297,17 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
         <input type="text" id="sm-client" placeholder="Nom du client (optionnel)" data-i18n-placeholder="ph_client"
           style="margin-bottom:8px;font-size:.82rem">
         <input type="number" id="sm-paid" inputmode="decimal"
-          placeholder="Montant payé (vide = tout payé)"
+          placeholder="Montant payé (vide = tout payé)" data-i18n-placeholder="sm_paid_placeholder"
           style="margin-bottom:8px;font-size:.82rem"
           oninput="SellerMode.onPaidInput()">
         <div id="sm-change-info" class="sm-change-info"></div>
         <div class="sm-total-row">
-          <span class="sm-total-label">TOTAL</span>
+          <span class="sm-total-label" data-i18n="sm_total_label">TOTAL</span>
           <span class="sm-total-val" id="sm-total">0 F</span>
         </div>
         <button id="sm-validate-btn" class="btn btn-primary btn-full"
           onclick="SellerMode.validate()" disabled style="padding:14px;font-size:.9rem">
-          ✅ VALIDER LA VENTE
+          ✅ <span data-i18n="sm_validate_sale">VALIDER LA VENTE</span>
         </button>
       </div>
     </div>
@@ -2314,11 +2317,11 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <div class="sm-mob-tabs">
     <button class="sm-mob-tab active" id="sm-tab-products" onclick="SellerMode.mobTab('products')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-      Produits
+      <span data-i18n="sm_products_tab">Produits</span>
     </button>
     <button class="sm-mob-tab" id="sm-tab-cart" onclick="SellerMode.mobTab('cart')">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
-      Panier
+      <span data-i18n="sm_cart_title">Panier</span>
       <span class="sm-mob-tab-badge" id="sm-tab-cart-badge"></span>
     </button>
   </div>
@@ -2326,7 +2329,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <!-- Flash succès -->
   <div id="sm-success">
     <div style="font-size:3.5rem">✅</div>
-    <div style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:#000">Vente enregistrée !</div>
+    <div style="font-family:var(--fd);font-size:1.6rem;font-weight:800;color:#000" data-i18n="sm_sale_recorded">Vente enregistrée !</div>
     <div style="font-family:var(--fd);font-size:2.2rem;font-weight:800;color:#000" id="sm-success-amount"></div>
     <div style="font-family:var(--fm);font-size:.8rem;color:rgba(0,0,0,.6)" id="sm-success-change"></div>
   </div>
@@ -2343,7 +2346,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
   <button class="bot-tab admin-only" id="btab-more"   onclick="MobNav.openDrawer()"><span class="bot-icon-svg"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="5" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="12" cy="19" r="1"/></svg></span>Plus</button>
 </nav>
 
-<footer id="app-footer">Smart Market Pro v7.7 Enterprise &nbsp;|&nbsp; © 2026 <strong style="color:var(--accent)">EZE Jean Emmanuel</strong> &nbsp;|&nbsp; Tous droits réservés</footer>
+<footer id="app-footer">Smart Market Pro v7.7 Enterprise &nbsp;|&nbsp; © 2026 <strong style="color:var(--accent)">EZE Jean Emmanuel</strong> &nbsp;|&nbsp; <span data-i18n="footer_rights">Tous droits réservés</span></footer>
 
 <script>
 'use strict';
@@ -2747,6 +2750,38 @@ const I18n = {
       lbl_add_supplier_btn:'+ AJOUTER LE FOURNISSEUR', lbl_suppliers_list:'Liste des Fournisseurs',
       lbl_amount_returned:'Montant Retourné', lbl_returns_count:'Nb Retours',
       lbl_how_to_return:'Pour enregistrer un retour', lbl_returns_history:'Historique des Retours',
+      cr_instructions:"Comptez l'argent physiquement dans votre caisse, entrez le montant ci-dessous. L'app calcule automatiquement les écarts avec la caisse théorique.",
+      cr_opening_fund:'Fond de caisse (ouverture)', ph_amount_day_start:'Montant au début de la journée',
+      ph_cash_now:'Argent dans la caisse en ce moment', lbl_calc_report:'Calculer le rapport',
+      lbl_comm_rate_title:'Taux de Commission par Vendeur (%)',
+      lbl_comm_explain:"Pourcentage du CA que chaque vendeur reçoit. Exemple : 5% = le vendeur reçoit 5% du total de tout ce qu'il vend ce mois.",
+      lbl_save_rates:'Sauvegarder les taux', lbl_comm_current_month:'Commissions — Mois en Cours',
+      th_ca:'CA', th_calc_base:'Base calcul', th_rate:'Taux', th_commission:'Commission',
+      lbl_period:'Période', lbl_all:'Tout', lbl_this_month:'Ce mois', lbl_this_year:'Cette année',
+      lbl_custom_dates:'Dates personnalisées', lbl_from:'Du', lbl_to:'Au', lbl_search:'Recherche',
+      ph_product_client:'Produit, client...', lbl_transactions:'Transactions', lbl_ca_total:'CA Total',
+      lbl_margin:'Marge', lbl_uncollected:'Non encaissé',
+      lbl_no_sales_criteria:'Aucune vente pour ces critères', lbl_prev_short:'Préc.', lbl_page:'Page', lbl_next_short:'Suiv.',
+      cr_ok:'✅ Caisse conforme', cr_missing:'❌ MANQUE dans la caisse', cr_surplus:'⚠️ EXCÉDENT détecté',
+      cr_opening_fund_short:'Fond ouverture', cr_ca_collected:'CA encaissé', cr_theoretical_cash:'Caisse théorique',
+      cr_counted_cash:'Caisse comptée', cr_gap:'Écart',
+      cr_check_missing:'Vérifiez : ventes non enregistrées, erreurs de rendu monnaie.',
+      cr_check_surplus:'Vérifiez : avances reçues, remboursements non enregistrés.',
+      cr_day_detail:'Détail du jour', cr_total_ca:'CA total', cr_uncollected_credits:'Dont crédits non encaissés',
+      cr_actually_collected:'Cash réellement encaissé',
+      comm_base_profit:'Bénéfice brut', comm_disabled_1:'Les commissions sont <strong>désactivées</strong>.',
+      comm_disabled_2:'Allez dans <strong>Paramètres → Commissions Vendeurs</strong> pour les activer.',
+      comm_calc_base:'Base de calcul', comm_configure_rates:'Configurez les taux ci-dessous',
+      comm_no_seller:'Aucun vendeur', comm_disabled_short:'Commissions désactivées — activez-les dans les Paramètres',
+      lbl_paid_check2:'Payé', lbl_pending:'En attente',
+      lbl_out_of_stock:'Rupture', lbl_stock_short:'Stock', sm_in_cart:'au panier',
+      sm_remaining_due:'Reste à payer', sm_cart_empty:'Panier vide', sm_tap_to_add:"Touchez un produit pour l'ajouter",
+      sm_exit:'Quitter', sm_cart_title:'Panier', sm_paid_placeholder:'Montant payé (vide = tout payé)',
+      sm_total_label:'TOTAL', sm_validate_sale:'VALIDER LA VENTE', sm_products_tab:'Produits', sm_sale_recorded:'Vente enregistrée !',
+      footer_rights:'Tous droits réservés',
+      lbl_expenses_word:'dépense(s)',
+      lbl_add_debt:'Ajouter une dette',
+      lbl_full_credit:'Vente à crédit', toast_full_credit_set:'💳 Vente à crédit — rien payé, dette totale',
       stock_out:'Épuisé', stock_alert:'Alerte',
       // Paramètres
       set_confirm_sale:'Demander confirmation avant vente',
@@ -3327,6 +3362,38 @@ const I18n = {
       lbl_add_supplier_btn:'+ ADD SUPPLIER', lbl_suppliers_list:'Suppliers List',
       lbl_amount_returned:'Amount Returned', lbl_returns_count:'Number of Returns',
       lbl_how_to_return:'To record a return', lbl_returns_history:'Returns History',
+      cr_instructions:'Physically count the money in your register and enter the amount below. The app automatically calculates the differences with the theoretical cash total.',
+      cr_opening_fund:'Opening cash fund', ph_amount_day_start:'Amount at the start of the day',
+      ph_cash_now:'Money currently in the register', lbl_calc_report:'Calculate report',
+      lbl_comm_rate_title:'Commission Rate per Seller (%)',
+      lbl_comm_explain:'Percentage of revenue each seller receives. Example: 5% = the seller receives 5% of everything they sell this month.',
+      lbl_save_rates:'Save rates', lbl_comm_current_month:'Commissions — Current Month',
+      th_ca:'Revenue', th_calc_base:'Calc. base', th_rate:'Rate', th_commission:'Commission',
+      lbl_period:'Period', lbl_all:'All', lbl_this_month:'This month', lbl_this_year:'This year',
+      lbl_custom_dates:'Custom dates', lbl_from:'From', lbl_to:'To', lbl_search:'Search',
+      ph_product_client:'Product, client...', lbl_transactions:'Transactions', lbl_ca_total:'Total Revenue',
+      lbl_margin:'Margin', lbl_uncollected:'Uncollected',
+      lbl_no_sales_criteria:'No sales for these criteria', lbl_prev_short:'Prev.', lbl_page:'Page', lbl_next_short:'Next',
+      cr_ok:'✅ Register balanced', cr_missing:'❌ SHORTAGE in register', cr_surplus:'⚠️ SURPLUS detected',
+      cr_opening_fund_short:'Opening fund', cr_ca_collected:'Revenue collected', cr_theoretical_cash:'Theoretical cash',
+      cr_counted_cash:'Counted cash', cr_gap:'Gap',
+      cr_check_missing:'Check: unrecorded sales, change-giving errors.',
+      cr_check_surplus:'Check: advances received, unrecorded refunds.',
+      cr_day_detail:"Day's detail", cr_total_ca:'Total revenue', cr_uncollected_credits:'Of which uncollected credits',
+      cr_actually_collected:'Cash actually collected',
+      comm_base_profit:'Gross profit', comm_disabled_1:'Commissions are <strong>disabled</strong>.',
+      comm_disabled_2:'Go to <strong>Settings → Seller Commissions</strong> to enable them.',
+      comm_calc_base:'Calculation base', comm_configure_rates:'Set the rates below',
+      comm_no_seller:'No seller', comm_disabled_short:'Commissions disabled — enable them in Settings',
+      lbl_paid_check2:'Paid', lbl_pending:'Pending',
+      lbl_out_of_stock:'Out of stock', lbl_stock_short:'Stock', sm_in_cart:'in cart',
+      sm_remaining_due:'Remaining due', sm_cart_empty:'Cart empty', sm_tap_to_add:'Tap a product to add it',
+      sm_exit:'Exit', sm_cart_title:'Cart', sm_paid_placeholder:'Amount paid (blank = full amount)',
+      sm_total_label:'TOTAL', sm_validate_sale:'VALIDATE SALE', sm_products_tab:'Products', sm_sale_recorded:'Sale recorded!',
+      footer_rights:'All rights reserved',
+      lbl_expenses_word:'expense(s)',
+      lbl_add_debt:'Add a debt',
+      lbl_full_credit:'Credit sale', toast_full_credit_set:'💳 Full credit sale — nothing paid, full debt',
       stock_out:'Out of stock', stock_alert:'Alert',
       // Paramètres
       set_confirm_sale:'Ask confirmation before sale',
@@ -3918,6 +3985,10 @@ const Sales = {
       if (qtyEl && (!qtyEl.value || parseInt(qtyEl.value) <= 0)) qtyEl.value = '1';
     }
     this.validate();
+  },
+  setFullCredit() {
+    const pEl = document.getElementById('s-paid');
+    if (pEl) { pEl.value = '0'; this.validate(); UI.toast(I18n.t('toast_full_credit_set'), 'warning'); }
   },
   validate() {
     const id    = document.getElementById('s-item')?.value;
@@ -6911,6 +6982,13 @@ const DeferredSales = {
     this._updateSummary();
   },
 
+  setLineFullCredit(id) {
+    this.updateLine(id, 'paid', 0);
+    const pEl = document.getElementById('def-paid-' + id);
+    if (pEl) pEl.value = '0';
+    UI.toast(I18n.t('toast_full_credit_set'), 'warning');
+  },
+
   updateLine(id, field, value) {
     const line = this._lines.find(l => l.id === id);
     if (!line) return;
@@ -7019,7 +7097,7 @@ const DeferredSales = {
             oninput="DeferredSales.updateLine(${line.id},'price',this.value)">
         </div>
         <div class="form-group" style="margin-bottom:0">
-          <label class="form-label">${I18n.t('def_paid_hint')}</label>
+          <label class="form-label">${I18n.t('def_paid_hint')} <button type="button" onclick="DeferredSales.setLineFullCredit(${line.id})" style="background:none;border:none;color:var(--danger);font-size:.6rem;cursor:pointer;font-family:var(--fm);text-decoration:underline;padding:0;margin-left:4px">🔴 ${I18n.t('lbl_full_credit')}</button></label>
           <input type="number" id="def-paid-${line.id}" value="${line.paid||''}"
             min="0" inputmode="decimal"
             oninput="DeferredSales.updateLine(${line.id},'paid',this.value)">
@@ -7584,9 +7662,9 @@ const History = {
     const se = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
     se('hist-count',      s.length);
     se('hist-ca',         Utils.currency(ca));
-    se('hist-ca-sub',     'Chiffre d\'affaires');
+    se('hist-ca-sub',     I18n.t('lbl_revenue_total'));
     se('hist-profit',     Utils.currency(pf));
-    se('hist-margin-sub', 'Marge : ' + mg + '%');
+    se('hist-margin-sub', I18n.t('dash_margin_prefix') + mg + '%');
     se('hist-debt',       Utils.currency(db));
   },
 
@@ -7599,11 +7677,12 @@ const History = {
     const slice = this._filtered.slice(start, start + this._perPage);
 
     if (!slice.length) {
-      tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:32px">Aucune vente pour ces critères</td></tr>';
+      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('lbl_no_sales_criteria')}</td></tr>`;
     } else {
+      const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
       tbody.innerHTML = slice.map(s => `
         <tr>
-          <td class="td-mono" style="font-size:.72rem">${new Date(s.date).toLocaleDateString('fr-FR', {day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})}${s.deferred?'<span style="margin-left:3px;font-size:.55rem;color:var(--warning)">📒</span>':''}</td>
+          <td class="td-mono" style="font-size:.72rem">${new Date(s.date).toLocaleDateString(locale, {day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})}${s.deferred?'<span style="margin-left:3px;font-size:.55rem;color:var(--warning)">📒</span>':''}</td>
           <td class="fw-700">${Utils.esc(s.itemName || '')}</td>
           <td class="td-mono">${s.qty}</td>
           <td class="td-mono">${Utils.currency(s.total)}</td>
@@ -7619,9 +7698,9 @@ const History = {
     if (!pg) return;
     if (pages <= 1) { pg.innerHTML = ''; return; }
     let html = '';
-    if (this._page > 1) html += `<button class="btn btn-ghost btn-sm" onclick="History.goPage(${this._page - 1})">← Préc.</button>`;
-    html += `<span style="font-family:var(--fm);font-size:.75rem;color:var(--text3)">Page ${this._page} / ${pages} &nbsp;(${total} ventes)</span>`;
-    if (this._page < pages) html += `<button class="btn btn-ghost btn-sm" onclick="History.goPage(${this._page + 1})">Suiv. →</button>`;
+    if (this._page > 1) html += `<button class="btn btn-ghost btn-sm" onclick="History.goPage(${this._page - 1})">← ${I18n.t('lbl_prev_short')}</button>`;
+    html += `<span style="font-family:var(--fm);font-size:.75rem;color:var(--text3)">${I18n.t('lbl_page')} ${this._page} / ${pages} &nbsp;(${total} ${I18n.t('dash_sales_count')})</span>`;
+    if (this._page < pages) html += `<button class="btn btn-ghost btn-sm" onclick="History.goPage(${this._page + 1})">${I18n.t('lbl_next_short')} →</button>`;
     pg.innerHTML = html;
   },
 
@@ -7735,41 +7814,42 @@ const CashReport = {
     const content = document.getElementById('cr-result-content');
     if (!card||!content) return;
     const eC = Math.abs(ecart)<100 ? 'var(--accent)' : ecart<0 ? 'var(--danger)' : 'var(--warning)';
-    const eL = Math.abs(ecart)<100 ? '✅ Caisse conforme' : ecart<0 ? '❌ MANQUE dans la caisse' : '⚠️ EXCÉDENT détecté';
+    const eL = Math.abs(ecart)<100 ? I18n.t('cr_ok') : ecart<0 ? I18n.t('cr_missing') : I18n.t('cr_surplus');
+    const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
     content.innerHTML = `
       <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:14px">
         <div style="background:var(--sur2);border:1px solid var(--border);border-radius:var(--rmd);padding:12px">
-          <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3);text-transform:uppercase;margin-bottom:4px">Fond ouverture</div>
+          <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3);text-transform:uppercase;margin-bottom:4px">${I18n.t('cr_opening_fund_short')}</div>
           <div style="font-weight:700">${Utils.currency(fond)}</div>
         </div>
         <div style="background:var(--sur2);border:1px solid var(--border);border-radius:var(--rmd);padding:12px">
-          <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3);text-transform:uppercase;margin-bottom:4px">CA encaissé</div>
+          <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3);text-transform:uppercase;margin-bottom:4px">${I18n.t('cr_ca_collected')}</div>
           <div style="font-weight:700;color:var(--accent)">${Utils.currency(cashIn)}</div>
         </div>
         <div style="background:var(--sur2);border:1px solid var(--border);border-radius:var(--rmd);padding:12px">
-          <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3);text-transform:uppercase;margin-bottom:4px">Caisse théorique</div>
+          <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3);text-transform:uppercase;margin-bottom:4px">${I18n.t('cr_theoretical_cash')}</div>
           <div style="font-weight:700">${Utils.currency(theo)}</div>
         </div>
         <div style="background:var(--sur2);border:1px solid var(--border);border-radius:var(--rmd);padding:12px">
-          <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3);text-transform:uppercase;margin-bottom:4px">Caisse comptée</div>
+          <div style="font-family:var(--fm);font-size:.58rem;color:var(--text3);text-transform:uppercase;margin-bottom:4px">${I18n.t('cr_counted_cash')}</div>
           <div style="font-weight:700">${Utils.currency(counted)}</div>
         </div>
       </div>
       <div style="background:${eC}18;border:2px solid ${eC};border-radius:var(--rmd);padding:16px;text-align:center;margin-bottom:12px">
         <div style="font-family:var(--fd);font-size:1.1rem;font-weight:800;color:${eC}">${eL}</div>
         <div style="font-size:.9rem;color:var(--text2);margin-top:8px">
-          Écart : <strong style="color:${eC};font-size:1.2rem">${ecart>=0?'+':''}${Utils.currency(ecart)}</strong>
+          ${I18n.t('cr_gap')} : <strong style="color:${eC};font-size:1.2rem">${ecart>=0?'+':''}${Utils.currency(ecart)}</strong>
         </div>
         ${Math.abs(ecart)>=100 ? `<div style="font-size:.75rem;color:var(--text3);margin-top:6px">
-          ${ecart<0 ? 'Vérifiez : ventes non enregistrées, erreurs de rendu monnaie.' : 'Vérifiez : avances reçues, remboursements non enregistrés.'}
+          ${ecart<0 ? I18n.t('cr_check_missing') : I18n.t('cr_check_surplus')}
         </div>` : ''}
       </div>
       <div style="font-size:.8rem;color:var(--text2);line-height:1.8;background:var(--sur2);padding:12px;border-radius:var(--rsm)">
-        <strong>Détail du jour :</strong><br>
-        • Ventes : ${todayS.length} | CA total : ${Utils.currency(caToday)}<br>
-        • Dont crédits non encaissés : −${Utils.currency(debtT)}<br>
-        • <strong>Cash réellement encaissé : ${Utils.currency(cashIn)}</strong><br>
-        • Date : ${new Date().toLocaleDateString('fr-FR',{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
+        <strong>${I18n.t('cr_day_detail')} :</strong><br>
+        • ${I18n.t('nav_sales')} : ${todayS.length} | ${I18n.t('cr_total_ca')} : ${Utils.currency(caToday)}<br>
+        • ${I18n.t('cr_uncollected_credits')} : −${Utils.currency(debtT)}<br>
+        • <strong>${I18n.t('cr_actually_collected')} : ${Utils.currency(cashIn)}</strong><br>
+        • ${I18n.t('lbl_date')} : ${new Date().toLocaleDateString(locale,{weekday:'long',day:'numeric',month:'long',year:'numeric'})}
       </div>`;
     card.style.display = '';
     card.scrollIntoView({behavior:'smooth'});
@@ -7842,7 +7922,7 @@ const Commissions = {
     const mk      = n.getFullYear() + '-' + String(n.getMonth() + 1).padStart(2, '0');
     const ms      = DB.salesInPeriod('month');
     const paid    = DB.data.commissionsPaid || {};
-    const baseLabel = base === 'profit' ? 'Bénéfice brut' : 'CA';
+    const baseLabel = base === 'profit' ? I18n.t('comm_base_profit') : I18n.t('th_ca');
 
     // Bannière si désactivé
     const cfg = document.getElementById('commissions-config');
@@ -7850,13 +7930,13 @@ const Commissions = {
       if (!enabled) {
         cfg.innerHTML = `
           <div style="background:rgba(255,186,0,.08);border:1px solid var(--warning);border-radius:var(--rmd);padding:14px;margin-bottom:12px;font-family:var(--fm);font-size:.75rem;color:var(--text2);line-height:1.6">
-            ⚠️ Les commissions sont <strong>désactivées</strong>.<br>
-            Allez dans <strong>Paramètres → Commissions Vendeurs</strong> pour les activer.
+            ⚠️ ${I18n.t('comm_disabled_1')}<br>
+            ${I18n.t('comm_disabled_2')}
           </div>`;
       } else {
         cfg.innerHTML = `
           <div style="background:rgba(0,232,122,.06);border:1px solid var(--accent);border-radius:var(--rmd);padding:10px 12px;margin-bottom:12px;font-family:var(--fm);font-size:.72rem;color:var(--text2)">
-            Base de calcul : <strong>${baseLabel}</strong> &nbsp;|&nbsp; Configurez les taux ci-dessous
+            ${I18n.t('comm_calc_base')} : <strong>${baseLabel}</strong> &nbsp;|&nbsp; ${I18n.t('comm_configure_rates')}
           </div>` +
           DB.data.users.filter(u => u.role !== 'admin').map(u => `
           <div style="display:flex;align-items:center;gap:12px;padding:12px;background:var(--sur2);border-radius:var(--rmd);margin-bottom:8px">
@@ -7865,7 +7945,7 @@ const Commissions = {
             </div>
             <div style="flex:1">
               <div class="fw-700" style="font-size:.85rem">${Utils.esc(u.name)}</div>
-              <div style="font-family:var(--fm);font-size:.62rem;color:var(--text3)">Vendeur</div>
+              <div style="font-family:var(--fm);font-size:.62rem;color:var(--text3)">${I18n.t('role_seller')}</div>
             </div>
             <div style="display:flex;align-items:center;gap:6px">
               <input type="number" id="rate-${u.id}" value="${rates[u.id] || 0}"
@@ -7882,12 +7962,12 @@ const Commissions = {
 
     const sellers = DB.data.users.filter(u => u.role !== 'admin');
     if (!sellers.length) {
-      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">Aucun vendeur</td></tr>';
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('comm_no_seller')}</td></tr>`;
       return;
     }
 
     if (!enabled) {
-      tbody.innerHTML = '<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">Commissions désactivées — activez-les dans les Paramètres</td></tr>';
+      tbody.innerHTML = `<tr><td colspan="6" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('comm_disabled_short')}</td></tr>`;
       return;
     }
 
@@ -7902,7 +7982,7 @@ const Commissions = {
         <td class="td-mono" style="font-size:.72rem;color:var(--text3)">${Utils.currency(baseAmt)}<br><span style="font-size:.6rem">${baseLabel}</span></td>
         <td class="td-mono">${rate}%</td>
         <td class="td-mono" style="color:var(--accent);font-weight:700">${Utils.currency(commission)}</td>
-        <td><span class="badge ${isPaid ? 'badge-green' : 'badge-yellow'}">${isPaid ? '✅ Payé' : '⏳ En attente'}</span></td>
+        <td><span class="badge ${isPaid ? 'badge-green' : 'badge-yellow'}">${isPaid ? '✅ '+I18n.t('lbl_paid_check2') : '⏳ '+I18n.t('lbl_pending')}</span></td>
         <td>${!isPaid && commission > 0
           ? `<button class="btn btn-primary btn-sm" onclick="Commissions.markPaid('${Utils.esc(u.id)}','${mk}')">Marquer payé</button>`
           : '—'}</td>
@@ -7933,7 +8013,7 @@ const SellerMode = {
       const sn = document.getElementById('sm-shop-name');
       const sl = document.getElementById('sm-seller-name');
       if (sn) sn.textContent = Settings.data.shopName || 'Smart Market Pro';
-      if (sl) sl.textContent = Auth.currentUser?.name || 'Vendeur';
+      if (sl) sl.textContent = Auth.currentUser?.name || I18n.t('role_seller');
       this.renderProducts();
       this.renderCart();
       // Toujours démarrer sur l'onglet Produits
@@ -7991,7 +8071,7 @@ const SellerMode = {
           <div class="sm-prod-name">${Utils.esc(i.name)}</div>
           <div class="sm-prod-price">${Utils.currency(i.sell)}</div>
           <div class="sm-prod-stock" style="color:${i.qty<=3?'var(--danger)':'var(--text3)'}">
-            ${outOfStock ? '❌ Rupture' : 'Stock : ' + i.qty + (cartQty ? ' ('+cartQty+' au panier)' : '')}
+            ${outOfStock ? '❌ '+I18n.t('lbl_out_of_stock') : I18n.t('lbl_stock_short')+' : ' + i.qty + (cartQty ? ' ('+cartQty+' '+I18n.t('sm_in_cart')+')' : '')}
           </div>
         </div>`;
     }).join('');
@@ -8054,11 +8134,11 @@ const SellerMode = {
       if (!isNaN(paid) && paid >= 0) {
         infoEl.style.display = '';
         if (change >= 0) {
-          infoEl.textContent    = 'Rendre : ' + Utils.currency(change);
+          infoEl.textContent    = I18n.t('lbl_change_due') + ' : ' + Utils.currency(change);
           infoEl.style.background = 'rgba(0,232,122,.12)';
           infoEl.style.color      = 'var(--accent)';
         } else {
-          infoEl.textContent    = 'Reste à payer : ' + Utils.currency(Math.abs(change));
+          infoEl.textContent    = I18n.t('sm_remaining_due') + ' : ' + Utils.currency(Math.abs(change));
           infoEl.style.background = 'rgba(255,59,92,.12)';
           infoEl.style.color      = 'var(--danger)';
         }
@@ -8088,7 +8168,7 @@ const SellerMode = {
     // Contenu panier
     if (!cartEl) return;
     if (!this._cart.length) {
-      cartEl.innerHTML = '<div style="text-align:center;color:var(--text3);font-family:var(--fm);font-size:.8rem;padding:24px 12px;line-height:1.6">Panier vide<br><span style="font-size:.7rem">Touchez un produit pour l\'ajouter</span></div>';
+      cartEl.innerHTML = `<div style="text-align:center;color:var(--text3);font-family:var(--fm);font-size:.8rem;padding:24px 12px;line-height:1.6">${I18n.t('sm_cart_empty')}<br><span style="font-size:.7rem">${I18n.t('sm_tap_to_add')}</span></div>`;
       return;
     }
     cartEl.innerHTML = this._cart.map(it => `
@@ -8148,7 +8228,7 @@ const SellerMode = {
     const sc  = document.getElementById('sm-success-change');
     if (suc) {
       if (sa) sa.textContent = Utils.currency(total);
-      if (sc) sc.textContent = change > 0 ? 'Rendre : ' + Utils.currency(change) : '';
+      if (sc) sc.textContent = change > 0 ? I18n.t('lbl_change_due') + ' : ' + Utils.currency(change) : '';
       suc.style.display = 'flex';
       setTimeout(() => {
         suc.style.display = 'none';
@@ -8585,12 +8665,18 @@ const Dashboard = {
     const todayReturns = (DB.data.returns||[]).filter(r => new Date(r.date).toDateString() === today);
     const returnedAmt  = todayReturns.reduce((t,r) => t + r.amount, 0);
 
+    // Dépenses du jour
+    const todayExp = (DB.data.expenses||[]).filter(e => new Date(e.date||0).toDateString() === today);
+    const totalExp = todayExp.reduce((t,e) => t + e.amount, 0);
+
     const se = (id, v) => { const el=document.getElementById(id); if(el) el.textContent=v; };
     se('dash-greeting',     greet + (user ? ', ' + user : '') + ' 👋');
     se('dash-date',         dateStr);
     se('dash-ca-today',     Utils.currency(ca));
     se('dash-ca-sub',       todayS.length + ' ' + I18n.t('dash_sales_count') + (returnedAmt>0 ? ' — ' + I18n.t('dash_returns_prefix') + Utils.currency(returnedAmt) : ''));
     se('dash-pft-today',    Utils.currency(pft));
+    se('dash-expenses-today', Utils.currency(totalExp));
+    se('dash-expenses-sub',   todayExp.length + ' ' + I18n.t('lbl_expenses_word'));
     if (typeof Expenses !== 'undefined') {
       const _nr  = Expenses.getRealNetProfit();
       const _del = document.getElementById('dash-margin-sub');
