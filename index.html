@@ -2209,7 +2209,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
           <tr>
             <th data-i18n="lbl_date">Date</th><th data-i18n="th_product">Produit</th><th data-i18n="th_qty">Qté</th>
             <th data-i18n="th_total">Total</th><th data-i18n="lbl_profit">Profit</th><th data-i18n="lbl_client">Client</th>
-            <th data-i18n="th_seller">Vendeur</th><th data-i18n="th_debt_short">Dette</th>
+            <th data-i18n="th_seller">Vendeur</th><th data-i18n="th_debt_short">Dette</th><th data-i18n="th_action">Action</th>
           </tr>
         </thead>
         <tbody></tbody>
@@ -7814,7 +7814,7 @@ const History = {
     const slice = this._filtered.slice(start, start + this._perPage);
 
     if (!slice.length) {
-      tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('lbl_no_sales_criteria')}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('lbl_no_sales_criteria')}</td></tr>`;
     } else {
       const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
       tbody.innerHTML = slice.map(s => `
@@ -7827,6 +7827,7 @@ const History = {
           <td>${Utils.esc(s.clientName || '—')}</td>
           <td style="font-size:.72rem;color:var(--text3)">${Utils.esc(s.userName || '—')}</td>
           <td class="td-mono" style="color:${s.debt > 0 ? 'var(--danger)' : 'var(--text3)'}">${s.debt > 0 ? Utils.currency(s.debt) : '—'}</td>
+          <td><button class="btn btn-danger btn-sm" onclick="Sales.cancel('${Utils.esc(s.id)}')" ${!Auth.isAdmin()?'disabled':''}>${I18n.t('btn_cancel')}</button></td>
         </tr>`).join('');
     }
 
