@@ -1346,12 +1346,13 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
       <input type="search" id="sales-search" placeholder="🔍 Client ou produit..." data-i18n-placeholder="ph_search_client_product"
         style="flex:1;min-width:160px;max-width:260px;padding:8px 12px;font-size:.82rem"
         oninput="Sales.filterTable(this.value)">
+      <button class="btn btn-danger btn-sm" id="sales-delete-sel-btn" onclick="Sales.deleteSelectedToday()" style="display:none">🗑️ <span data-i18n="lbl_delete_selection">Supprimer la sélection</span> (<span id="sales-sel-count">0</span>)</button>
       <button class="btn btn-info btn-sm" id="btn-day-report" onclick="Printer.printDayReport()">🖨️ Rapport journalier</button>
       <button class="btn btn-warning btn-sm" onclick="Share.dayReport()" title="Partager sur WhatsApp" data-i18n-title="lbl_share_whatsapp">📤 <span data-i18n="lbl_share">Partager</span></button>
     </div>
     <div class="table-wrap">
       <table id="tableSales">
-        <thead><tr><th data-i18n="th_time">Heure</th><th data-i18n="th_seller">Vendeur</th><th data-i18n="th_product">Produit</th><th data-i18n="th_qty">Qté</th><th data-i18n="th_total">Total</th><th data-i18n="th_status">Statut</th><th data-i18n="th_action">Action</th></tr></thead>
+        <thead><tr><th style="width:30px"><input type="checkbox" id="sales-check-all" onchange="Sales.toggleAllToday(this.checked)"></th><th data-i18n="th_time">Heure</th><th data-i18n="th_seller">Vendeur</th><th data-i18n="th_product">Produit</th><th data-i18n="th_qty">Qté</th><th data-i18n="th_total">Total</th><th data-i18n="th_status">Statut</th><th data-i18n="th_action">Action</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -2138,7 +2139,10 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
 <section id="history" class="page">
   <div class="page-header">
     <h1 class="page-title" data-i18n="history_title">📋 <span>Historique</span></h1>
-    <button class="btn btn-info btn-sm" onclick="ExcelExport.historyReport()">📊 <span data-i18n="btn_export">Export</span></button>
+    <div style="display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn btn-danger btn-sm" id="hist-delete-sel-btn" onclick="History.deleteSelected()" style="display:none">🗑️ <span data-i18n="lbl_delete_selection">Supprimer la sélection</span> (<span id="hist-sel-count">0</span>)</button>
+      <button class="btn btn-info btn-sm" onclick="ExcelExport.historyReport()">📊 <span data-i18n="btn_export">Export</span></button>
+    </div>
   </div>
 
   <!-- Filtres -->
@@ -2207,6 +2211,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
       <table id="tableHistory">
         <thead>
           <tr>
+            <th style="width:30px"><input type="checkbox" id="hist-check-all" onchange="History.toggleAll(this.checked)"></th>
             <th data-i18n="lbl_date">Date</th><th data-i18n="th_product">Produit</th><th data-i18n="th_qty">Qté</th>
             <th data-i18n="th_total">Total</th><th data-i18n="lbl_profit">Profit</th><th data-i18n="lbl_client">Client</th>
             <th data-i18n="th_seller">Vendeur</th><th data-i18n="th_debt_short">Dette</th><th data-i18n="th_action">Action</th>
@@ -2835,6 +2840,8 @@ const I18n = {
       // ── Toasts — succès ──
       toast_sale_ok:'Vente enregistrée avec succès',
       toast_sale_cancelled:'Vente annulée, stock restauré',
+      toast_sales_cancelled_bulk:'{n} vente(s) annulée(s), stock restauré',
+      lbl_delete_selection:'Supprimer la sélection',
       toast_product_added:'Produit ajouté',
       toast_product_updated:'Produit mis à jour',
       toast_product_deleted:'Produit supprimé',
@@ -2953,6 +2960,7 @@ const I18n = {
       modal_confirm_sale_title:'Confirmer la vente',
       modal_confirm_sale_ok:'Valider',
       modal_cancel_sale_msg:'Le stock sera restauré.',
+      modal_cancel_bulk_msg:'Annuler {n} vente(s) pour un total de {total} ? Le stock sera restauré pour chacune.',
       modal_cancel_sale_title:'Annuler la vente',
       modal_cancel_sale_ok:'Oui, annuler',
       modal_delete_product_title:'Supprimer le produit',
@@ -3448,6 +3456,8 @@ const I18n = {
       // ── Toasts — succès ──
       toast_sale_ok:'Sale recorded successfully',
       toast_sale_cancelled:'Sale cancelled, stock restored',
+      toast_sales_cancelled_bulk:'{n} sale(s) cancelled, stock restored',
+      lbl_delete_selection:'Delete selection',
       toast_product_added:'Product added',
       toast_product_updated:'Product updated',
       toast_product_deleted:'Product deleted',
@@ -3566,6 +3576,7 @@ const I18n = {
       modal_confirm_sale_title:'Confirm sale',
       modal_confirm_sale_ok:'Validate',
       modal_cancel_sale_msg:'Stock will be restored.',
+      modal_cancel_bulk_msg:'Cancel {n} sale(s) for a total of {total}? Stock will be restored for each one.',
       modal_cancel_sale_title:'Cancel sale',
       modal_cancel_sale_ok:'Yes, cancel',
       modal_delete_product_title:'Delete product',
@@ -3865,11 +3876,12 @@ const UI = {
     const tbody = document.querySelector('#tableSales tbody'); if(!tbody) return;
     const today = new Date().toDateString();
     const list  = DB.activeSales().filter(s => new Date(s.date).toDateString() === today).reverse().slice(0,50);
-    if (!list.length) { tbody.innerHTML = `<tr><td colspan="7" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('no_sales')}</td></tr>`; return; }
+    if (!list.length) { tbody.innerHTML = `<tr><td colspan="8" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('no_sales')}</td></tr>`; Sales._updateTodaySelectionUI(); return; }
     tbody.innerHTML = list.map(s => {
       const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
       return `
       <tr>
+        <td><input type="checkbox" class="sale-row-check" value="${Utils.esc(s.id)}" ${Sales._selectedToday.has(s.id)?'checked':''} onchange="Sales.toggleOneToday('${Utils.esc(s.id)}', this.checked)" ${!Auth.isAdmin()?'disabled':''}></td>
         <td class="td-mono">${new Date(s.date).toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit'})}${s.deferred?'<span style="margin-left:4px;font-family:var(--fm);font-size:.55rem;color:var(--warning);background:rgba(255,186,0,.12);padding:1px 4px;border-radius:3px">'+I18n.t('lbl_deferred_badge')+'</span>':''}</td>
         <td><span class="badge badge-gray">${Utils.esc(s.userName)}</span></td>
         <td class="fw-700">${Utils.esc(s.itemName)}</td>
@@ -3884,6 +3896,7 @@ const UI = {
         </td>
       </tr>`;
     }).join('');
+    Sales._updateTodaySelectionUI();
   },
   renderStock() {
     const tbody = document.querySelector('#tableStock tbody'); if(!tbody) return;
@@ -4120,6 +4133,7 @@ const Sales = {
     if (item) item.qty += sale.qty;
     sale.deleted = true;
     DB.save(); UI.renderAll();
+    if (typeof History !== 'undefined') History.render();
     UI.toast(I18n.t('toast_sale_cancelled'),'warning');
   },
   filterTable(q) {
@@ -4129,6 +4143,52 @@ const Sales = {
       const txt = tr.textContent.toLowerCase();
       tr.style.display = (!term || txt.includes(term)) ? '' : 'none';
     });
+  },
+  async cancelBulk(ids) {
+    if (!Auth.isAdmin()) return UI.toast(I18n.t('toast_err_admin'),'danger');
+    const sales = ids.map(id => DB.data.sales.find(s=>s.id===id)).filter(s => s && !s.deleted);
+    if (!sales.length) return;
+    const total = sales.reduce((t,s)=>t+s.total,0);
+    const msg = I18n.t('modal_cancel_bulk_msg').replace('{n}', sales.length).replace('{total}', Utils.currency(total));
+    if (!await SmpModal.confirm(msg, {title:I18n.t('modal_cancel_sale_title'), icon:'↩️', okLabel:I18n.t('modal_cancel_sale_ok'), okClass:'btn-danger'})) return;
+    sales.forEach(sale => {
+      const item = DB.data.items.find(i=>i.id===sale.itemId);
+      if (item) item.qty += sale.qty;
+      sale.deleted = true;
+    });
+    DB.save(); UI.renderAll();
+    if (typeof History !== 'undefined') History.render();
+    UI.toast(I18n.t('toast_sales_cancelled_bulk').replace('{n}', sales.length), 'warning');
+  },
+  // ── Sélection multiple sur "Transactions du Jour" ──
+  _selectedToday: new Set(),
+  toggleOneToday(id, checked) {
+    if (checked) this._selectedToday.add(id); else this._selectedToday.delete(id);
+    this._updateTodaySelectionUI();
+  },
+  toggleAllToday(checked) {
+    document.querySelectorAll('#tableSales tbody .sale-row-check').forEach(cb => {
+      cb.checked = checked;
+      if (checked) this._selectedToday.add(cb.value); else this._selectedToday.delete(cb.value);
+    });
+    this._updateTodaySelectionUI();
+  },
+  _updateTodaySelectionUI() {
+    const btn = document.getElementById('sales-delete-sel-btn');
+    const cnt = document.getElementById('sales-sel-count');
+    if (cnt) cnt.textContent = this._selectedToday.size;
+    if (btn) btn.style.display = this._selectedToday.size > 0 ? '' : 'none';
+    const allCb = document.getElementById('sales-check-all');
+    if (allCb) {
+      const rows = document.querySelectorAll('#tableSales tbody .sale-row-check');
+      allCb.checked = rows.length > 0 && Array.from(rows).every(cb => cb.checked);
+    }
+  },
+  async deleteSelectedToday() {
+    const ids = Array.from(this._selectedToday);
+    await this.cancelBulk(ids);
+    this._selectedToday.clear();
+    this._updateTodaySelectionUI();
   }
 };
 
@@ -7729,6 +7789,36 @@ const History = {
   _page: 1,
   _perPage: 50,
   _filtered: [],
+  _selected: new Set(),
+
+  toggleOne(id, checked) {
+    if (checked) this._selected.add(id); else this._selected.delete(id);
+    this._updateSelectionUI();
+  },
+  toggleAll(checked) {
+    document.querySelectorAll('#tableHistory tbody .hist-row-check').forEach(cb => {
+      cb.checked = checked;
+      if (checked) this._selected.add(cb.value); else this._selected.delete(cb.value);
+    });
+    this._updateSelectionUI();
+  },
+  _updateSelectionUI() {
+    const btn = document.getElementById('hist-delete-sel-btn');
+    const cnt = document.getElementById('hist-sel-count');
+    if (cnt) cnt.textContent = this._selected.size;
+    if (btn) btn.style.display = this._selected.size > 0 ? '' : 'none';
+    const allCb = document.getElementById('hist-check-all');
+    if (allCb) {
+      const rows = document.querySelectorAll('#tableHistory tbody .hist-row-check');
+      allCb.checked = rows.length > 0 && Array.from(rows).every(cb => cb.checked);
+    }
+  },
+  async deleteSelected() {
+    const ids = Array.from(this._selected);
+    await Sales.cancelBulk(ids);
+    this._selected.clear();
+    this._updateSelectionUI();
+  },
 
   _getSales() {
     const period  = document.getElementById('hist-period')?.value || 'month';
@@ -7814,11 +7904,12 @@ const History = {
     const slice = this._filtered.slice(start, start + this._perPage);
 
     if (!slice.length) {
-      tbody.innerHTML = `<tr><td colspan="9" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('lbl_no_sales_criteria')}</td></tr>`;
+      tbody.innerHTML = `<tr><td colspan="10" style="text-align:center;color:var(--text3);padding:32px">${I18n.t('lbl_no_sales_criteria')}</td></tr>`;
     } else {
       const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
       tbody.innerHTML = slice.map(s => `
         <tr>
+          <td><input type="checkbox" class="hist-row-check" value="${Utils.esc(s.id)}" ${this._selected.has(s.id)?'checked':''} onchange="History.toggleOne('${Utils.esc(s.id)}', this.checked)" ${!Auth.isAdmin()?'disabled':''}></td>
           <td class="td-mono" style="font-size:.72rem">${new Date(s.date).toLocaleDateString(locale, {day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})}${s.deferred?'<span style="margin-left:3px;font-size:.55rem;color:var(--warning)">📒</span>':''}</td>
           <td class="fw-700">${Utils.esc(s.itemName || '')}</td>
           <td class="td-mono">${s.qty}</td>
@@ -7830,6 +7921,7 @@ const History = {
           <td><button class="btn btn-danger btn-sm" onclick="Sales.cancel('${Utils.esc(s.id)}')" ${!Auth.isAdmin()?'disabled':''}>${I18n.t('btn_cancel')}</button></td>
         </tr>`).join('');
     }
+    this._updateSelectionUI();
 
     // Pagination
     const pg = document.getElementById('hist-pagination');
