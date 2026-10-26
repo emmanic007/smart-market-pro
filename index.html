@@ -579,6 +579,36 @@ footer{background:var(--surface);border-top:1px solid var(--border);text-align:c
 #smp-order-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.75);z-index:29999;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(4px);}
 #smp-order-overlay.open{display:flex;}
 #smp-order-box{background:var(--surface);border:1px solid var(--bord2);border-radius:var(--rxl);padding:28px 24px;width:100%;max-width:380px;box-shadow:var(--shadow-lg);animation:slideUp .18s ease;}
+
+/* ── Cases à cocher de sélection multiple (Historique / Transactions du Jour) ── */
+.row-check {
+  appearance: none; -webkit-appearance: none;
+  width: 24px; height: 24px;
+  border: 2px solid var(--border);
+  border-radius: 6px;
+  background: var(--sur2);
+  cursor: pointer;
+  position: relative;
+  flex-shrink: 0;
+  transition: background .15s ease, border-color .15s ease;
+}
+.row-check:checked {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.row-check:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  color: #000;
+  font-size: 16px;
+  font-weight: 900;
+  line-height: 1;
+}
+.row-check:disabled { opacity: .35; cursor: not-allowed; }
+tr.row-selected { background: rgba(0,232,122,.10) !important; }
+tr.row-selected td { background: transparent; }
 </style>
 
 <script>
@@ -1352,7 +1382,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     </div>
     <div class="table-wrap">
       <table id="tableSales">
-        <thead><tr><th style="width:30px"><input type="checkbox" id="sales-check-all" onchange="Sales.toggleAllToday(this.checked)"></th><th data-i18n="th_time">Heure</th><th data-i18n="th_seller">Vendeur</th><th data-i18n="th_product">Produit</th><th data-i18n="th_qty">Qté</th><th data-i18n="th_total">Total</th><th data-i18n="th_status">Statut</th><th data-i18n="th_action">Action</th></tr></thead>
+        <thead><tr><th style="width:36px"><input type="checkbox" class="row-check" id="sales-check-all" onchange="Sales.toggleAllToday(this.checked)"></th><th data-i18n="th_time">Heure</th><th data-i18n="th_seller">Vendeur</th><th data-i18n="th_product">Produit</th><th data-i18n="th_qty">Qté</th><th data-i18n="th_total">Total</th><th data-i18n="th_status">Statut</th><th data-i18n="th_action">Action</th></tr></thead>
         <tbody></tbody>
       </table>
     </div>
@@ -2211,7 +2241,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
       <table id="tableHistory">
         <thead>
           <tr>
-            <th style="width:30px"><input type="checkbox" id="hist-check-all" onchange="History.toggleAll(this.checked)"></th>
+            <th style="width:36px"><input type="checkbox" class="row-check" id="hist-check-all" onchange="History.toggleAll(this.checked)"></th>
             <th data-i18n="lbl_date">Date</th><th data-i18n="th_product">Produit</th><th data-i18n="th_qty">Qté</th>
             <th data-i18n="th_total">Total</th><th data-i18n="lbl_profit">Profit</th><th data-i18n="lbl_client">Client</th>
             <th data-i18n="th_seller">Vendeur</th><th data-i18n="th_debt_short">Dette</th><th data-i18n="th_action">Action</th>
@@ -3880,8 +3910,8 @@ const UI = {
     tbody.innerHTML = list.map(s => {
       const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
       return `
-      <tr>
-        <td><input type="checkbox" class="sale-row-check" value="${Utils.esc(s.id)}" ${Sales._selectedToday.has(s.id)?'checked':''} onchange="Sales.toggleOneToday('${Utils.esc(s.id)}', this.checked)" ${!Auth.isAdmin()?'disabled':''}></td>
+      <tr class="${Sales._selectedToday.has(s.id)?'row-selected':''}">
+        <td><input type="checkbox" class="row-check sale-row-check" value="${Utils.esc(s.id)}" ${Sales._selectedToday.has(s.id)?'checked':''} onchange="Sales.toggleOneToday('${Utils.esc(s.id)}', this.checked, this)" ${!Auth.isAdmin()?'disabled':''}></td>
         <td class="td-mono">${new Date(s.date).toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit'})}${s.deferred?'<span style="margin-left:4px;font-family:var(--fm);font-size:.55rem;color:var(--warning);background:rgba(255,186,0,.12);padding:1px 4px;border-radius:3px">'+I18n.t('lbl_deferred_badge')+'</span>':''}</td>
         <td><span class="badge badge-gray">${Utils.esc(s.userName)}</span></td>
         <td class="fw-700">${Utils.esc(s.itemName)}</td>
@@ -4162,14 +4192,18 @@ const Sales = {
   },
   // ── Sélection multiple sur "Transactions du Jour" ──
   _selectedToday: new Set(),
-  toggleOneToday(id, checked) {
+  toggleOneToday(id, checked, cbEl) {
     if (checked) this._selectedToday.add(id); else this._selectedToday.delete(id);
+    const row = cbEl?.closest ? cbEl.closest('tr') : null;
+    if (row) row.classList.toggle('row-selected', checked);
     this._updateTodaySelectionUI();
   },
   toggleAllToday(checked) {
     document.querySelectorAll('#tableSales tbody .sale-row-check').forEach(cb => {
       cb.checked = checked;
       if (checked) this._selectedToday.add(cb.value); else this._selectedToday.delete(cb.value);
+      const row = cb.closest ? cb.closest('tr') : null;
+      if (row) row.classList.toggle('row-selected', checked);
     });
     this._updateTodaySelectionUI();
   },
@@ -7791,14 +7825,18 @@ const History = {
   _filtered: [],
   _selected: new Set(),
 
-  toggleOne(id, checked) {
+  toggleOne(id, checked, cbEl) {
     if (checked) this._selected.add(id); else this._selected.delete(id);
+    const row = cbEl?.closest ? cbEl.closest('tr') : null;
+    if (row) row.classList.toggle('row-selected', checked);
     this._updateSelectionUI();
   },
   toggleAll(checked) {
     document.querySelectorAll('#tableHistory tbody .hist-row-check').forEach(cb => {
       cb.checked = checked;
       if (checked) this._selected.add(cb.value); else this._selected.delete(cb.value);
+      const row = cb.closest ? cb.closest('tr') : null;
+      if (row) row.classList.toggle('row-selected', checked);
     });
     this._updateSelectionUI();
   },
@@ -7908,13 +7946,13 @@ const History = {
     } else {
       const locale = I18n._lang === 'en' ? 'en-US' : 'fr-FR';
       tbody.innerHTML = slice.map(s => `
-        <tr>
-          <td><input type="checkbox" class="hist-row-check" value="${Utils.esc(s.id)}" ${this._selected.has(s.id)?'checked':''} onchange="History.toggleOne('${Utils.esc(s.id)}', this.checked)" ${!Auth.isAdmin()?'disabled':''}></td>
+        <tr class="${this._selected.has(s.id)?'row-selected':''}">
+          <td><input type="checkbox" class="row-check hist-row-check" value="${Utils.esc(s.id)}" ${this._selected.has(s.id)?'checked':''} onchange="History.toggleOne('${Utils.esc(s.id)}', this.checked, this)" ${!Auth.isAdmin()?'disabled':''}></td>
           <td class="td-mono" style="font-size:.72rem">${new Date(s.date).toLocaleDateString(locale, {day:'2-digit',month:'2-digit',year:'2-digit',hour:'2-digit',minute:'2-digit'})}${s.deferred?'<span style="margin-left:3px;font-size:.55rem;color:var(--warning)">📒</span>':''}</td>
           <td class="fw-700">${Utils.esc(s.itemName || '')}</td>
           <td class="td-mono">${s.qty}</td>
           <td class="td-mono">${Utils.currency(s.total)}</td>
-          <td class="td-mono" style="color:var(--accent)">${Utils.currency(s.profit)}</td>
+          <td class="td-mono" style="color:var(--accent);font-weight:800">${Utils.currency(s.profit)}</td>
           <td>${Utils.esc(s.clientName || '—')}</td>
           <td style="font-size:.72rem;color:var(--text3)">${Utils.esc(s.userName || '—')}</td>
           <td class="td-mono" style="color:${s.debt > 0 ? 'var(--danger)' : 'var(--text3)'}">${s.debt > 0 ? Utils.currency(s.debt) : '—'}</td>
