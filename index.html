@@ -10070,5 +10070,119 @@ const NavDesktop = {
 
 /* ═══════════════ PWA ═══════════════ */
 </script>
+
+<!-- ═══ PONT VERS SMART MARKET PRO (version en ligne) ═══ -->
+<style>
+#bridge-sheet{position:fixed;left:0;right:0;bottom:0;z-index:9400;display:none;padding:12px}
+#bridge-sheet.on{display:block}
+#bridge-sheet .bx{max-width:520px;margin:auto;background:var(--surface);border:1px solid var(--accent);border-radius:16px;padding:16px;box-shadow:0 -8px 30px rgba(0,0,0,.55)}
+#bridge-sheet h4{margin:0 0 6px;font-size:1rem}
+#bridge-sheet p{margin:0 0 12px;font-size:.84rem;line-height:1.55;color:var(--text2)}
+#bridge-sheet .row{display:flex;gap:8px;flex-wrap:wrap}
+#bridge-sheet .row .btn{flex:1;min-width:140px}
+.bridge-login{margin-top:10px;font-size:.72rem;text-align:center}
+.bridge-login a,#app-footer a.bridge-ft{color:var(--accent)}
+@media(max-width:900px){#bridge-sheet{bottom:72px}}
+</style>
+<script>
+/* Pont FREE → PRO : propose la version en ligne au bon moment, sans jamais gêner.
+   Règles : pas dans les 24 premières heures · jamais plus d'un message par semaine ·
+   après 3 « Plus tard » ou un clic : pause longue · uniquement pour le patron (pas pour les vendeurs). */
+const Bridge = {
+  PRO: 'https://emmanic007.github.io/Smart-market-pro-PRO/', KEY: 'SMP_PRO_BRIDGE', D: 864e5,
+  GAP: { volume: 21, monthly: 30, backup: 14, seller: 14 },
+  st() { let s = null; try { s = JSON.parse(localStorage.getItem(this.KEY) || 'null'); } catch (e) {} return s || { first: Date.now(), last: 0, types: {}, dismiss: 0, mute: 0, clicked: 0 }; },
+  save(s) { try { localStorage.setItem(this.KEY, JSON.stringify(s)); } catch (e) {} },
+  en() { return typeof I18n !== 'undefined' && I18n._lang === 'en'; },
+  url(src) { return this.PRO + 'migration.html?src=free_' + src; },
+  open(src) { const s = this.st(); s.clicked++; this.save(s); window.open(this.url(src), '_blank', 'noopener'); },
+  isOwner() { return typeof Auth !== 'undefined' && !!(Auth.currentUser && Auth.currentUser.role === 'admin'); },
+  sales() { try { return (DB.activeSales ? DB.activeSales() : DB.data.sales).length; } catch (e) { return 0; } },
+  can(type) {
+    const s = this.st(), now = Date.now();
+    return this.isOwner() && now >= (s.mute || 0) && now - s.first >= this.D && now - (s.last || 0) >= 7 * this.D && now - ((s.types || {})[type] || 0) >= this.GAP[type] * this.D;
+  },
+  msg(type, n) {
+    const en = this.en();
+    const M = {
+      volume:  en ? ['🔒 Your data lives only on this phone', 'Your ' + n + ' sales are saved only on this device. If it is lost or broken, everything disappears. With PRO they are protected online automatically.', 'Protect my data']
+                  : ['🔒 Vos données sont sur ce seul téléphone', 'Vos ' + n + ' ventes sont enregistrées uniquement sur cet appareil. S\'il est perdu ou cassé, tout disparaît. Avec PRO, elles sont protégées en ligne automatiquement.', 'Protéger mes données'],
+      backup:  en ? ['✅ Backup saved', 'With PRO, this backup happens automatically, online, after every sale — even without internet.', 'Discover PRO']
+                  : ['✅ Sauvegarde enregistrée', 'Avec PRO, cette sauvegarde se fait toute seule, en ligne, à chaque vente, même sans internet.', 'Découvrir PRO'],
+      seller:  en ? ['👥 One phone per seller', 'With PRO, each seller has his own phone and account. You see his sales live, and he never sees your profits.', 'See PRO']
+                  : ['👥 Un téléphone par vendeur', 'Avec PRO, chaque vendeur a son propre téléphone et son propre compte. Vous voyez ses ventes en direct, et il ne voit pas vos bénéfices.', 'Voir PRO'],
+      monthly: en ? ['🗓 Time to back up your data', 'It has been a month. Back up now, or let PRO do it for you automatically (14-day free trial, your data moves over in 10 minutes).', 'See PRO']
+                  : ['🗓 Pensez à sauvegarder vos données', 'Cela fait un mois. Sauvegardez maintenant, ou laissez PRO le faire pour vous automatiquement (14 jours d\'essai gratuit, vos données sont reprises en 10 minutes).', 'Voir PRO']
+    };
+    return M[type];
+  },
+  trigger(type, n) {
+    if (!this.can(type)) return false;
+    const s = this.st(); s.last = Date.now(); (s.types = s.types || {})[type] = s.last; this.save(s);
+    const m = this.msg(type, n), en = this.en();
+    let el = document.getElementById('bridge-sheet');
+    if (!el) { el = document.createElement('div'); el.id = 'bridge-sheet'; document.body.appendChild(el); }
+    el.innerHTML = '<div class="bx"><h4></h4><p></p><div class="row"></div></div>';
+    el.querySelector('h4').textContent = m[0]; el.querySelector('p').textContent = m[1];
+    const row = el.querySelector('.row');
+    const b = (cls, txt, fn) => { const x = document.createElement('button'); x.className = 'btn ' + cls; x.textContent = txt; x.onclick = fn; row.appendChild(x); };
+    b('btn-primary', m[2], () => { const t = this.st(); t.mute = Date.now() + 30 * this.D; this.save(t); this.close(); this.open(type); });
+    if (type === 'monthly') b('btn-ghost', en ? 'Back up now' : 'Sauvegarder maintenant', () => { this.close(); DataManager.downloadBackup(); });
+    b('btn-ghost', en ? 'Later' : 'Plus tard', () => { const t = this.st(); t.dismiss = (t.dismiss || 0) + 1; if (t.dismiss >= 3) { t.mute = Date.now() + 60 * this.D; t.dismiss = 0; } this.save(t); this.close(); });
+    el.classList.add('on');
+    return true;
+  },
+  close() { const el = document.getElementById('bridge-sheet'); if (el) el.classList.remove('on'); },
+  ensureUI() {
+    const en = this.en();
+    const g = document.querySelector('.config-grid');
+    if (g && !document.getElementById('bridge-card')) {
+      const c = document.createElement('div'); c.className = 'config-block'; c.id = 'bridge-card';
+      c.innerHTML = '<h4></h4><p></p><p style="font-size:.74rem;color:var(--text3)"></p><button class="btn btn-primary btn-full"></button>';
+      g.insertBefore(c, g.firstChild);
+      c.querySelector('button').onclick = () => this.open('card');
+    }
+    const c = document.getElementById('bridge-card');
+    if (c) {
+      c.querySelector('h4').textContent = en ? '🚀 Upgrade to PRO' : '🚀 Passez à la version PRO';
+      c.querySelectorAll('p')[0].textContent = en ? 'Your data protected online, several sellers with their own phone, remote follow-up of your shop — and still usable without internet.' : 'Vos données protégées en ligne, plusieurs vendeurs avec leur propre téléphone, suivi de votre boutique à distance, et toujours utilisable sans internet.';
+      c.querySelectorAll('p')[1].textContent = en ? '14-day free trial. Your data is moved over in 10 minutes.' : '14 jours d\'essai gratuit. Vos données sont reprises en 10 minutes.';
+      c.querySelector('button').textContent = en ? 'See the PRO version' : 'Voir la version PRO';
+    }
+    const sub = document.querySelector('#auth-overlay .auth-sub');
+    if (sub && !document.getElementById('bridge-login')) {
+      const d = document.createElement('div'); d.id = 'bridge-login'; d.className = 'bridge-login';
+      d.innerHTML = '<a target="_blank" rel="noopener"></a>'; sub.insertAdjacentElement('afterend', d);
+    }
+    const a = document.querySelector('#bridge-login a');
+    if (a) { a.href = this.url('login'); a.textContent = en ? '🚀 Discover the PRO version (online backup, sellers)' : '🚀 Découvrez la version PRO (sauvegarde en ligne, vendeurs)'; }
+    const f = document.getElementById('app-footer');
+    if (f && !f.querySelector('.bridge-ft')) { f.insertAdjacentHTML('beforeend', ' &nbsp;|&nbsp; <a class="bridge-ft" target="_blank" rel="noopener">🚀 PRO</a>'); }
+    const fa = f && f.querySelector('.bridge-ft'); if (fa) fa.href = this.url('footer');
+  },
+  tick() {
+    this.ensureUI();
+    if (!this.isOwner()) return;
+    const n = this.sales();
+    if (n >= 50) this.trigger('volume', n);
+    else if (Date.now() - (this.st().types.monthly || this.st().first) >= 30 * this.D) this.trigger('monthly');
+  }
+};
+(function () {
+  Bridge.save(Bridge.st());                                              // mémorise la date de première ouverture
+  const dl = DataManager.downloadBackup.bind(DataManager);               // après une sauvegarde
+  DataManager.downloadBackup = function () { dl(); setTimeout(() => Bridge.trigger('backup'), 1800); };
+  const ua = Users.add.bind(Users);                                      // après la création d'un compte vendeur
+  Users.add = async function () {
+    const n = (DB.data.users || []).length, r = await ua();
+    const list = DB.data.users || [];
+    if (list.length > n && list[list.length - 1] && list[list.length - 1].role !== 'admin') setTimeout(() => Bridge.trigger('seller'), 1500);
+    return r;
+  };
+  Bridge.ensureUI();
+  setTimeout(() => Bridge.tick(), 8000);
+  setInterval(() => Bridge.tick(), 20000);
+})();
+</script>
 </body>
 </html>
