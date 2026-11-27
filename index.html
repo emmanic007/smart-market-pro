@@ -1430,7 +1430,7 @@ console.log('[SMP PWA] Mode localStorage + Service Worker ./sw.js');
     <div style="display:flex;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap">
       <div class="card-title" style="margin-bottom:0" data-i18n="lbl_full_inventory">Inventaire Complet</div>
       <input type="search" id="stock-search" placeholder="🔍 Rechercher un produit..." data-i18n-placeholder="ph_search_product"
-        style="flex:1;min-width:180px;max-width:320px;padding:8px 12px;font-size:.82rem"
+        style="flex:1 1 200px;min-width:180px;max-width:320px;padding:8px 12px;font-size:.82rem"
         oninput="Stock.filterTable(this.value)">
       <button type="button" class="btn btn-ghost btn-sm" onclick="StockLog.open()"><svg class="ic"><use href="#ic-history"/></svg> Mouvements</button>
     </div>
@@ -8735,6 +8735,7 @@ const Guide = {
           <li>${t('Voir tous vos produits avec quantité, prix et état en temps réel','View all your products with quantity, price and status in real time')}</li>
           <li>${t('Les produits <strong style="color:var(--danger)">en rouge</strong> sont sous le seuil d\'alerte ou en rupture','Products <strong style="color:var(--danger)">in red</strong> are below the alert threshold or out of stock')}</li>
           <li>${t('Utilisez la barre de <strong>recherche</strong> en haut pour trouver un produit rapidement','Use the <strong>search</strong> bar at the top to find a product quickly')}</li>
+          <li>${t('Le bouton <strong>Mouvements</strong> (ou l\'icône d\'historique d\'un produit) liste ventes, retours, réapprovisionnements, corrections et suppressions','The <strong>Movements</strong> button (or a product\'s history icon) lists sales, returns, restocking, corrections and deletions')}</li>
           <li>${t('Sur mobile : chaque produit s\'affiche en carte — lisible sans zoomer','On mobile: each product appears as a card — readable without zooming')}</li>
           <li>${t('Le badge rouge sur l\'onglet Stock indique le nombre de produits en alerte','The red badge on the Stock tab shows the number of products on alert')}</li>
         </ul>`
